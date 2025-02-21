@@ -10,13 +10,12 @@ using System.Windows.Forms;
 
 namespace BogsyVideoStore.Classes
 {
-    public class Helper
+    public class AccountHandler
     {
-        public static bool LogIn()
+        public static bool LogIn(CurrentCustomer currentCustomer)
         {
             try
             {
-                CurrentCustomer currentCustomer = new CurrentCustomer();
                 string parseContactInfo, parsePass;
 
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -28,7 +27,7 @@ namespace BogsyVideoStore.Classes
                     cmd.Parameters.AddRange(new SqlParameter[]
                     {
                         new SqlParameter("@ContactInfo", currentCustomer.ContactInfo),
-                        new SqlParameter("@Password", currentCustomer.ContactInfo)
+                        new SqlParameter("@Password", currentCustomer.ContactInfo),
                     });
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -42,7 +41,7 @@ namespace BogsyVideoStore.Classes
                             {
                                 if (parsePass == currentCustomer.Password)
                                 {
-                                    currentCustomer.CustomerID = reader.GetInt16(0);
+                                    CurrentCustomer.Role = reader.GetString(3);
                                     return true;
                                 }
                             }
@@ -51,22 +50,19 @@ namespace BogsyVideoStore.Classes
                         else throw new Exception("No accounts found");
                     }
                 }
+                return true;
             }
             catch (Exception ex) 
             {
                 MessageBox.Show(ex.Message);
                 return false;
             }
-
-            return true;
         }
 
-        public static void Registration()
+        public static void Registration(Customer customer)
         {
             try
             {
-                Customer customer = new Customer();
-
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
                 {
                     conn.Open();
@@ -80,15 +76,17 @@ namespace BogsyVideoStore.Classes
                         new SqlParameter("@Age", customer.Age),
                         new SqlParameter("@ContactInfo", customer.ContactInfo),
                         new SqlParameter("@Address", customer.Address),
-                        new SqlParameter("@Password", customer.Password)
+                        new SqlParameter("@Password", customer.Password),
+                        new SqlParameter("@Role", customer.Role)
                     });
 
                     cmd.ExecuteNonQuery();
+                    MessageBox.Show("Registration successful");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
     }

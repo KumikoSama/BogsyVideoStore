@@ -1,5 +1,6 @@
 ﻿using BogsyVideoStore.Classes;
 using BogsyVideoStore.Models;
+using BogsyVideoStore.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace BogsyVideoStore
 {
     public partial class LogIn : Form
     {
-        Forms.Dashboard dashboard = new Forms.Dashboard();
+        Dashboard dashboard = new Dashboard();
 
         public LogIn()
         {
@@ -23,17 +24,27 @@ namespace BogsyVideoStore
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            CurrentCustomer customer = new CurrentCustomer();
-            customer.ContactInfo = txtbxContactInfo.Text;
-            customer.Password = txtbxPassword.Text;
+            CurrentCustomer customer = new CurrentCustomer
+            {
+                ContactInfo = txtbxContactInfo.Text,
+                Password = txtbxPassword.Text
+            };
 
-            if (Helper.LogIn())
+            if (AccountHandler.LogIn(customer))
             {
                 MessageBox.Show("Log in successful");
 
                 this.Hide();
                 dashboard.Show();
             }
+        }
+
+        private void btnSignUp_Click(object sender, EventArgs e)
+        {
+            RegistrationForm registrationForm = new RegistrationForm();
+
+            this.Hide();
+            registrationForm.Show();
         }
     }
 }

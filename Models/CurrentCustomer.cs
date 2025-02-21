@@ -8,8 +8,11 @@ namespace BogsyVideoStore.Models
 {
     public class CurrentCustomer
     {
-        public int CustomerID { get; set; }
+        static string role;
+
+        public static int CustomerID { get; set; }
         public string ContactInfo { get; set; }
         public string Password { get; set; }
+        public static string Role { get { return role; } set => role = (value == "Customer") ? value : "Admin"; }
     }
 }
