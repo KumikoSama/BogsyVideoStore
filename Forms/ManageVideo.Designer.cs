@@ -38,12 +38,12 @@
             this.txtbxCopies = new System.Windows.Forms.TextBox();
             this.txtbxTitle = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnEditBook = new System.Windows.Forms.Button();
+            this.btnEditVideo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(171, 346);
+            this.btnAdd.Location = new System.Drawing.Point(159, 377);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 26;
@@ -54,7 +54,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(131, 194);
+            this.label8.Location = new System.Drawing.Point(119, 225);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 25;
@@ -62,7 +62,7 @@
             // 
             // txtbxPrice
             // 
-            this.txtbxPrice.Location = new System.Drawing.Point(131, 210);
+            this.txtbxPrice.Location = new System.Drawing.Point(119, 241);
             this.txtbxPrice.Name = "txtbxPrice";
             this.txtbxPrice.ReadOnly = true;
             this.txtbxPrice.Size = new System.Drawing.Size(160, 20);
@@ -72,7 +72,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(131, 251);
+            this.label9.Location = new System.Drawing.Point(119, 282);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 23;
@@ -81,7 +81,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(131, 139);
+            this.label10.Location = new System.Drawing.Point(119, 170);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(49, 13);
             this.label10.TabIndex = 22;
@@ -90,7 +90,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(131, 82);
+            this.label11.Location = new System.Drawing.Point(119, 113);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(27, 13);
             this.label11.TabIndex = 21;
@@ -102,7 +102,7 @@
             this.cmbbxCategory.Items.AddRange(new object[] {
             "DVD",
             "VCD"});
-            this.cmbbxCategory.Location = new System.Drawing.Point(131, 155);
+            this.cmbbxCategory.Location = new System.Drawing.Point(119, 186);
             this.cmbbxCategory.Name = "cmbbxCategory";
             this.cmbbxCategory.Size = new System.Drawing.Size(160, 21);
             this.cmbbxCategory.TabIndex = 20;
@@ -111,14 +111,14 @@
             // 
             // txtbxCopies
             // 
-            this.txtbxCopies.Location = new System.Drawing.Point(131, 267);
+            this.txtbxCopies.Location = new System.Drawing.Point(119, 298);
             this.txtbxCopies.Name = "txtbxCopies";
             this.txtbxCopies.Size = new System.Drawing.Size(160, 20);
             this.txtbxCopies.TabIndex = 19;
             // 
             // txtbxTitle
             // 
-            this.txtbxTitle.Location = new System.Drawing.Point(131, 101);
+            this.txtbxTitle.Location = new System.Drawing.Point(119, 132);
             this.txtbxTitle.Name = "txtbxTitle";
             this.txtbxTitle.Size = new System.Drawing.Size(160, 20);
             this.txtbxTitle.TabIndex = 18;
@@ -127,28 +127,28 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(153, 29);
+            this.label5.Location = new System.Drawing.Point(141, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(118, 20);
             this.label5.TabIndex = 27;
             this.label5.Text = "Add New Video";
             // 
-            // btnEditBook
+            // btnEditVideo
             // 
-            this.btnEditBook.Location = new System.Drawing.Point(171, 346);
-            this.btnEditBook.Name = "btnEditBook";
-            this.btnEditBook.Size = new System.Drawing.Size(75, 23);
-            this.btnEditBook.TabIndex = 28;
-            this.btnEditBook.Text = "Edit";
-            this.btnEditBook.UseVisualStyleBackColor = true;
-            this.btnEditBook.Visible = false;
-            this.btnEditBook.Click += new System.EventHandler(this.btnEditBook_Click);
+            this.btnEditVideo.Location = new System.Drawing.Point(159, 377);
+            this.btnEditVideo.Name = "btnEditVideo";
+            this.btnEditVideo.Size = new System.Drawing.Size(75, 23);
+            this.btnEditVideo.TabIndex = 28;
+            this.btnEditVideo.Text = "Edit";
+            this.btnEditVideo.UseVisualStyleBackColor = true;
+            this.btnEditVideo.Visible = false;
+            this.btnEditVideo.Click += new System.EventHandler(this.btnEditVideo_Click);
             // 
             // ManageVideo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 450);
+            this.ClientSize = new System.Drawing.Size(422, 470);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtbxPrice);
@@ -158,7 +158,7 @@
             this.Controls.Add(this.cmbbxCategory);
             this.Controls.Add(this.txtbxCopies);
             this.Controls.Add(this.txtbxTitle);
-            this.Controls.Add(this.btnEditBook);
+            this.Controls.Add(this.btnEditVideo);
             this.Controls.Add(this.btnAdd);
             this.Name = "ManageVideo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -181,6 +181,6 @@
         private System.Windows.Forms.TextBox txtbxCopies;
         private System.Windows.Forms.TextBox txtbxTitle;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnEditBook;
+        private System.Windows.Forms.Button btnEditVideo;
     }
 }

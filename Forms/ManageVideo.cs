@@ -27,10 +27,10 @@ namespace BogsyVideoStore.Forms
         {
             if (isEdit)
             {
-                btnEditBook.Show();
+                btnEditVideo.Show();
                 txtbxTitle.Text = GlobalVideo.Title;
                 txtbxPrice.Text = GlobalVideo.Price.ToString();
-                txtbxCopies.Text = GlobalVideo.In.ToString();
+                txtbxCopies.Text = GlobalVideo.Copies.ToString();
                 cmbbxCategory.Text = GlobalVideo.Category;
             }
         }
@@ -45,7 +45,6 @@ namespace BogsyVideoStore.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO VideoTable (Title, Category, Price) VALUES (@Title, @Category, @Price)";
             Video video = new Video
             {
                 Title = txtbxTitle.Text,
@@ -53,18 +52,16 @@ namespace BogsyVideoStore.Forms
                 Price = int.Parse(txtbxPrice.Text)
             };
 
-            Utility.ExecuteQuery("Video added", query, false, new SqlParameter("@Title", video.Title), new SqlParameter("@Category", video.Category),
+            Utility.ExecuteQuery("Video added", Queries.AddNewVideo, false, new SqlParameter("@Title", video.Title), new SqlParameter("@Category", video.Category),
                 new SqlParameter("@Price", video.Price));
 
             this.Close();
         }
 
-        private void btnEditBook_Click(object sender, EventArgs e)
+        private void btnEditVideo_Click(object sender, EventArgs e)
         {
-            string query = "UPDATE VideoTable SET Title = @Title, Category = @Category, Price = @Price, Copies = @Copies WHERE VideoID = @VideoID";
-
-            Utility.ExecuteQuery("Video added", query, false, new SqlParameter("@Title", GlobalVideo.Title), new SqlParameter("@Category", GlobalVideo.Category),
-                new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.In), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+            Utility.ExecuteQuery("Video edited", Queries.EditVideo, false, new SqlParameter("@Title", GlobalVideo.Title), new SqlParameter("@Category", GlobalVideo.Category),
+                new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.Copies), new SqlParameter("@VideoID", GlobalVideo.VideoID));
         }
     }
 }

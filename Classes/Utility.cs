@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using BogsyVideoStore.Properties;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace BogsyVideoStore.Classes
 {
@@ -58,9 +59,59 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void LoadCategory()
+        public static void GetCustomerID()
         {
-            string query = "SELECT FullName FROM CustomerTable"
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(Queries.GetMemberID, conn);
+                cmd.Parameters.AddWithValue("@FullName", GlobalCustomer.FullName);
+
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+
+                GlobalCustomer.CustomerID = (result != null) ? int.Parse(result.ToString()) : 0;
+            }
+        }
+
+        public static DataTable SortByCategory(string category)
+        {
+            string query = "SELECT * FROM VideoTable WHERE Category = @Category";
+
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@Category", category);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                return dt;
+            }
+        }
+
+        public static object LoadCustomers()
+        {
+            string query = "SELECT FullName FROM CustomerTable";
+            List<string> customers = new List<string>
+            {
+                "All"
+            };
+
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        customers.Add(reader["FullName"].ToString());
+                }
+            }
+
+            return customers;
         }
     }
 }

@@ -1,54 +1,46 @@
 ﻿using BogsyVideoStore.Classes;
 using BogsyVideoStore.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using System;
 using System.Windows.Forms;
 
 namespace BogsyVideoStore.Forms
 {
     public partial class RentForm : Form
     {
-        readonly Video video;
-        Dashboard dashboard = new Dashboard();
-
-        public RentForm(Video video)
+        public RentForm()
         {
             InitializeComponent();
-            this.video = video;
 
-            txtbxTitle.Text = video.Title;
-            txtbxCategory.Text = video.Category;
-            txtbxPrice.Text = video.Price.ToString();
+            txtbxTitle.Text = GlobalVideo.Title;
+            txtbxCategory.Text = GlobalVideo.Category;
+            txtbxPrice.Text = GlobalVideo.Price.ToString();
         }
 
         private void btnRent_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO RentalTable (VideoID, CustomerID, RentDate, DueDate, PenaltyFee, Status)" +
-                "VALUES (@VideoID, @CustomerID, @RentDate, @DueDate, @PenaltyFee, @Status)";
-
             DateTime dueDate = DateTime.Now.AddDays(int.Parse(cmbbxDays.Text));
 
             Transaction transaction = new Transaction
             {
-                VideoID = video.VideoID,
-                Status = "Rented",
+                VideoID = GlobalVideo.VideoID,
+                Status = "On Rent",
                 DueDate = dueDate,
                 RentDate = DateTime.Now,
                 IsReturned = false,
-                PenaltyFee = 0
+                PenaltyFee = 0,
+                RentFee = GlobalVideo.Price
             };
 
-            Utility.ExecuteQuery("Rent successful", query, false, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", transaction.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
-                new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
+            Utility.ExecuteQuery("Rent successful", "InsertToRental", true, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
+                new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
 
             this.Hide();
+        }
+
+        private void cmbbxDays_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

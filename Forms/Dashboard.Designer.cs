@@ -30,13 +30,21 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.RentReturn = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbbxCategory = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnAllVideos = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
+            this.btnRent = new System.Windows.Forms.Button();
+            this.btnAllReports = new System.Windows.Forms.Button();
+            this.btnOngoingRent = new System.Windows.Forms.Button();
             this.btnPastTransactions = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
-            this.btnReturn = new System.Windows.Forms.Button();
-            this.btnRent = new System.Windows.Forms.Button();
             this.datagridTransactions = new System.Windows.Forms.DataGridView();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
+            this.lbl = new System.Windows.Forms.Label();
+            this.txtbxFullName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnEditCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
@@ -47,10 +55,6 @@
             this.btnEditVideo = new System.Windows.Forms.Button();
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
-            this.txtbxFullName = new System.Windows.Forms.TextBox();
-            this.lbl = new System.Windows.Forms.Label();
-            this.btnOngoingRent = new System.Windows.Forms.Button();
-            this.btnAllReports = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -75,14 +79,18 @@
             // 
             // RentReturn
             // 
+            this.RentReturn.Controls.Add(this.label5);
+            this.RentReturn.Controls.Add(this.cmbbxCategory);
+            this.RentReturn.Controls.Add(this.label4);
+            this.RentReturn.Controls.Add(this.btnAllVideos);
+            this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Controls.Add(this.btnAllReports);
             this.RentReturn.Controls.Add(this.btnOngoingRent);
             this.RentReturn.Controls.Add(this.btnPastTransactions);
             this.RentReturn.Controls.Add(this.label1);
             this.RentReturn.Controls.Add(this.cmbbxCustomer);
-            this.RentReturn.Controls.Add(this.btnReturn);
-            this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Controls.Add(this.datagridTransactions);
+            this.RentReturn.Controls.Add(this.btnReturn);
             this.RentReturn.Location = new System.Drawing.Point(4, 22);
             this.RentReturn.Name = "RentReturn";
             this.RentReturn.Padding = new System.Windows.Forms.Padding(3);
@@ -91,9 +99,92 @@
             this.RentReturn.Text = "Rent and Return";
             this.RentReturn.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(793, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 15);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Category:";
+            // 
+            // cmbbxCategory
+            // 
+            this.cmbbxCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxCategory.FormattingEnabled = true;
+            this.cmbbxCategory.Items.AddRange(new object[] {
+            "VCD",
+            "DVD"});
+            this.cmbbxCategory.Location = new System.Drawing.Point(796, 65);
+            this.cmbbxCategory.Name = "cmbbxCategory";
+            this.cmbbxCategory.Size = new System.Drawing.Size(120, 23);
+            this.cmbbxCategory.TabIndex = 25;
+            this.cmbbxCategory.SelectedIndexChanged += new System.EventHandler(this.cmbbxCategory_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(18, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(140, 20);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Rental and Return";
+            // 
+            // btnAllVideos
+            // 
+            this.btnAllVideos.Location = new System.Drawing.Point(685, 65);
+            this.btnAllVideos.Name = "btnAllVideos";
+            this.btnAllVideos.Size = new System.Drawing.Size(105, 23);
+            this.btnAllVideos.TabIndex = 23;
+            this.btnAllVideos.Text = "View All Videos";
+            this.btnAllVideos.UseVisualStyleBackColor = true;
+            this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
+            // 
+            // btnReturn
+            // 
+            this.btnReturn.Location = new System.Drawing.Point(22, 402);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(74, 25);
+            this.btnReturn.TabIndex = 22;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            // 
+            // btnRent
+            // 
+            this.btnRent.Location = new System.Drawing.Point(22, 403);
+            this.btnRent.Name = "btnRent";
+            this.btnRent.Size = new System.Drawing.Size(74, 25);
+            this.btnRent.TabIndex = 21;
+            this.btnRent.Text = "Rent";
+            this.btnRent.UseVisualStyleBackColor = true;
+            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
+            // 
+            // btnAllReports
+            // 
+            this.btnAllReports.Location = new System.Drawing.Point(624, 403);
+            this.btnAllReports.Name = "btnAllReports";
+            this.btnAllReports.Size = new System.Drawing.Size(84, 23);
+            this.btnAllReports.TabIndex = 20;
+            this.btnAllReports.Text = "All Reports";
+            this.btnAllReports.UseVisualStyleBackColor = true;
+            this.btnAllReports.Click += new System.EventHandler(this.btnAllReports_Click);
+            // 
+            // btnOngoingRent
+            // 
+            this.btnOngoingRent.Location = new System.Drawing.Point(714, 403);
+            this.btnOngoingRent.Name = "btnOngoingRent";
+            this.btnOngoingRent.Size = new System.Drawing.Size(91, 25);
+            this.btnOngoingRent.TabIndex = 16;
+            this.btnOngoingRent.Text = "Ongoing Rent";
+            this.btnOngoingRent.UseVisualStyleBackColor = true;
+            this.btnOngoingRent.Click += new System.EventHandler(this.btnOngoingRent_Click);
+            // 
             // btnPastTransactions
             // 
-            this.btnPastTransactions.Location = new System.Drawing.Point(811, 398);
+            this.btnPastTransactions.Location = new System.Drawing.Point(811, 403);
             this.btnPastTransactions.Name = "btnPastTransactions";
             this.btnPastTransactions.Size = new System.Drawing.Size(105, 25);
             this.btnPastTransactions.TabIndex = 15;
@@ -104,51 +195,41 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 27);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(19, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 13);
+            this.label1.Size = new System.Drawing.Size(116, 15);
             this.label1.TabIndex = 14;
             this.label1.Text = "Choose a customer:";
             // 
             // cmbbxCustomer
             // 
-            this.cmbbxCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbbxCustomer.FormattingEnabled = true;
-            this.cmbbxCustomer.Location = new System.Drawing.Point(22, 54);
+            this.cmbbxCustomer.Items.AddRange(new object[] {
+            "All"});
+            this.cmbbxCustomer.Location = new System.Drawing.Point(22, 65);
             this.cmbbxCustomer.Name = "cmbbxCustomer";
-            this.cmbbxCustomer.Size = new System.Drawing.Size(220, 26);
+            this.cmbbxCustomer.Size = new System.Drawing.Size(231, 23);
             this.cmbbxCustomer.TabIndex = 13;
+            this.cmbbxCustomer.Text = "All";
             this.cmbbxCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbbxCustomer_SelectedIndexChanged);
-            // 
-            // btnReturn
-            // 
-            this.btnReturn.Location = new System.Drawing.Point(102, 398);
-            this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(74, 25);
-            this.btnReturn.TabIndex = 12;
-            this.btnReturn.Text = "Return";
-            this.btnReturn.UseVisualStyleBackColor = true;
-            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // btnRent
-            // 
-            this.btnRent.Location = new System.Drawing.Point(22, 398);
-            this.btnRent.Name = "btnRent";
-            this.btnRent.Size = new System.Drawing.Size(74, 25);
-            this.btnRent.TabIndex = 11;
-            this.btnRent.Text = "Rent";
-            this.btnRent.UseVisualStyleBackColor = true;
-            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
             // datagridTransactions
             // 
+            this.datagridTransactions.AllowUserToAddRows = false;
+            this.datagridTransactions.AllowUserToDeleteRows = false;
+            this.datagridTransactions.AllowUserToResizeColumns = false;
+            this.datagridTransactions.AllowUserToResizeRows = false;
+            this.datagridTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridTransactions.Location = new System.Drawing.Point(22, 97);
+            this.datagridTransactions.Location = new System.Drawing.Point(22, 94);
             this.datagridTransactions.MultiSelect = false;
             this.datagridTransactions.Name = "datagridTransactions";
             this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridTransactions.Size = new System.Drawing.Size(894, 295);
+            this.datagridTransactions.Size = new System.Drawing.Size(894, 303);
             this.datagridTransactions.TabIndex = 10;
+            this.datagridTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridTransactions_CellClick);
             // 
             // CustomerLibrary
             // 
@@ -166,6 +247,23 @@
             this.CustomerLibrary.Text = "Customer Library";
             this.CustomerLibrary.UseVisualStyleBackColor = true;
             // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl.Location = new System.Drawing.Point(25, 335);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(104, 16);
+            this.lbl.TabIndex = 21;
+            this.lbl.Text = "Customer Name";
+            // 
+            // txtbxFullName
+            // 
+            this.txtbxFullName.Location = new System.Drawing.Point(27, 363);
+            this.txtbxFullName.Name = "txtbxFullName";
+            this.txtbxFullName.Size = new System.Drawing.Size(238, 20);
+            this.txtbxFullName.TabIndex = 20;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -178,7 +276,7 @@
             // 
             // btnEditCustomer
             // 
-            this.btnEditCustomer.Location = new System.Drawing.Point(108, 383);
+            this.btnEditCustomer.Location = new System.Drawing.Point(107, 394);
             this.btnEditCustomer.Name = "btnEditCustomer";
             this.btnEditCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnEditCustomer.TabIndex = 13;
@@ -188,7 +286,7 @@
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(27, 383);
+            this.btnAddCustomer.Location = new System.Drawing.Point(26, 394);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnAddCustomer.TabIndex = 12;
@@ -198,6 +296,11 @@
             // 
             // datagridCustomer
             // 
+            this.datagridCustomer.AllowUserToAddRows = false;
+            this.datagridCustomer.AllowUserToDeleteRows = false;
+            this.datagridCustomer.AllowUserToResizeColumns = false;
+            this.datagridCustomer.AllowUserToResizeRows = false;
+            this.datagridCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagridCustomer.Location = new System.Drawing.Point(27, 51);
             this.datagridCustomer.MultiSelect = false;
@@ -233,7 +336,7 @@
             // 
             // btnDeleteVideo
             // 
-            this.btnDeleteVideo.Location = new System.Drawing.Point(189, 395);
+            this.btnDeleteVideo.Location = new System.Drawing.Point(842, 395);
             this.btnDeleteVideo.Name = "btnDeleteVideo";
             this.btnDeleteVideo.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteVideo.TabIndex = 17;
@@ -243,7 +346,7 @@
             // 
             // btnEditVideo
             // 
-            this.btnEditVideo.Location = new System.Drawing.Point(108, 395);
+            this.btnEditVideo.Location = new System.Drawing.Point(761, 395);
             this.btnEditVideo.Name = "btnEditVideo";
             this.btnEditVideo.Size = new System.Drawing.Size(75, 23);
             this.btnEditVideo.TabIndex = 16;
@@ -253,7 +356,7 @@
             // 
             // btnAddVideo
             // 
-            this.btnAddVideo.Location = new System.Drawing.Point(27, 395);
+            this.btnAddVideo.Location = new System.Drawing.Point(680, 395);
             this.btnAddVideo.Name = "btnAddVideo";
             this.btnAddVideo.Size = new System.Drawing.Size(75, 23);
             this.btnAddVideo.TabIndex = 15;
@@ -263,6 +366,11 @@
             // 
             // datagridVidLibrary
             // 
+            this.datagridVidLibrary.AllowUserToAddRows = false;
+            this.datagridVidLibrary.AllowUserToDeleteRows = false;
+            this.datagridVidLibrary.AllowUserToResizeColumns = false;
+            this.datagridVidLibrary.AllowUserToResizeRows = false;
+            this.datagridVidLibrary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridVidLibrary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagridVidLibrary.Location = new System.Drawing.Point(27, 47);
             this.datagridVidLibrary.MultiSelect = false;
@@ -272,41 +380,6 @@
             this.datagridVidLibrary.TabIndex = 1;
             this.datagridVidLibrary.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridVidLibrary_CellClick);
             // 
-            // txtbxFullName
-            // 
-            this.txtbxFullName.Location = new System.Drawing.Point(28, 352);
-            this.txtbxFullName.Name = "txtbxFullName";
-            this.txtbxFullName.Size = new System.Drawing.Size(238, 20);
-            this.txtbxFullName.TabIndex = 20;
-            // 
-            // lbl
-            // 
-            this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(25, 335);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(82, 13);
-            this.lbl.TabIndex = 21;
-            this.lbl.Text = "Customer Name";
-            // 
-            // btnOngoingRent
-            // 
-            this.btnOngoingRent.Location = new System.Drawing.Point(714, 398);
-            this.btnOngoingRent.Name = "btnOngoingRent";
-            this.btnOngoingRent.Size = new System.Drawing.Size(91, 25);
-            this.btnOngoingRent.TabIndex = 16;
-            this.btnOngoingRent.Text = "Ongoing Rent";
-            this.btnOngoingRent.UseVisualStyleBackColor = true;
-            this.btnOngoingRent.Click += new System.EventHandler(this.btnOngoingRent_Click);
-            // 
-            // btnAllReports
-            // 
-            this.btnAllReports.Location = new System.Drawing.Point(624, 398);
-            this.btnAllReports.Name = "btnAllReports";
-            this.btnAllReports.Size = new System.Drawing.Size(84, 23);
-            this.btnAllReports.TabIndex = 20;
-            this.btnAllReports.Text = "All Reports";
-            this.btnAllReports.UseVisualStyleBackColor = true;
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,7 +388,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dashboard";
+            this.Text = "Bogsy\'s Video Store";
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.tabControl1.ResumeLayout(false);
             this.RentReturn.ResumeLayout(false);
@@ -338,8 +411,6 @@
         private System.Windows.Forms.Button btnPastTransactions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbbxCustomer;
-        private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.Button btnRent;
         private System.Windows.Forms.DataGridView datagridTransactions;
         private System.Windows.Forms.TabPage CustomerLibrary;
         private System.Windows.Forms.TabPage VideoLibrary;
@@ -356,5 +427,11 @@
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Button btnOngoingRent;
         private System.Windows.Forms.Button btnAllReports;
+        private System.Windows.Forms.Button btnReturn;
+        private System.Windows.Forms.Button btnRent;
+        private System.Windows.Forms.Button btnAllVideos;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbbxCategory;
     }
 }
