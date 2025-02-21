@@ -13,15 +13,17 @@ namespace BogsyVideoStore.Classes
 {
     public class Utility
     {
-        public static DataTable LoadData(string query)
+        public static DataTable LoadData(string query, bool isCustomer, bool isStoredProcedure)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
 
-                if (CurrentCustomer.Role == "Customer")
-                    cmd.Parameters.AddWithValue("@MemberID", CurrentCustomer.CustomerID);
+                if (isStoredProcedure)
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                if (isCustomer)
+                    cmd.Parameters.AddWithValue("@CustomerID", GlobalCustomer.CustomerID);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -31,14 +33,16 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void ExecuteQuery(string message, string query, params SqlParameter[] parameterSets)
+        public static void ExecuteQuery(string message, string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (isStoredProcedure)
+                        cmd.CommandType = CommandType.StoredProcedure;
 
                     if (parameterSets != null)
                         cmd.Parameters.AddRange(parameterSets);

@@ -16,6 +16,7 @@ namespace BogsyVideoStore.Forms
     public partial class RentForm : Form
     {
         readonly Video video;
+        Dashboard dashboard = new Dashboard();
 
         public RentForm(Video video)
         {
@@ -23,24 +24,31 @@ namespace BogsyVideoStore.Forms
             this.video = video;
 
             txtbxTitle.Text = video.Title;
-            txtbxFormat.Text = video.Category;
+            txtbxCategory.Text = video.Category;
             txtbxPrice.Text = video.Price.ToString();
         }
 
         private void btnRent_Click(object sender, EventArgs e)
         {
+            string query = "INSERT INTO RentalTable (VideoID, CustomerID, RentDate, DueDate, PenaltyFee, Status)" +
+                "VALUES (@VideoID, @CustomerID, @RentDate, @DueDate, @PenaltyFee, @Status)";
+
+            DateTime dueDate = DateTime.Now.AddDays(int.Parse(cmbbxDays.Text));
+
             Transaction transaction = new Transaction
             {
-                CustomerID = CurrentCustomer.CustomerID,
                 VideoID = video.VideoID,
-                Status = "Pending",
-                DueDate = null,
-                RentDate = null,
+                Status = "Rented",
+                DueDate = dueDate,
+                RentDate = DateTime.Now,
                 IsReturned = false,
                 PenaltyFee = 0
             };
 
-            Utility.ExecuteQuery("Request successful", "InsertToPendingRequests", new SqlParameter());
+            Utility.ExecuteQuery("Rent successful", query, false, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", transaction.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
+                new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
+
+            this.Hide();
         }
     }
 }

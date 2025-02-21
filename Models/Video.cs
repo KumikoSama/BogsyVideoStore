@@ -8,19 +8,21 @@ namespace BogsyVideoStore.Models
 {
     public class Video
     {
-        string rating;
-
         public int VideoID { get; set; }
         public string Title { get; set; }
-        public string ProductionStudio { get; set; }
-        public string Runtime { get; set; }
-        public DateTime ReleaseDate { get; set; }
         public string Category { get; set; }
         public int Price { get; set; }
-        public string Rating 
-        {
-            get { return rating; }
-            set => rating = (value == "G" || value == "PG" || value == "PG-13" || value == "R") ? value : "NR";
-        }
+        public int In { get; set; }
+        public int Out { get; set; }
+    }
+
+    public class GlobalVideo
+    {
+        public static int VideoID { get; set; }
+        public static string Title { get; set; }
+        public static string Category { get; set; }
+        public static int Price { get; set; }
+        public static int In { get; set; }
+        public static int Out { get; set; }
     }
 }

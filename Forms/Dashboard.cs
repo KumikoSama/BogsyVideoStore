@@ -8,53 +8,36 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace BogsyVideoStore.Forms
 {
     public partial class Dashboard : Form
     {
+        ManageVideo manageVideo;
+
         public Dashboard()
         {
             InitializeComponent();
-            datagridVideos.DataSource = Utility.LoadData("LoadAllVideos");
         }
 
-        private void btnAllVideos_Click(object sender, EventArgs e)
+        private void Dashboard_Load(object sender, EventArgs e)
         {
-            datagridVideos.DataSource = Utility.LoadData("LoadAllVideos");
+            datagridVideos.DataSource = Utility.LoadData("LoadAllVideos", false, true);
+            datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
+            datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
         }
 
-        private void btnRentedVideos_Click(object sender, EventArgs e)
+        private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            datagridVideos.DataSource = Utility.LoadData("LoadRentedVideos");
-        }
+            string query = "INSERT INTO CustomerTable (FullName) VALUES (@FullName)";
 
-        private void btnTransactions_Click(object sender, EventArgs e)
-        {
-            datagridVideos.DataSource = Utility.LoadData("LoadClosedTransactions");
-        }
+            Customer customer = new Customer();
+            customer.FullName = txtbxFullName.Text;
 
-        private void btnOverdueRents_Click(object sender, EventArgs e)
-        {
-            datagridVideos.DataSource = Utility.LoadData("LoadDueRent");
-        }
-
-        private void btnPendingRequests_Click(object sender, EventArgs e)
-        {
-            datagridVideos.DataSource = Utility.LoadData("LoadPendingRequests");
-        }
-
-        private void btnVideoLibrary_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            FormsHandler.VideoLibrary().Show();
-        }
-
-        private void btnCustomerLibrary_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            FormsHandler.CustomerLibrary().Show();
+            Utility.ExecuteQuery("Member successfully added", query, false, new SqlParameter("@FullName", customer.FullName));
+            datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, false);
         }
 
         private void btnRent_Click(object sender, EventArgs e)
@@ -63,20 +46,68 @@ namespace BogsyVideoStore.Forms
 
             Video video = new Video
             {
-                VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString()),
                 Title = selectedRow.Cells["Title"].Value.ToString(),
-                ProductionStudio = selectedRow.Cells["ProductionStudio"].Value.ToString(),
-                Runtime = selectedRow.Cells["Runtime"].Value.ToString(),
-                ReleaseDate = Convert.ToDateTime(selectedRow.Cells["ReleaseDate"].Value),
-                Category = selectedRow.Cells["Format"].Value.ToString(),
+                Category = selectedRow.Cells["Category"].Value.ToString(),
                 Price = int.Parse(selectedRow.Cells["Price"].Value.ToString()),
-                Rating = selectedRow.Cells["Rating"].Value.ToString()
             };
 
-            RentForm rentForm = new RentForm(video);
+        }
 
-            rentForm.Show();
-            this.Hide();
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPastTransactions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOngoingRent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbbxCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditCustomer_Click(object sender, EventArgs e)
+        {
+            string query = "UPDATE CustomerTable SET FullName = @FullName WHERE CustomerID = @CustomerID";
+
+            Utility.ExecuteQuery("Customer information updated", query, false, new SqlParameter("@FullName", txtbxFullName.Text), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID));
+        }
+
+        private void btnAddVideo_Click(object sender, EventArgs e)
+        {
+            manageVideo = new ManageVideo(false);
+            manageVideo.Show();
+        }
+
+        private void datagridCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedCustomer = datagridCustomer.SelectedRows[0];
+            txtbxFullName.Text = selectedCustomer.Cells["FullName"].Value.ToString();
+            GlobalCustomer.CustomerID = int.Parse(selectedCustomer.Cells["CustomerID"].Value.ToString());
+        }
+
+        private void btnEditVideo_Click(object sender, EventArgs e)
+        {
+            manageVideo = new ManageVideo(true);
+            manageVideo.Show();
+        }
+
+        private void datagridVidLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedRow = datagridVideos.SelectedRows[0];
+
+            GlobalVideo.VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString());
+            GlobalVideo.Title = selectedRow.Cells["Title"].Value.ToString();
+            GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
+            GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
+            GlobalVideo.In = int.Parse(selectedRow.Cells["In"].Value.ToString());
         }
     }
 }

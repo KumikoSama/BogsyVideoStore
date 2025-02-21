@@ -18,8 +18,5 @@ namespace BogsyVideoStore.Classes
     public static class FormsHandler
     {
         public static Dashboard Dashboard() => FormFactory.CreateForm<Dashboard>();
-        public static RegistrationForm RegistrationForm() => FormFactory.CreateForm<RegistrationForm>();
-        public static VideoLibrary VideoLibrary() => FormFactory.CreateForm<VideoLibrary>();
-        public static CustomerLibrary CustomerLibrary() => FormFactory.CreateForm<CustomerLibrary>();
     }
 }

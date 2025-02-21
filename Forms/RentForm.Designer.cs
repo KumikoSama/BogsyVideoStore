@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.txtbxTitle = new System.Windows.Forms.TextBox();
-            this.txtbxFormat = new System.Windows.Forms.TextBox();
+            this.txtbxCategory = new System.Windows.Forms.TextBox();
             this.cmbbxDays = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,21 +37,24 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtbxPrice = new System.Windows.Forms.TextBox();
             this.btnRent = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtbxTitle
             // 
             this.txtbxTitle.Location = new System.Drawing.Point(122, 91);
             this.txtbxTitle.Name = "txtbxTitle";
+            this.txtbxTitle.ReadOnly = true;
             this.txtbxTitle.Size = new System.Drawing.Size(160, 20);
             this.txtbxTitle.TabIndex = 0;
             // 
-            // txtbxFormat
+            // txtbxCategory
             // 
-            this.txtbxFormat.Location = new System.Drawing.Point(122, 143);
-            this.txtbxFormat.Name = "txtbxFormat";
-            this.txtbxFormat.Size = new System.Drawing.Size(160, 20);
-            this.txtbxFormat.TabIndex = 1;
+            this.txtbxCategory.Location = new System.Drawing.Point(122, 143);
+            this.txtbxCategory.Name = "txtbxCategory";
+            this.txtbxCategory.ReadOnly = true;
+            this.txtbxCategory.Size = new System.Drawing.Size(160, 20);
+            this.txtbxCategory.TabIndex = 1;
             // 
             // cmbbxDays
             // 
@@ -79,9 +82,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(122, 127);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Format";
+            this.label2.Text = "Category";
             // 
             // label3
             // 
@@ -105,6 +108,7 @@
             // 
             this.txtbxPrice.Location = new System.Drawing.Point(122, 257);
             this.txtbxPrice.Name = "txtbxPrice";
+            this.txtbxPrice.ReadOnly = true;
             this.txtbxPrice.Size = new System.Drawing.Size(160, 20);
             this.txtbxPrice.TabIndex = 6;
             // 
@@ -118,11 +122,22 @@
             this.btnRent.UseVisualStyleBackColor = true;
             this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(178, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Rent";
+            // 
             // RentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 450);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnRent);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtbxPrice);
@@ -130,9 +145,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbbxDays);
-            this.Controls.Add(this.txtbxFormat);
+            this.Controls.Add(this.txtbxCategory);
             this.Controls.Add(this.txtbxTitle);
             this.Name = "RentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RentForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -142,7 +158,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtbxTitle;
-        private System.Windows.Forms.TextBox txtbxFormat;
+        private System.Windows.Forms.TextBox txtbxCategory;
         private System.Windows.Forms.ComboBox cmbbxDays;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -150,5 +166,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtbxPrice;
         private System.Windows.Forms.Button btnRent;
+        private System.Windows.Forms.Label label5;
     }
 }
