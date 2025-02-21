@@ -14,5 +14,7 @@ namespace BogsyVideoStore.Models
         public string DueDate { get; set; }
         public string Status { get; set; }
         public bool IsReturned { get; set; }
+        public int PenaltyFee { get; set; }
+
     }
 }
