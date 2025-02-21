@@ -57,5 +57,10 @@ namespace BogsyVideoStore.Classes
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public static void LoadCategory()
+        {
+            string query = "SELECT FullName FROM CustomerTable"
+        }
     }
 }

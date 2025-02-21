@@ -35,7 +35,7 @@
             this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnRent = new System.Windows.Forms.Button();
-            this.datagridVideos = new System.Windows.Forms.DataGridView();
+            this.datagridTransactions = new System.Windows.Forms.DataGridView();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.btnEditCustomer = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@
             this.btnAllReports = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridVideos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
             this.CustomerLibrary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).BeginInit();
             this.VideoLibrary.SuspendLayout();
@@ -71,6 +71,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(957, 470);
             this.tabControl1.TabIndex = 10;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // RentReturn
             // 
@@ -81,7 +82,7 @@
             this.RentReturn.Controls.Add(this.cmbbxCustomer);
             this.RentReturn.Controls.Add(this.btnReturn);
             this.RentReturn.Controls.Add(this.btnRent);
-            this.RentReturn.Controls.Add(this.datagridVideos);
+            this.RentReturn.Controls.Add(this.datagridTransactions);
             this.RentReturn.Location = new System.Drawing.Point(4, 22);
             this.RentReturn.Name = "RentReturn";
             this.RentReturn.Padding = new System.Windows.Forms.Padding(3);
@@ -139,15 +140,15 @@
             this.btnRent.UseVisualStyleBackColor = true;
             this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
-            // datagridVideos
+            // datagridTransactions
             // 
-            this.datagridVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridVideos.Location = new System.Drawing.Point(22, 97);
-            this.datagridVideos.MultiSelect = false;
-            this.datagridVideos.Name = "datagridVideos";
-            this.datagridVideos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridVideos.Size = new System.Drawing.Size(894, 295);
-            this.datagridVideos.TabIndex = 10;
+            this.datagridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridTransactions.Location = new System.Drawing.Point(22, 97);
+            this.datagridTransactions.MultiSelect = false;
+            this.datagridTransactions.Name = "datagridTransactions";
+            this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.datagridTransactions.Size = new System.Drawing.Size(894, 295);
+            this.datagridTransactions.TabIndex = 10;
             // 
             // CustomerLibrary
             // 
@@ -238,6 +239,7 @@
             this.btnDeleteVideo.TabIndex = 17;
             this.btnDeleteVideo.Text = "Delete";
             this.btnDeleteVideo.UseVisualStyleBackColor = true;
+            this.btnDeleteVideo.Click += new System.EventHandler(this.btnDeleteVideo_Click);
             // 
             // btnEditVideo
             // 
@@ -318,7 +320,7 @@
             this.tabControl1.ResumeLayout(false);
             this.RentReturn.ResumeLayout(false);
             this.RentReturn.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridVideos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).EndInit();
             this.CustomerLibrary.ResumeLayout(false);
             this.CustomerLibrary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).EndInit();
@@ -338,7 +340,7 @@
         private System.Windows.Forms.ComboBox cmbbxCustomer;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnRent;
-        private System.Windows.Forms.DataGridView datagridVideos;
+        private System.Windows.Forms.DataGridView datagridTransactions;
         private System.Windows.Forms.TabPage CustomerLibrary;
         private System.Windows.Forms.TabPage VideoLibrary;
         private System.Windows.Forms.Button btnEditCustomer;

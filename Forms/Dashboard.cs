@@ -24,7 +24,7 @@ namespace BogsyVideoStore.Forms
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            datagridVideos.DataSource = Utility.LoadData("LoadAllVideos", false, true);
+            datagridTransactions.DataSource = Utility.LoadData("LoadAllRentalTransactions", false, true);
             datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
             datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
         }
@@ -42,7 +42,7 @@ namespace BogsyVideoStore.Forms
 
         private void btnRent_Click(object sender, EventArgs e)
         {
-            DataGridViewRow selectedRow = datagridVideos.SelectedRows[0];
+            DataGridViewRow selectedRow = datagridTransactions.SelectedRows[0];
 
             Video video = new Video
             {
@@ -101,13 +101,30 @@ namespace BogsyVideoStore.Forms
 
         private void datagridVidLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow selectedRow = datagridVideos.SelectedRows[0];
+            DataGridViewRow selectedRow = datagridTransactions.SelectedRows[0];
 
             GlobalVideo.VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString());
             GlobalVideo.Title = selectedRow.Cells["Title"].Value.ToString();
             GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
             GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
             GlobalVideo.In = int.Parse(selectedRow.Cells["In"].Value.ToString());
+        }
+
+        private void btnDeleteVideo_Click(object sender, EventArgs e)
+        {
+            string query = "DELETE FROM VideoTable WHERE VideoID = @VideoID";
+
+            Utility.ExecuteQuery("Video deleted", query, false, new SqlParameter("@VideoID", GlobalVideo.VideoID));
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 0)
+                datagridTransactions.DataSource = Utility.LoadData("LoadAllRentalTransactions", false, true);
+            else if (tabControl1.SelectedIndex == 1)
+                datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
+            else
+                datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
         }
     }
 }

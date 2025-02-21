@@ -141,6 +141,7 @@
             this.btnEditBook.TabIndex = 28;
             this.btnEditBook.Text = "Edit";
             this.btnEditBook.UseVisualStyleBackColor = true;
+            this.btnEditBook.Visible = false;
             this.btnEditBook.Click += new System.EventHandler(this.btnEditBook_Click);
             // 
             // ManageVideo

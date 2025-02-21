@@ -45,17 +45,16 @@ namespace BogsyVideoStore.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO VideoTable (Title, Category, Price, In) VALUES (@Title, @Category, @Price, @Copies)";
+            string query = "INSERT INTO VideoTable (Title, Category, Price) VALUES (@Title, @Category, @Price)";
             Video video = new Video
             {
                 Title = txtbxTitle.Text,
                 Category = cmbbxCategory.SelectedItem.ToString(),
-                Price = int.Parse(txtbxPrice.Text),
-                In = int.Parse(txtbxCopies.Text),
+                Price = int.Parse(txtbxPrice.Text)
             };
 
             Utility.ExecuteQuery("Video added", query, false, new SqlParameter("@Title", video.Title), new SqlParameter("@Category", video.Category),
-                new SqlParameter("@Price", video.Price), new SqlParameter("@Copies", video.In));
+                new SqlParameter("@Price", video.Price));
 
             this.Close();
         }
