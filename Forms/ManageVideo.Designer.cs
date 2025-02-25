@@ -108,6 +108,7 @@
             this.cmbbxCategory.TabIndex = 20;
             this.cmbbxCategory.Text = "DVD";
             this.cmbbxCategory.SelectedIndexChanged += new System.EventHandler(this.cmbbxCategory_SelectedIndexChanged);
+            this.cmbbxCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbbxCategory_KeyPress);
             // 
             // txtbxCopies
             // 
@@ -115,6 +116,7 @@
             this.txtbxCopies.Name = "txtbxCopies";
             this.txtbxCopies.Size = new System.Drawing.Size(160, 20);
             this.txtbxCopies.TabIndex = 19;
+            this.txtbxCopies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxCopies_KeyPress);
             // 
             // txtbxTitle
             // 

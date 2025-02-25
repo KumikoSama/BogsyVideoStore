@@ -9,6 +9,7 @@ using Microsoft.Data.SqlClient;
 using BogsyVideoStore.Properties;
 using System.Windows.Forms;
 using System.Collections;
+using System.Globalization;
 
 namespace BogsyVideoStore.Classes
 {
@@ -34,7 +35,7 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void ExecuteQuery(string message, string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
+        public static void ExecuteQuery(string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
         {
             try
             {
@@ -51,11 +52,33 @@ namespace BogsyVideoStore.Classes
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
-                MessageBox.Show(message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static bool GetCustomerInformation(string name, string number)
+        {
+            string query = "SELECT COUNT (*) FROM CustomerTable WHERE @CustomerName = CustomerName AND @ContactInfo = ContactInfo";
+            
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@CustomerName", name);
+                cmd.Parameters.AddWithValue("@ContactInfo", number);
+
+                conn.Open();
+                int result = (int)cmd.ExecuteScalar();
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Customer information already exists");
+                    return false;
+                }
+                
+                return true;
             }
         }
 
@@ -64,7 +87,7 @@ namespace BogsyVideoStore.Classes
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(Queries.GetMemberID, conn);
-                cmd.Parameters.AddWithValue("@FullName", GlobalCustomer.FullName);
+                cmd.Parameters.AddWithValue("@CustomerName", GlobalCustomer.CustomerName);
 
                 conn.Open();
                 object result = cmd.ExecuteScalar();
@@ -73,15 +96,16 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static DataTable SortByCategory(string category)
+        public static DataTable LoadDataByCustomerAndCategory(string query, string category, bool isCustomer)
         {
-            string query = "SELECT * FROM VideoTable WHERE Category = @Category";
-
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Category", category);
+                cmd.Parameters.AddWithValue("@Category", category != "All" ? category : null);
+                if (isCustomer)
+                    cmd.Parameters.AddWithValue("@CustomerID", GlobalCustomer.CustomerID);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -93,7 +117,7 @@ namespace BogsyVideoStore.Classes
 
         public static object LoadCustomers()
         {
-            string query = "SELECT FullName FROM CustomerTable";
+            string query = "SELECT CustomerName FROM CustomerTable";
             List<string> customers = new List<string>
             {
                 "All"
@@ -107,11 +131,17 @@ namespace BogsyVideoStore.Classes
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
-                        customers.Add(reader["FullName"].ToString());
+                        customers.Add(reader["CustomerName"].ToString());
                 }
             }
 
             return customers;
+        }
+
+        public static void HideColumns(DataGridView dt, params string[] columnNames)
+        {
+            foreach (string item in columnNames)
+                dt.Columns[item].Visible = false; 
         }
     }
 }

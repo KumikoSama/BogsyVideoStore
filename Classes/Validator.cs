@@ -28,21 +28,6 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static bool ValidateAge(int age)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(age.ToString()))
-                    throw new Exception("Invalid input");
-                else return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-        }
-
         public static bool ValidateContactInfo(string contactinfo)
         {
             try
@@ -50,7 +35,7 @@ namespace BogsyVideoStore.Classes
                 if (string.IsNullOrEmpty(contactinfo))
                     throw new FormatException();
 
-                string phonenumpattern = @"^\+?[1-9]\d{0,2}[-. ]?\(?\d{1,4}\)?[-. ]?\d{1,4}[-. ]?\d{1,9}$";
+                string phonenumpattern = @"^\+63\d{10}$";
 
                 if (Regex.IsMatch(contactinfo, phonenumpattern))
                     return true;
@@ -60,29 +45,6 @@ namespace BogsyVideoStore.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return false;
-            }
-        }
-
-        public static bool ValidatePassword(string pass)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(pass))
-                    throw new FormatException();
-
-                string passwordpattern = @"^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$";
-
-                if (string.IsNullOrEmpty(pass))
-                    throw new FormatException();
-
-                if (Regex.IsMatch(pass, passwordpattern))
-                    return true;
-                else 
-                    throw new FormatException();
-            }
-            catch (Exception)
-            {
                 return false;
             }
         }
