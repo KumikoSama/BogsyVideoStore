@@ -59,41 +59,9 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static bool GetCustomerInformation(string name, string number)
+        public static void LoadVideosInComboBox()
         {
-            string query = "SELECT COUNT (*) FROM CustomerTable WHERE @CustomerName = CustomerName AND @ContactInfo = ContactInfo";
-            
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@CustomerName", name);
-                cmd.Parameters.AddWithValue("@ContactInfo", number);
 
-                conn.Open();
-                int result = (int)cmd.ExecuteScalar();
-
-                if (result > 0)
-                {
-                    MessageBox.Show("Customer information already exists");
-                    return false;
-                }
-                
-                return true;
-            }
-        }
-
-        public static void GetCustomerID()
-        {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(Queries.GetMemberID, conn);
-                cmd.Parameters.AddWithValue("@CustomerName", GlobalCustomer.CustomerName);
-
-                conn.Open();
-                object result = cmd.ExecuteScalar();
-
-                GlobalCustomer.CustomerID = (result != null) ? int.Parse(result.ToString()) : 0;
-            }
         }
 
         public static DataTable LoadDataByCustomerAndCategory(string query, string category, bool isCustomer)
@@ -115,26 +83,35 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static object LoadCustomers()
+        public static void LoadCustomers(ComboBox comboBox)
         {
-            string query = "SELECT CustomerName FROM CustomerTable";
-            List<string> customers = new List<string>
+            string query = "SELECT CustomerID, CustomerName FROM CustomerTable";
+            var customers = new List<Customer>
             {
-                "All"
+                new Customer { CustomerName = "All" },
             };
 
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
+                conn.Open();
                 SqlCommand cmd = new SqlCommand(query, conn);
 
-                conn.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
-                        customers.Add(reader["CustomerName"].ToString());
+                    {
+                        customers.Add(new Customer
+                        {
+                            CustomerID = int.Parse(reader["CustomerID"].ToString()),
+                            CustomerName = reader["CustomerName"].ToString()
+                        });
+                    }
                 }
             }
-            return customers;
+
+            comboBox.DataSource = customers;
+            comboBox.DisplayMember = "CustomerName";
+            comboBox.ValueMember = "CustomerID";
         }
 
         public static void HideColumns(DataGridView dt, params string[] columnNames)

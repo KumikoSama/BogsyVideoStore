@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -12,19 +13,26 @@ namespace BogsyVideoStore.Classes
 {
     public class Validator
     {
-        public static bool ValidateName(string name)
+        public static bool ValidateCustomerInformation(string name, string number)
         {
-            try
+            string query = "SELECT COUNT (*) FROM CustomerTable WHERE @CustomerName = CustomerName AND @ContactInfo = ContactInfo";
+            
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
-                if (string.IsNullOrEmpty(name))
-                    throw new Exception("Invalid input");
-                else
-                    return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@CustomerName", name);
+                cmd.Parameters.AddWithValue("@ContactInfo", number);
+
+                conn.Open();
+                int result = (int)cmd.ExecuteScalar();
+
+                if (result > 0)
+                {
+                    MessageBox.Show("Customer information already exists");
+                    return false;
+                }
+                
+                return true;
             }
         }
 

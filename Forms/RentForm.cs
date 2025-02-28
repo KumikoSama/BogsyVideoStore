@@ -2,19 +2,26 @@
 using BogsyVideoStore.Models;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace BogsyVideoStore.Forms
 {
     public partial class RentForm : Form
     {
-        public RentForm()
+        public RentForm(bool isMultiple, params List<Video>[] videos)
         {
             InitializeComponent();
 
-            txtbxTitle.Text = GlobalVideo.Title;
-            txtbxCategory.Text = GlobalVideo.Category;
-            txtbxPrice.Text = GlobalVideo.Price.ToString();
+            if (!isMultiple)
+            {
+                txtbxTitle.Text = GlobalVideo.Title;
+                txtbxCategory.Text = GlobalVideo.Category;
+                txtbxPrice.Text = GlobalVideo.Price.ToString(); 
+            }
+            else
+            {
+            }
         }
 
         private void btnRent_Click(object sender, EventArgs e)
@@ -42,6 +49,11 @@ namespace BogsyVideoStore.Forms
         private void cmbbxDays_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -35,13 +35,13 @@
             this.cmbbxCategory = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAllVideos = new System.Windows.Forms.Button();
-            this.btnRent = new System.Windows.Forms.Button();
             this.btnAllReports = new System.Windows.Forms.Button();
             this.btnOngoingRent = new System.Windows.Forms.Button();
             this.btnPastTransactions = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
             this.datagridTransactions = new System.Windows.Forms.DataGridView();
+            this.btnRent = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
             this.lnklblClearAll = new System.Windows.Forms.LinkLabel();
@@ -94,8 +94,8 @@
             this.RentReturn.Controls.Add(this.label1);
             this.RentReturn.Controls.Add(this.cmbbxCustomer);
             this.RentReturn.Controls.Add(this.datagridTransactions);
-            this.RentReturn.Controls.Add(this.btnReturn);
             this.RentReturn.Controls.Add(this.btnRent);
+            this.RentReturn.Controls.Add(this.btnReturn);
             this.RentReturn.Location = new System.Drawing.Point(4, 22);
             this.RentReturn.Name = "RentReturn";
             this.RentReturn.Padding = new System.Windows.Forms.Padding(3);
@@ -160,16 +160,6 @@
             this.btnAllVideos.UseVisualStyleBackColor = true;
             this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
             // 
-            // btnRent
-            // 
-            this.btnRent.Location = new System.Drawing.Point(22, 403);
-            this.btnRent.Name = "btnRent";
-            this.btnRent.Size = new System.Drawing.Size(74, 25);
-            this.btnRent.TabIndex = 21;
-            this.btnRent.Text = "Rent";
-            this.btnRent.UseVisualStyleBackColor = true;
-            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
-            // 
             // btnAllReports
             // 
             this.btnAllReports.Location = new System.Drawing.Point(534, 402);
@@ -233,13 +223,22 @@
             this.datagridTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagridTransactions.Location = new System.Drawing.Point(22, 94);
-            this.datagridTransactions.MultiSelect = false;
             this.datagridTransactions.Name = "datagridTransactions";
             this.datagridTransactions.ReadOnly = true;
             this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridTransactions.Size = new System.Drawing.Size(894, 302);
             this.datagridTransactions.TabIndex = 10;
             this.datagridTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridTransactions_CellClick);
+            // 
+            // btnRent
+            // 
+            this.btnRent.Location = new System.Drawing.Point(22, 403);
+            this.btnRent.Name = "btnRent";
+            this.btnRent.Size = new System.Drawing.Size(74, 25);
+            this.btnRent.TabIndex = 21;
+            this.btnRent.Text = "Rent";
+            this.btnRent.UseVisualStyleBackColor = true;
+            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
             // btnReturn
             // 
@@ -249,6 +248,7 @@
             this.btnReturn.TabIndex = 22;
             this.btnReturn.Text = "Return";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Visible = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // CustomerLibrary
@@ -439,6 +439,7 @@
             this.datagridVidLibrary.Size = new System.Drawing.Size(890, 353);
             this.datagridVidLibrary.TabIndex = 1;
             this.datagridVidLibrary.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridVidLibrary_CellClick);
+            this.datagridVidLibrary.DoubleClick += new System.EventHandler(this.datagridVidLibrary_DoubleClick);
             // 
             // Dashboard
             // 

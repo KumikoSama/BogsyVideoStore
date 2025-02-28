@@ -26,11 +26,13 @@ namespace BogsyVideoStore.Forms
     public partial class Dashboard : Form
     {
         DataDisplayed currentDataDisplayed = DataDisplayed.AllVideos;
+        string selectedCategory;
 
         public Dashboard()
         {
             InitializeComponent();
             Utility.ExecuteQuery(Queries.UpdateRentalTable, false);
+            Utility.ExecuteQuery(Queries.UpdatePenaltyFee, false);
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -39,8 +41,7 @@ namespace BogsyVideoStore.Forms
             datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
             datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
 
-            cmbbxCustomer.DataSource = Utility.LoadCustomers();
-            btnReturn.Visible = false;
+            Utility.LoadCustomers(cmbbxCustomer);
 
             datagridCustomer.Columns["CustomerID"].Visible = false;
             datagridTransactions.Columns["VideoID"].Visible = false;
@@ -67,19 +68,47 @@ namespace BogsyVideoStore.Forms
 
         private void btnRent_Click(object sender, EventArgs e)
         {
-            if (cmbbxCustomer.SelectedItem.ToString() == "All")
+            if (cmbbxCustomer.Text == "All")
                 return;
             else
             {
-                DataGridViewRow selectedRow = datagridTransactions.SelectedRows[0];
+                DataGridViewRow selectedRow;
+                var video = new List<Video>();
+                bool isMultiple = false;
 
-                GlobalVideo.VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString());
-                GlobalVideo.Title = selectedRow.Cells["Title"].Value.ToString();
-                GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
-                GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
+                if (datagridTransactions.SelectedRows.Count == 1)
+                {
+                    selectedRow = datagridTransactions.SelectedRows[0];
 
-                RentForm rentForm = new RentForm();
-                rentForm.Show();
+                    GlobalVideo.VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString());
+                    GlobalVideo.Title = selectedRow.Cells["Title"].Value.ToString();
+                    GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
+                    GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
+
+                    isMultiple = false;
+
+                    RentForm rentForm = new RentForm(isMultiple);
+                    rentForm.Show();
+                }
+                else if (datagridTransactions.SelectedRows.Count > 1)
+                {
+                    for (int i = 0; i < datagridTransactions.SelectedRows.Count; i++)
+                    {
+                        selectedRow = datagridTransactions.SelectedRows[i];
+
+                        video.Add(new Video
+                        {
+                            VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString()),
+                            Title = selectedRow.Cells["Title"].Value.ToString(),
+                            Category = selectedRow.Cells["Category"].Value.ToString(),
+                            Price = int.Parse(selectedRow.Cells["Price"].Value.ToString())
+                        });
+                    }
+                    isMultiple = true;
+
+                    RentForm rentForm = new RentForm(isMultiple, video);
+                    rentForm.Show();
+                }
             }
         }
 
@@ -100,7 +129,7 @@ namespace BogsyVideoStore.Forms
         {
             currentDataDisplayed = DataDisplayed.PreviousTransactions;
 
-            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadClosedTransactions", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.SelectedItem.ToString() != "All");
+            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadClosedTransactions", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
 
             btnReturn.Visible = false;
             btnRent.Visible = false;
@@ -111,22 +140,24 @@ namespace BogsyVideoStore.Forms
         {
             currentDataDisplayed = DataDisplayed.OngoingRent;
 
-            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", cmbbxCustomer.SelectedItem.ToString(), cmbbxCustomer.SelectedItem.ToString() != "All");
+            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
+            datagridTransactions.MultiSelect = false;
 
             btnReturn.Visible = true;
             btnRent.Visible = false;
+
             Utility.HideColumns(datagridTransactions, "RentalID", "CustomerID", "VideoID");
         }
 
         private void cmbbxCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbbxCustomer.SelectedItem.ToString() != "All")
+            if (cmbbxCustomer.Text != "All")
             {
-                GlobalCustomer.CustomerName = cmbbxCustomer.SelectedItem.ToString();
-                Utility.GetCustomerID();
+                GlobalCustomer.CustomerName = cmbbxCustomer.Text;
+                GlobalCustomer.CustomerID = int.Parse(cmbbxCustomer.SelectedValue.ToString());
             }
 
-            string selectedCategory = (string)cmbbxCategory.SelectedItem;
+            selectedCategory = (string)cmbbxCategory.SelectedItem;
 
             switch (currentDataDisplayed)
             {
@@ -134,16 +165,16 @@ namespace BogsyVideoStore.Forms
                     datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllVideos", selectedCategory, false);
                     break;
                 case DataDisplayed.OngoingRent:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
                 case DataDisplayed.PreviousTransactions:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadClosedTransactions", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadClosedTransactions", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
                 case DataDisplayed.AllReports:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllRentalTransactions", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllRentalTransactions", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
                 case DataDisplayed.OverdueRent:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
             }
         }
@@ -152,7 +183,7 @@ namespace BogsyVideoStore.Forms
         {
             currentDataDisplayed = DataDisplayed.AllReports;
 
-            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllRentalTransactions", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.SelectedItem.ToString() != "All");
+            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllRentalTransactions", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
 
             btnReturn.Visible = false;
             btnRent.Visible = false;
@@ -162,13 +193,20 @@ namespace BogsyVideoStore.Forms
 
         private void datagridTransactions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow selectedTransaction = datagridTransactions.Rows[0];
+            DataGridViewRow selectedRows = datagridTransactions.Rows[0];
 
             if (currentDataDisplayed != DataDisplayed.AllVideos)
             {
-                GlobalVideo.VideoID = int.Parse(selectedTransaction.Cells["VideoID"].Value.ToString());
-                GlobalCustomer.CustomerID = int.Parse(selectedTransaction.Cells["CustomerID"].Value.ToString());
-                GlobalTransaction.RentalID = int.Parse(selectedTransaction.Cells["RentalID"].Value.ToString()); 
+                GlobalVideo.VideoID = int.Parse(selectedRows.Cells["VideoID"].Value.ToString());
+                GlobalCustomer.CustomerID = int.Parse(selectedRows.Cells["CustomerID"].Value.ToString());
+                GlobalTransaction.RentalID = int.Parse(selectedRows.Cells["RentalID"].Value.ToString());
+            }
+            else
+            {
+                if (datagridTransactions.SelectedRows.Count == 1)
+                {
+
+                }
             }
         }
 
@@ -176,7 +214,7 @@ namespace BogsyVideoStore.Forms
         {
             currentDataDisplayed = DataDisplayed.AllVideos;
 
-            datagridTransactions.DataSource = Utility.LoadData("LoadAllVideos", false, true);
+            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllVideos", cmbbxCategory.SelectedItem.ToString(), false);
 
             btnReturn.Visible = false;
             btnRent.Visible = true;
@@ -184,7 +222,7 @@ namespace BogsyVideoStore.Forms
 
         private void cmbbxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedCategory = (string)cmbbxCategory.SelectedItem;
+            selectedCategory = (string)cmbbxCategory.SelectedItem;
 
             switch (currentDataDisplayed)
             {
@@ -192,16 +230,16 @@ namespace BogsyVideoStore.Forms
                     datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllVideos", selectedCategory, false);
                     break;
                 case DataDisplayed.OngoingRent:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
                 case DataDisplayed.PreviousTransactions:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadClosedTransactions", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadClosedTransactions", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
                 case DataDisplayed.AllReports:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllRentalTransactions", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllRentalTransactions", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
                 case DataDisplayed.OverdueRent:
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", selectedCategory, cmbbxCustomer.Text != "All");
                     break;
             }
         }
@@ -210,7 +248,7 @@ namespace BogsyVideoStore.Forms
         {
             currentDataDisplayed = DataDisplayed.OverdueRent;
 
-            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.SelectedItem.ToString() != "All");
+            datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
 
             btnReturn.Visible = true;
             btnRent.Visible = false;
@@ -230,7 +268,7 @@ namespace BogsyVideoStore.Forms
         {
             Customer customer = new Customer();
 
-            if (!Utility.GetCustomerInformation(txtbxFullName.Text, txtbxContactInfo.Text))
+            if (!Validator.ValidateCustomerInformation(txtbxFullName.Text, txtbxContactInfo.Text))
                 return;
 
             if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
@@ -244,6 +282,7 @@ namespace BogsyVideoStore.Forms
 
             MessageBox.Show("Customer successfully added");
             datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, false);
+            Utility.LoadCustomers(cmbbxCustomer);
         }
 
         private void btnEditCustomer_Click(object sender, EventArgs e)
@@ -342,6 +381,7 @@ namespace BogsyVideoStore.Forms
                 GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
                 GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
                 GlobalVideo.Copies = int.Parse(selectedRow.Cells["Copies"].Value.ToString());
+                GlobalVideo.CopiesBorrowed = int.Parse(selectedRow.Cells["CopiesOnRent"].Value.ToString());
 
                 btnEditVideo.Enabled = true;
                 btnDeleteVideo.Enabled = true;
@@ -350,14 +390,28 @@ namespace BogsyVideoStore.Forms
 
         private void btnDeleteVideo_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you'll delete this video?", "Video Deletion Confirmation",
+            if (GlobalVideo.CopiesBorrowed > 0)
+                MessageBox.Show("You can't delete this yet! There's still copies that are being borrowed.");
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure you'll delete this video?", "Video Deletion Confirmation",
                 MessageBoxButtons.YesNo);
 
-            if (result == DialogResult.Yes)
-                Utility.ExecuteQuery(Queries.DeleteVideo, false, new SqlParameter("@VideoID", GlobalVideo.VideoID));
-            else return;
+                if (result == DialogResult.Yes)
+                    Utility.ExecuteQuery(Queries.DeleteVideo, false, new SqlParameter("@VideoID", GlobalVideo.VideoID));
+                else return;
+            }
+        }
+
+        private void datagridVidLibrary_DoubleClick(object sender, EventArgs e)
+        {
+            using (ManageVideo manageVideo = new ManageVideo(true))
+                manageVideo.ShowDialog();
+
+            datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
         }
 
         #endregion
+
     }
 }
