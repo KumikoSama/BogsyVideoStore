@@ -79,7 +79,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(957, 470);
             this.tabControl1.TabIndex = 10;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // RentReturn
             // 
@@ -88,7 +88,6 @@
             this.RentReturn.Controls.Add(this.cmbbxCategory);
             this.RentReturn.Controls.Add(this.label4);
             this.RentReturn.Controls.Add(this.btnAllVideos);
-            this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Controls.Add(this.btnAllReports);
             this.RentReturn.Controls.Add(this.btnOngoingRent);
             this.RentReturn.Controls.Add(this.btnPastTransactions);
@@ -96,6 +95,7 @@
             this.RentReturn.Controls.Add(this.cmbbxCustomer);
             this.RentReturn.Controls.Add(this.datagridTransactions);
             this.RentReturn.Controls.Add(this.btnReturn);
+            this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Location = new System.Drawing.Point(4, 22);
             this.RentReturn.Name = "RentReturn";
             this.RentReturn.Padding = new System.Windows.Forms.Padding(3);
@@ -235,6 +235,7 @@
             this.datagridTransactions.Location = new System.Drawing.Point(22, 94);
             this.datagridTransactions.MultiSelect = false;
             this.datagridTransactions.Name = "datagridTransactions";
+            this.datagridTransactions.ReadOnly = true;
             this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridTransactions.Size = new System.Drawing.Size(894, 302);
             this.datagridTransactions.TabIndex = 10;
@@ -360,6 +361,7 @@
             this.datagridCustomer.Location = new System.Drawing.Point(31, 160);
             this.datagridCustomer.MultiSelect = false;
             this.datagridCustomer.Name = "datagridCustomer";
+            this.datagridCustomer.ReadOnly = true;
             this.datagridCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridCustomer.Size = new System.Drawing.Size(884, 262);
             this.datagridCustomer.TabIndex = 11;
@@ -432,6 +434,7 @@
             this.datagridVidLibrary.Location = new System.Drawing.Point(27, 47);
             this.datagridVidLibrary.MultiSelect = false;
             this.datagridVidLibrary.Name = "datagridVidLibrary";
+            this.datagridVidLibrary.ReadOnly = true;
             this.datagridVidLibrary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridVidLibrary.Size = new System.Drawing.Size(890, 353);
             this.datagridVidLibrary.TabIndex = 1;

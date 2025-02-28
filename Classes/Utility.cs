@@ -134,7 +134,6 @@ namespace BogsyVideoStore.Classes
                         customers.Add(reader["CustomerName"].ToString());
                 }
             }
-
             return customers;
         }
 

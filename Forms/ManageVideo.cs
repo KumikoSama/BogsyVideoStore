@@ -67,17 +67,21 @@ namespace BogsyVideoStore.Forms
 
         private void btnEditVideo_Click(object sender, EventArgs e)
         {
-            txtbxTitle.Text = GlobalVideo.Title;
-            txtbxPrice.Text = GlobalVideo.Price.ToString();
-            txtbxCopies.Text = GlobalVideo.Copies.ToString();
-            cmbbxCategory.Text = GlobalVideo.Category;
-
             DialogResult result = MessageBox.Show("Are you sure you'll edit this video?", "Video Edit Confirmation",
                 MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
+            {
+                GlobalVideo.Title = txtbxTitle.Text;
+                GlobalVideo.Price = int.Parse(txtbxPrice.Text);
+                GlobalVideo.Copies = int.Parse(txtbxCopies.Text);
+                GlobalVideo.Category = cmbbxCategory.Text;
+
                 Utility.ExecuteQuery(Queries.EditVideo, false, new SqlParameter("@Title", GlobalVideo.Title), new SqlParameter("@Category", GlobalVideo.Category),
                     new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.Copies), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+
+                this.Close();
+            }
             else return;
         }
 

@@ -25,7 +25,6 @@ namespace BogsyVideoStore.Forms
 
     public partial class Dashboard : Form
     {
-        ManageVideo manageVideo;
         DataDisplayed currentDataDisplayed = DataDisplayed.AllVideos;
 
         public Dashboard()
@@ -42,28 +41,29 @@ namespace BogsyVideoStore.Forms
 
             cmbbxCustomer.DataSource = Utility.LoadCustomers();
             btnReturn.Visible = false;
+
+            datagridCustomer.Columns["CustomerID"].Visible = false;
             datagridTransactions.Columns["VideoID"].Visible = false;
+            datagridVidLibrary.Columns["VideoID"].Visible = false;
         }
 
-        private void btnAddCustomer_Click(object sender, EventArgs e)
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Customer customer = new Customer();
-
-            if (!Utility.GetCustomerInformation(txtbxFullName.Text, txtbxContactInfo.Text))
-                return;
-
-            if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
+            switch (tabControl1.SelectedTab.Name)
             {
-                customer.CustomerName = txtbxFullName.Text.ToUpper();
-                customer.ContactInfo = txtbxContactInfo.Text;
+                case "RentReturn":
+                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadAllVideos", "All", false);
+                    break;
+                case "VideoLibrary":
+                    datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
+                    break;
+                case "CustomerLibrary":
+                    datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
+                    break;
             }
-            else return;
-
-            Utility.ExecuteQuery(Queries.InsertToCustomerTable, false, new SqlParameter("@CustomerName", customer.CustomerName), new SqlParameter("@ContactInfo", customer.ContactInfo));
-
-            MessageBox.Show("Customer successfully added");
-            datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, false);
         }
+
+        #region RentalAndReturn
 
         private void btnRent_Click(object sender, EventArgs e)
         {
@@ -85,7 +85,15 @@ namespace BogsyVideoStore.Forms
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+            DialogResult result = MessageBox.Show("Are you sure you want to return this?", "Return Video", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+
+                MessageBox.Show("Video returned successfully");
+            }
+            else return;
         }
 
         private void btnPastTransactions_Click(object sender, EventArgs e)
@@ -104,7 +112,6 @@ namespace BogsyVideoStore.Forms
             currentDataDisplayed = DataDisplayed.OngoingRent;
 
             datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOnGoingRent", cmbbxCustomer.SelectedItem.ToString(), cmbbxCustomer.SelectedItem.ToString() != "All");
-
 
             btnReturn.Visible = true;
             btnRent.Visible = false;
@@ -139,81 +146,6 @@ namespace BogsyVideoStore.Forms
                     datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory("LoadOverdueRent", selectedCategory, cmbbxCustomer.SelectedItem.ToString() != "All");
                     break;
             }
-        }
-
-        private void btnEditCustomer_Click(object sender, EventArgs e)
-        {
-            if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
-            {
-                DialogResult result = MessageBox.Show("Are you sure you'll edit this customer information?", "Customer Information",
-                MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                    Utility.ExecuteQuery(Queries.EditCustomerQuery, false, new SqlParameter("@CustomerName", txtbxFullName.Text.ToUpper()), new SqlParameter("@ContactInfo", txtbxContactInfo.Text), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID));
-                else return;
-
-                datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
-            }
-            else
-                MessageBox.Show("Fields are empty or in an incorrect format");
-        }
-
-        private void btnAddVideo_Click(object sender, EventArgs e)
-        {
-            manageVideo = new ManageVideo(false);
-            manageVideo.Show();
-        }
-
-        private void datagridCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (datagridCustomer.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedCustomer = datagridCustomer.SelectedRows[0];
-
-                txtbxFullName.Text = selectedCustomer.Cells["CustomerName"].Value.ToString();
-                txtbxContactInfo.Text = selectedCustomer.Cells["ContactInfo"].Value.ToString();
-
-                GlobalCustomer.CustomerID = int.Parse(selectedCustomer.Cells["CustomerID"].Value.ToString());
-                btnAddCustomer.Enabled = false;
-            }
-        }
-
-        private void btnEditVideo_Click(object sender, EventArgs e)
-        {
-            if (datagridVidLibrary.SelectedRows.Count > 0)
-            {
-                manageVideo = new ManageVideo(true);
-                manageVideo.Show();
-            }
-            else
-                MessageBox.Show("Select one video");
-        }
-
-        private void datagridVidLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (datagridVidLibrary.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = datagridVidLibrary.SelectedRows[0];
-
-                GlobalVideo.VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString());
-                GlobalVideo.Title = selectedRow.Cells["Title"].Value.ToString();
-                GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
-                GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
-                GlobalVideo.Copies = int.Parse(selectedRow.Cells["Copies"].Value.ToString());
-
-                btnEditVideo.Enabled = true;
-                btnDeleteVideo.Enabled = true;
-            }
-        }
-
-        private void btnDeleteVideo_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Are you sure you'll delete this video?", "Video Deletion Confirmation",
-                MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
-                Utility.ExecuteQuery(Queries.DeleteVideo, false, new SqlParameter("@VideoID", GlobalVideo.VideoID));
-            else return;
         }
 
         private void btnAllReports_Click(object sender, EventArgs e)
@@ -285,6 +217,66 @@ namespace BogsyVideoStore.Forms
             Utility.HideColumns(datagridTransactions, "VideoID", "CustomerID", "RentalID");
         }
 
+        private void cmbbxCategory_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        #endregion
+
+        #region CustomerLibrary
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            Customer customer = new Customer();
+
+            if (!Utility.GetCustomerInformation(txtbxFullName.Text, txtbxContactInfo.Text))
+                return;
+
+            if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
+            {
+                customer.CustomerName = txtbxFullName.Text.ToUpper();
+                customer.ContactInfo = txtbxContactInfo.Text;
+            }
+            else return;
+
+            Utility.ExecuteQuery(Queries.InsertToCustomerTable, false, new SqlParameter("@CustomerName", customer.CustomerName), new SqlParameter("@ContactInfo", customer.ContactInfo));
+
+            MessageBox.Show("Customer successfully added");
+            datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, false);
+        }
+
+        private void btnEditCustomer_Click(object sender, EventArgs e)
+        {
+            if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
+            {
+                DialogResult result = MessageBox.Show("Are you sure you'll edit this customer information?", "Customer Information",
+                MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                    Utility.ExecuteQuery(Queries.EditCustomerQuery, false, new SqlParameter("@CustomerName", txtbxFullName.Text.ToUpper()), new SqlParameter("@ContactInfo", txtbxContactInfo.Text), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID));
+                else return;
+
+                datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
+            }
+            else
+                MessageBox.Show("Fields are empty or in an incorrect format");
+        }
+
+        private void datagridCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (datagridCustomer.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedCustomer = datagridCustomer.SelectedRows[0];
+
+                txtbxFullName.Text = selectedCustomer.Cells["CustomerName"].Value.ToString();
+                txtbxContactInfo.Text = selectedCustomer.Cells["ContactInfo"].Value.ToString();
+
+                GlobalCustomer.CustomerID = int.Parse(selectedCustomer.Cells["CustomerID"].Value.ToString());
+                btnAddCustomer.Enabled = false;
+            }
+        }
+
         private void txtbxContactInfo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '+')
@@ -301,21 +293,6 @@ namespace BogsyVideoStore.Forms
                 e.Handled = true;
         }
 
-        private void cmbbxCategory_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            if (tabControl1.SelectedTab.Text == "Rent and Return")
-                datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
-            else if (tabControl1.SelectedTab.Text == "Customer Library")
-                datagridCustomer.DataSource = Utility.LoadData("LoadAllCustomers", false, true);
-            else
-                datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
-        }
-
         private void lnklblClearAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             txtbxFullName.Clear();
@@ -328,5 +305,59 @@ namespace BogsyVideoStore.Forms
             if (string.IsNullOrEmpty(txtbxFullName.Text) || string.IsNullOrEmpty(txtbxContactInfo.Text))
                 btnAddCustomer.Enabled = true;
         }
+
+        #endregion
+
+        #region VideoLibrary
+
+        private void btnAddVideo_Click(object sender, EventArgs e)
+        {
+            using (ManageVideo manageVideo = new ManageVideo(false))
+                manageVideo.ShowDialog();
+
+            datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
+        }
+
+        private void btnEditVideo_Click(object sender, EventArgs e)
+        {
+            if (datagridVidLibrary.SelectedRows.Count > 0)
+            {
+                using (ManageVideo manageVideo = new ManageVideo(true))
+                    manageVideo.ShowDialog();
+
+                datagridVidLibrary.DataSource = Utility.LoadData("LoadAllVideos", false, true);
+            }
+            else
+                MessageBox.Show("Select one video");
+        }
+
+        private void datagridVidLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (datagridVidLibrary.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = datagridVidLibrary.SelectedRows[0];
+
+                GlobalVideo.VideoID = int.Parse(selectedRow.Cells["VideoID"].Value.ToString());
+                GlobalVideo.Title = selectedRow.Cells["Title"].Value.ToString();
+                GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
+                GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
+                GlobalVideo.Copies = int.Parse(selectedRow.Cells["Copies"].Value.ToString());
+
+                btnEditVideo.Enabled = true;
+                btnDeleteVideo.Enabled = true;
+            }
+        }
+
+        private void btnDeleteVideo_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you'll delete this video?", "Video Deletion Confirmation",
+                MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+                Utility.ExecuteQuery(Queries.DeleteVideo, false, new SqlParameter("@VideoID", GlobalVideo.VideoID));
+            else return;
+        }
+
+        #endregion
     }
 }
