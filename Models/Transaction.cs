@@ -20,6 +20,7 @@ namespace BogsyVideoStore.Models
 
     public class GlobalTransaction
     {
+        public static List<Transaction> TransactionList = new List<Transaction>();
         public static int RentalID { get; set; }
         public static int VideoID { get; set; }
         public static int CustomerID { get; set; }

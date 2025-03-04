@@ -18,6 +18,7 @@ namespace BogsyVideoStore.Models
 
     public class GlobalVideo
     {
+        public static List<Video> VideoList = new List<Video>();
         public static int VideoID { get; set; }
         public static string Title { get; set; }
         public static string Category { get; set; }

@@ -35,7 +35,7 @@
             this.cmbbxCategory = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAllVideos = new System.Windows.Forms.Button();
-            this.btnAllReports = new System.Windows.Forms.Button();
+            this.btnAllTransactions = new System.Windows.Forms.Button();
             this.btnOngoingRent = new System.Windows.Forms.Button();
             this.btnPastTransactions = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,6 +59,10 @@
             this.btnEditVideo = new System.Windows.Forms.Button();
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
+            this.ReportsPage = new System.Windows.Forms.TabPage();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnGenerateReport = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -66,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).BeginInit();
             this.VideoLibrary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).BeginInit();
+            this.ReportsPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -73,6 +78,7 @@
             this.tabControl1.Controls.Add(this.RentReturn);
             this.tabControl1.Controls.Add(this.CustomerLibrary);
             this.tabControl1.Controls.Add(this.VideoLibrary);
+            this.tabControl1.Controls.Add(this.ReportsPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -88,7 +94,7 @@
             this.RentReturn.Controls.Add(this.cmbbxCategory);
             this.RentReturn.Controls.Add(this.label4);
             this.RentReturn.Controls.Add(this.btnAllVideos);
-            this.RentReturn.Controls.Add(this.btnAllReports);
+            this.RentReturn.Controls.Add(this.btnAllTransactions);
             this.RentReturn.Controls.Add(this.btnOngoingRent);
             this.RentReturn.Controls.Add(this.btnPastTransactions);
             this.RentReturn.Controls.Add(this.label1);
@@ -152,7 +158,7 @@
             // 
             // btnAllVideos
             // 
-            this.btnAllVideos.Location = new System.Drawing.Point(454, 402);
+            this.btnAllVideos.Location = new System.Drawing.Point(445, 402);
             this.btnAllVideos.Name = "btnAllVideos";
             this.btnAllVideos.Size = new System.Drawing.Size(74, 23);
             this.btnAllVideos.TabIndex = 23;
@@ -160,15 +166,15 @@
             this.btnAllVideos.UseVisualStyleBackColor = true;
             this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
             // 
-            // btnAllReports
+            // btnAllTransactions
             // 
-            this.btnAllReports.Location = new System.Drawing.Point(534, 402);
-            this.btnAllReports.Name = "btnAllReports";
-            this.btnAllReports.Size = new System.Drawing.Size(84, 23);
-            this.btnAllReports.TabIndex = 20;
-            this.btnAllReports.Text = "All Reports";
-            this.btnAllReports.UseVisualStyleBackColor = true;
-            this.btnAllReports.Click += new System.EventHandler(this.btnAllReports_Click);
+            this.btnAllTransactions.Location = new System.Drawing.Point(525, 402);
+            this.btnAllTransactions.Name = "btnAllTransactions";
+            this.btnAllTransactions.Size = new System.Drawing.Size(93, 23);
+            this.btnAllTransactions.TabIndex = 20;
+            this.btnAllTransactions.Text = "All Transactions";
+            this.btnAllTransactions.UseVisualStyleBackColor = true;
+            this.btnAllTransactions.Click += new System.EventHandler(this.btnAllReports_Click);
             // 
             // btnOngoingRent
             // 
@@ -223,6 +229,7 @@
             this.datagridTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datagridTransactions.Location = new System.Drawing.Point(22, 94);
+            this.datagridTransactions.MultiSelect = false;
             this.datagridTransactions.Name = "datagridTransactions";
             this.datagridTransactions.ReadOnly = true;
             this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -441,6 +448,47 @@
             this.datagridVidLibrary.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridVidLibrary_CellClick);
             this.datagridVidLibrary.DoubleClick += new System.EventHandler(this.datagridVidLibrary_DoubleClick);
             // 
+            // ReportsPage
+            // 
+            this.ReportsPage.Controls.Add(this.btnGenerateReport);
+            this.ReportsPage.Controls.Add(this.label7);
+            this.ReportsPage.Controls.Add(this.reportViewer1);
+            this.ReportsPage.Location = new System.Drawing.Point(4, 22);
+            this.ReportsPage.Name = "ReportsPage";
+            this.ReportsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ReportsPage.Size = new System.Drawing.Size(949, 444);
+            this.ReportsPage.TabIndex = 3;
+            this.ReportsPage.Text = "Reports Page";
+            this.ReportsPage.UseVisualStyleBackColor = true;
+            // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Location = new System.Drawing.Point(24, 55);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
+            this.reportViewer1.Size = new System.Drawing.Size(903, 325);
+            this.reportViewer1.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(20, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 20);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Reports";
+            // 
+            // btnGenerateReport
+            // 
+            this.btnGenerateReport.Location = new System.Drawing.Point(24, 386);
+            this.btnGenerateReport.Name = "btnGenerateReport";
+            this.btnGenerateReport.Size = new System.Drawing.Size(95, 23);
+            this.btnGenerateReport.TabIndex = 20;
+            this.btnGenerateReport.Text = "Generate Report";
+            this.btnGenerateReport.UseVisualStyleBackColor = true;
+            this.btnGenerateReport.Click += new System.EventHandler(this.btnGenerateReport_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,6 +511,8 @@
             this.VideoLibrary.ResumeLayout(false);
             this.VideoLibrary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).EndInit();
+            this.ReportsPage.ResumeLayout(false);
+            this.ReportsPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -496,9 +546,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbbxCategory;
         private System.Windows.Forms.Button btnOverdue;
-        private System.Windows.Forms.Button btnAllReports;
+        private System.Windows.Forms.Button btnAllTransactions;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtbxContactInfo;
         private System.Windows.Forms.LinkLabel lnklblClearAll;
+        private System.Windows.Forms.TabPage ReportsPage;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnGenerateReport;
     }
 }

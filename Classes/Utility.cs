@@ -10,6 +10,7 @@ using BogsyVideoStore.Properties;
 using System.Windows.Forms;
 using System.Collections;
 using System.Globalization;
+using Microsoft.Reporting.WinForms;
 
 namespace BogsyVideoStore.Classes
 {
@@ -59,9 +60,35 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void LoadVideosInComboBox()
+        public static void LoadVideosInComboBox(ComboBox comboBox)
         {
+            string query = "SELECT VideoID, Title, Category, Price FROM VideoTable WHERE Copies > 0";
+            GlobalVideo.VideoList.Clear();
 
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        GlobalVideo.VideoList.Add(new Video
+                        {
+                            VideoID = int.Parse(reader["VideoID"].ToString()),
+                            Title = reader["Title"].ToString(),
+                            Category = reader["Category"].ToString(),
+                            Price = int.Parse(reader["Price"].ToString())
+                        });
+                    }
+                }
+            }
+
+            comboBox.DataSource = null;
+            comboBox.DataSource = GlobalVideo.VideoList;
+            comboBox.DisplayMember = "Title";
+            comboBox.ValueMember = "VideoID";
         }
 
         public static DataTable LoadDataByCustomerAndCategory(string query, string category, bool isCustomer)
@@ -88,7 +115,7 @@ namespace BogsyVideoStore.Classes
             string query = "SELECT CustomerID, CustomerName FROM CustomerTable";
             var customers = new List<Customer>
             {
-                new Customer { CustomerName = "All" },
+                new Customer { CustomerName = "All", CustomerID = 0 },
             };
 
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -112,6 +139,34 @@ namespace BogsyVideoStore.Classes
             comboBox.DataSource = customers;
             comboBox.DisplayMember = "CustomerName";
             comboBox.ValueMember = "CustomerID";
+        }
+
+        public static void GenerateReport(ReportViewer reportViewer)
+        {
+            string query = "SELECT * FROM RentalTable";
+
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                reportViewer.LocalReport.DataSources.Clear();
+                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", dt);
+                reportViewer.LocalReport.ReportPath = "Reports.rdlc";
+                reportViewer.LocalReport.DataSources.Add(reportDataSource);
+
+                reportViewer.RefreshReport();
+                reportViewer.Refresh();
+            }
+        }
+
+        public static void GetCategoryAndPrice()
+        {
+            GlobalVideo.Category = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Category).FirstOrDefault();
+            GlobalVideo.Price = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Price).FirstOrDefault();
         }
 
         public static void HideColumns(DataGridView dt, params string[] columnNames)
