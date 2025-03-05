@@ -60,9 +60,11 @@
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
             this.ReportsPage = new System.Windows.Forms.TabPage();
+            this.cmbbxCustomerReport = new System.Windows.Forms.ComboBox();
+            this.btnGenerateVideoReport = new System.Windows.Forms.Button();
+            this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnGenerateReport = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -392,7 +394,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(23, 17);
+            this.label2.Location = new System.Drawing.Point(23, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 20);
             this.label2.TabIndex = 18;
@@ -401,7 +403,7 @@
             // btnDeleteVideo
             // 
             this.btnDeleteVideo.Enabled = false;
-            this.btnDeleteVideo.Location = new System.Drawing.Point(842, 406);
+            this.btnDeleteVideo.Location = new System.Drawing.Point(842, 405);
             this.btnDeleteVideo.Name = "btnDeleteVideo";
             this.btnDeleteVideo.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteVideo.TabIndex = 17;
@@ -412,7 +414,7 @@
             // btnEditVideo
             // 
             this.btnEditVideo.Enabled = false;
-            this.btnEditVideo.Location = new System.Drawing.Point(761, 406);
+            this.btnEditVideo.Location = new System.Drawing.Point(761, 405);
             this.btnEditVideo.Name = "btnEditVideo";
             this.btnEditVideo.Size = new System.Drawing.Size(75, 23);
             this.btnEditVideo.TabIndex = 16;
@@ -422,7 +424,7 @@
             // 
             // btnAddVideo
             // 
-            this.btnAddVideo.Location = new System.Drawing.Point(680, 406);
+            this.btnAddVideo.Location = new System.Drawing.Point(680, 405);
             this.btnAddVideo.Name = "btnAddVideo";
             this.btnAddVideo.Size = new System.Drawing.Size(75, 23);
             this.btnAddVideo.TabIndex = 15;
@@ -438,7 +440,7 @@
             this.datagridVidLibrary.AllowUserToResizeRows = false;
             this.datagridVidLibrary.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridVidLibrary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridVidLibrary.Location = new System.Drawing.Point(27, 47);
+            this.datagridVidLibrary.Location = new System.Drawing.Point(27, 46);
             this.datagridVidLibrary.MultiSelect = false;
             this.datagridVidLibrary.Name = "datagridVidLibrary";
             this.datagridVidLibrary.ReadOnly = true;
@@ -450,8 +452,10 @@
             // 
             // ReportsPage
             // 
-            this.ReportsPage.Controls.Add(this.btnGenerateReport);
             this.ReportsPage.Controls.Add(this.label7);
+            this.ReportsPage.Controls.Add(this.cmbbxCustomerReport);
+            this.ReportsPage.Controls.Add(this.btnGenerateVideoReport);
+            this.ReportsPage.Controls.Add(this.btnGenerateCustomerReport);
             this.ReportsPage.Controls.Add(this.reportViewer1);
             this.ReportsPage.Location = new System.Drawing.Point(4, 22);
             this.ReportsPage.Name = "ReportsPage";
@@ -461,33 +465,55 @@
             this.ReportsPage.Text = "Reports Page";
             this.ReportsPage.UseVisualStyleBackColor = true;
             // 
+            // cmbbxCustomerReport
+            // 
+            this.cmbbxCustomerReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxCustomerReport.FormattingEnabled = true;
+            this.cmbbxCustomerReport.Items.AddRange(new object[] {
+            "All"});
+            this.cmbbxCustomerReport.Location = new System.Drawing.Point(710, 27);
+            this.cmbbxCustomerReport.Name = "cmbbxCustomerReport";
+            this.cmbbxCustomerReport.Size = new System.Drawing.Size(231, 23);
+            this.cmbbxCustomerReport.TabIndex = 22;
+            this.cmbbxCustomerReport.Text = "All";
+            // 
+            // btnGenerateVideoReport
+            // 
+            this.btnGenerateVideoReport.Location = new System.Drawing.Point(163, 403);
+            this.btnGenerateVideoReport.Name = "btnGenerateVideoReport";
+            this.btnGenerateVideoReport.Size = new System.Drawing.Size(127, 23);
+            this.btnGenerateVideoReport.TabIndex = 21;
+            this.btnGenerateVideoReport.Text = "Generate Video Report";
+            this.btnGenerateVideoReport.UseVisualStyleBackColor = true;
+            this.btnGenerateVideoReport.Click += new System.EventHandler(this.btnGenerateVideoReport_Click);
+            // 
+            // btnGenerateCustomerReport
+            // 
+            this.btnGenerateCustomerReport.Location = new System.Drawing.Point(8, 403);
+            this.btnGenerateCustomerReport.Name = "btnGenerateCustomerReport";
+            this.btnGenerateCustomerReport.Size = new System.Drawing.Size(149, 23);
+            this.btnGenerateCustomerReport.TabIndex = 20;
+            this.btnGenerateCustomerReport.Text = "Generate Customer Report";
+            this.btnGenerateCustomerReport.UseVisualStyleBackColor = true;
+            this.btnGenerateCustomerReport.Click += new System.EventHandler(this.btnGenerateCustomerReport_Click);
+            // 
             // reportViewer1
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(24, 55);
+            this.reportViewer1.Location = new System.Drawing.Point(0, 56);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(903, 325);
+            this.reportViewer1.Size = new System.Drawing.Size(949, 341);
             this.reportViewer1.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(20, 21);
+            this.label7.Location = new System.Drawing.Point(23, 18);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 20);
-            this.label7.TabIndex = 19;
+            this.label7.TabIndex = 23;
             this.label7.Text = "Reports";
-            // 
-            // btnGenerateReport
-            // 
-            this.btnGenerateReport.Location = new System.Drawing.Point(24, 386);
-            this.btnGenerateReport.Name = "btnGenerateReport";
-            this.btnGenerateReport.Size = new System.Drawing.Size(95, 23);
-            this.btnGenerateReport.TabIndex = 20;
-            this.btnGenerateReport.Text = "Generate Report";
-            this.btnGenerateReport.UseVisualStyleBackColor = true;
-            this.btnGenerateReport.Click += new System.EventHandler(this.btnGenerateReport_Click);
             // 
             // Dashboard
             // 
@@ -552,7 +578,9 @@
         private System.Windows.Forms.LinkLabel lnklblClearAll;
         private System.Windows.Forms.TabPage ReportsPage;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.Button btnGenerateCustomerReport;
+        private System.Windows.Forms.ComboBox cmbbxCustomerReport;
+        private System.Windows.Forms.Button btnGenerateVideoReport;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnGenerateReport;
     }
 }

@@ -141,22 +141,31 @@ namespace BogsyVideoStore.Classes
             comboBox.ValueMember = "CustomerID";
         }
 
-        public static void GenerateReport(ReportViewer reportViewer)
+        public static void GenerateReport(ReportViewer reportViewer, string query, string dataSet, string reportpath, string customerid = null)
         {
-            string query = "SELECT * FROM RentalTable";
-
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                if (customerid != null)
+                    cmd.Parameters.AddWithValue("@CustomerID", customerid);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
                 reportViewer.LocalReport.DataSources.Clear();
-                ReportDataSource reportDataSource = new ReportDataSource("DataSet1", dt);
-                reportViewer.LocalReport.ReportPath = "Reports.rdlc";
+
+                ReportDataSource reportDataSource = new ReportDataSource(dataSet, dt);
+                reportViewer.LocalReport.ReportPath = reportpath;
                 reportViewer.LocalReport.DataSources.Add(reportDataSource);
+
+                if (customerid != null)
+                {
+                    ReportParameter reportParameter = new ReportParameter("CustomerID", customerid);
+                    reportViewer.LocalReport.SetParameters(reportParameter);
+                }
 
                 reportViewer.RefreshReport();
                 reportViewer.Refresh();
