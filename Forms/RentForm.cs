@@ -8,10 +8,12 @@ namespace BogsyVideoStore.Forms
 {
     public partial class RentForm : Form
     {
+        int previousAmount;
+        Func<int, int, int> calculateTotal = (x, y) => x + y;
+
         public RentForm()
         {
             InitializeComponent();
-            this.FormClosing += RentForm_FormClosing;
 
             GlobalTransaction.TransactionList.Clear();
         }
@@ -23,9 +25,7 @@ namespace BogsyVideoStore.Forms
             txtbxPrice.Text = GlobalVideo.Price.ToString();
 
             cmbbxVideos.SelectedIndexChanged -= cmbbxVideos_SelectedIndexChanged;
-
             Utility.LoadVideosInComboBox(cmbbxVideos);
-
             cmbbxVideos.SelectedIndexChanged += cmbbxVideos_SelectedIndexChanged;
         }
 
@@ -43,8 +43,10 @@ namespace BogsyVideoStore.Forms
 
             MessageBox.Show("Video successfully rented");
 
-            this.FormClosing -= RentForm_FormClosing;
             this.Close();
+
+            Receipt receipt = new Receipt(GlobalTransaction.TotalAmount);
+            receipt.Show();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -64,6 +66,10 @@ namespace BogsyVideoStore.Forms
 
             datagridList.DataSource = null;
             datagridList.DataSource = GlobalTransaction.TransactionList;
+
+            GlobalTransaction.TotalAmount = calculateTotal(int.Parse(txtbxPrice.Text), previousAmount);
+            previousAmount = GlobalTransaction.TotalAmount;
+            lblTotalAmount.Text = GlobalTransaction.TotalAmount.ToString();
         }
 
         private void cmbbxDays_KeyPress(object sender, KeyPressEventArgs e)
@@ -81,12 +87,19 @@ namespace BogsyVideoStore.Forms
             txtbxPrice.Text = GlobalVideo.Price.ToString();
         }
 
-        private void RentForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("This transaction won't be saved\nProceed to leave form?", "Leave Rent Form", MessageBoxButtons.YesNo);
+            int rowIndex = datagridList.SelectedRows[0].Index;
 
-            if (result == DialogResult.No)
-                e.Cancel = true;
+            DialogResult result = MessageBox.Show("Are you sure you want to remove this?", "Removing Video", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                GlobalTransaction.TransactionList.RemoveAt(rowIndex);
+                datagridList.DataSource = null;
+                datagridList.DataSource = GlobalTransaction.TransactionList;
+            }
+            else return;
         }
     }
 }

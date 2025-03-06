@@ -141,11 +141,43 @@ namespace BogsyVideoStore.Classes
             comboBox.ValueMember = "CustomerID";
         }
 
-        public static void GenerateReport(ReportViewer reportViewer, string query, string dataSet, string reportpath, string customerid = null)
+        public static void GenerateReceipt(ReportViewer reportViewer, decimal totalAmount)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand("SelectRecentTransaction", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CustomerID", GlobalCustomer.CustomerID);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                reportViewer.LocalReport.DataSources.Clear();
+
+                ReportDataSource reportDataSource = new ReportDataSource("NewTransaction", dt);
+                reportViewer.LocalReport.ReportPath = "Receipt.rdlc";
+                reportViewer.LocalReport.DataSources.Add(reportDataSource);
+
+                ReportParameter[] reportParams = new ReportParameter[]
+                {
+                    new ReportParameter("CustomerID", GlobalCustomer.CustomerID.ToString()),
+                    new ReportParameter("TotalAmount", totalAmount.ToString())
+                };
+
+                reportViewer.LocalReport.SetParameters(reportParams);
+
+                reportViewer.RefreshReport();
+                reportViewer.Refresh();
+            }
+        }
+
+        public static void GenerateCustomerReport(ReportViewer reportViewer, string customerName, string customerid = null)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("LoadOnGoingRent", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 if (customerid != null)
@@ -157,15 +189,39 @@ namespace BogsyVideoStore.Classes
 
                 reportViewer.LocalReport.DataSources.Clear();
 
-                ReportDataSource reportDataSource = new ReportDataSource(dataSet, dt);
-                reportViewer.LocalReport.ReportPath = reportpath;
+                ReportDataSource reportDataSource = new ReportDataSource("CustomerRentalTransaction", dt);
+                reportViewer.LocalReport.ReportPath = "CustomerReport.rdlc";
                 reportViewer.LocalReport.DataSources.Add(reportDataSource);
 
-                if (customerid != null)
+                ReportParameter[] reportParams = new ReportParameter[]
                 {
-                    ReportParameter reportParameter = new ReportParameter("CustomerID", customerid);
-                    reportViewer.LocalReport.SetParameters(reportParameter);
-                }
+                    new ReportParameter("CustomerID", customerid ?? null),
+                    new ReportParameter("CustomerName", customerName != "All" ? customerName : "(All Customers)") 
+                };
+
+                reportViewer.LocalReport.SetParameters(reportParams);
+
+                reportViewer.RefreshReport();
+                reportViewer.Refresh();
+            }
+        }
+        
+        public static void GenerateVideoReport(ReportViewer reportViewer)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("LoadAllVideos", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+
+                reportViewer.LocalReport.DataSources.Clear();
+
+                ReportDataSource reportDataSource = new ReportDataSource("VideosDataSet", dt);
+                reportViewer.LocalReport.ReportPath = "VideosReport.rdlc";
+                reportViewer.LocalReport.DataSources.Add(reportDataSource);
 
                 reportViewer.RefreshReport();
                 reportViewer.Refresh();

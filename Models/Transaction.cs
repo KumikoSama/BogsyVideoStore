@@ -29,5 +29,6 @@ namespace BogsyVideoStore.Models
         public static string Status { get; set; }
         public static int PenaltyFee { get; set; }
         public static int RentFee { get; set; }
+        public static int TotalAmount { get; set; }
     }
 }

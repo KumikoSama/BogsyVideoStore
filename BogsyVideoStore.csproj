@@ -194,6 +194,12 @@
     <Compile Include="Forms\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Receipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Receipt.Designer.cs">
+      <DependentUpon>Receipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,12 +221,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BogsyDataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="bin\Debug\Receipt.rdlc" />
     <EmbeddedResource Include="bin\Debug\VideosReport.rdlc" />
     <EmbeddedResource Include="Forms\ManageVideo.resx">
       <DependentUpon>ManageVideo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Receipt.resx">
+      <DependentUpon>Receipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RentForm.resx">
       <DependentUpon>RentForm.cs</DependentUpon>
@@ -236,6 +246,7 @@
     </Compile>
     <EmbeddedResource Include="bin\Debug\CustomerReport.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BogsyVideoStore.Models.Transaction.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

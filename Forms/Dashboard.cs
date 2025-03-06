@@ -402,12 +402,12 @@ namespace BogsyVideoStore.Forms
         {
             string customerID = cmbbxCustomerReport.Text != "All" ? cmbbxCustomerReport.SelectedValue.ToString() : null;
 
-            Utility.GenerateReport(reportViewer1, StoredProcedures.LoadOnGoingRent.ToString(), "CustomerRentalTransaction", "CustomerReport.rdlc", customerID);
+            Utility.GenerateCustomerReport(reportViewer1, cmbbxCustomerReport.Text, customerID);
         }
 
         private void btnGenerateVideoReport_Click(object sender, EventArgs e)
         {
-            Utility.GenerateReport(reportViewer1, StoredProcedures.LoadAllVideos.ToString(), "VideosDataSet", "VideosReport.rdlc");
+            Utility.GenerateVideoReport(reportViewer1);
         }
 
         #endregion

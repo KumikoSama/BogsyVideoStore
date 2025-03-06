@@ -65,6 +65,7 @@
             this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnPayment = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -91,6 +92,7 @@
             // 
             // RentReturn
             // 
+            this.RentReturn.Controls.Add(this.btnPayment);
             this.RentReturn.Controls.Add(this.btnOverdue);
             this.RentReturn.Controls.Add(this.label5);
             this.RentReturn.Controls.Add(this.cmbbxCategory);
@@ -515,6 +517,15 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "Reports";
             // 
+            // btnPayment
+            // 
+            this.btnPayment.Location = new System.Drawing.Point(102, 403);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(109, 25);
+            this.btnPayment.TabIndex = 28;
+            this.btnPayment.Text = "Settle Penalty Fees";
+            this.btnPayment.UseVisualStyleBackColor = true;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -582,5 +593,6 @@
         private System.Windows.Forms.ComboBox cmbbxCustomerReport;
         private System.Windows.Forms.Button btnGenerateVideoReport;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnPayment;
     }
 }

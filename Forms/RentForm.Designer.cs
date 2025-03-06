@@ -43,12 +43,15 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.datagridList = new System.Windows.Forms.DataGridView();
             this.cmbbxVideos = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
+            this.btnRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.datagridList)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbxTitle
             // 
-            this.txtbxTitle.Location = new System.Drawing.Point(95, 75);
+            this.txtbxTitle.Location = new System.Drawing.Point(95, 66);
             this.txtbxTitle.Name = "txtbxTitle";
             this.txtbxTitle.ReadOnly = true;
             this.txtbxTitle.Size = new System.Drawing.Size(143, 20);
@@ -56,7 +59,7 @@
             // 
             // txtbxCategory
             // 
-            this.txtbxCategory.Location = new System.Drawing.Point(302, 75);
+            this.txtbxCategory.Location = new System.Drawing.Point(302, 66);
             this.txtbxCategory.Name = "txtbxCategory";
             this.txtbxCategory.ReadOnly = true;
             this.txtbxCategory.Size = new System.Drawing.Size(160, 20);
@@ -69,7 +72,7 @@
             "1",
             "2",
             "3"});
-            this.cmbbxDays.Location = new System.Drawing.Point(98, 135);
+            this.cmbbxDays.Location = new System.Drawing.Point(98, 126);
             this.cmbbxDays.Name = "cmbbxDays";
             this.cmbbxDays.Size = new System.Drawing.Size(160, 21);
             this.cmbbxDays.TabIndex = 2;
@@ -79,7 +82,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(95, 56);
+            this.label1.Location = new System.Drawing.Point(95, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 3;
@@ -88,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(302, 59);
+            this.label2.Location = new System.Drawing.Point(302, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 4;
@@ -97,7 +100,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(98, 119);
+            this.label3.Location = new System.Drawing.Point(98, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 5;
@@ -106,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 119);
+            this.label4.Location = new System.Drawing.Point(305, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 7;
@@ -114,7 +117,7 @@
             // 
             // txtbxPrice
             // 
-            this.txtbxPrice.Location = new System.Drawing.Point(305, 135);
+            this.txtbxPrice.Location = new System.Drawing.Point(305, 126);
             this.txtbxPrice.Name = "txtbxPrice";
             this.txtbxPrice.ReadOnly = true;
             this.txtbxPrice.Size = new System.Drawing.Size(160, 20);
@@ -122,7 +125,7 @@
             // 
             // btnRent
             // 
-            this.btnRent.Location = new System.Drawing.Point(202, 187);
+            this.btnRent.Location = new System.Drawing.Point(202, 174);
             this.btnRent.Name = "btnRent";
             this.btnRent.Size = new System.Drawing.Size(75, 23);
             this.btnRent.TabIndex = 8;
@@ -134,7 +137,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(253, 21);
+            this.label5.Location = new System.Drawing.Point(253, 12);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 20);
             this.label5.TabIndex = 9;
@@ -142,7 +145,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(283, 187);
+            this.btnAdd.Location = new System.Drawing.Point(283, 174);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 11;
@@ -158,27 +161,60 @@
             this.datagridList.AllowUserToResizeRows = false;
             this.datagridList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridList.Location = new System.Drawing.Point(0, 224);
+            this.datagridList.Location = new System.Drawing.Point(0, 207);
             this.datagridList.Name = "datagridList";
             this.datagridList.ReadOnly = true;
             this.datagridList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridList.Size = new System.Drawing.Size(555, 246);
+            this.datagridList.Size = new System.Drawing.Size(555, 225);
             this.datagridList.TabIndex = 13;
             // 
             // cmbbxVideos
             // 
             this.cmbbxVideos.FormattingEnabled = true;
-            this.cmbbxVideos.Location = new System.Drawing.Point(95, 75);
+            this.cmbbxVideos.Location = new System.Drawing.Point(95, 66);
             this.cmbbxVideos.Name = "cmbbxVideos";
             this.cmbbxVideos.Size = new System.Drawing.Size(160, 21);
             this.cmbbxVideos.TabIndex = 14;
             this.cmbbxVideos.SelectedIndexChanged += new System.EventHandler(this.cmbbxVideos_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(438, 442);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 17);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Total:";
+            // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.AutoSize = true;
+            this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAmount.Location = new System.Drawing.Point(479, 442);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(36, 17);
+            this.lblTotalAmount.TabIndex = 16;
+            this.lblTotalAmount.Text = "0.00";
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(12, 438);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 17;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // RentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 470);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.lblTotalAmount);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.datagridList);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label5);
@@ -195,7 +231,6 @@
             this.Name = "RentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RentForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RentForm_FormClosing);
             this.Load += new System.EventHandler(this.RentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datagridList)).EndInit();
             this.ResumeLayout(false);
@@ -219,5 +254,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridView datagridList;
         private System.Windows.Forms.ComboBox cmbbxVideos;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblTotalAmount;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
