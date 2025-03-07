@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.reportViewerReceipt = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // reportViewer1
+            // reportViewerReceipt
             // 
-            this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.reportViewerReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.reportViewer1.Location = new System.Drawing.Point(1, 41);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(375, 375);
-            this.reportViewer1.TabIndex = 0;
+            this.reportViewerReceipt.Location = new System.Drawing.Point(1, 41);
+            this.reportViewerReceipt.Name = "reportViewerReceipt";
+            this.reportViewerReceipt.ServerReport.BearerToken = null;
+            this.reportViewerReceipt.Size = new System.Drawing.Size(375, 375);
+            this.reportViewerReceipt.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(110, 13);
+            this.label1.Location = new System.Drawing.Point(155, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 17);
+            this.label1.Size = new System.Drawing.Size(63, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Transaction Receipt";
+            this.label1.Text = "Receipt";
             // 
             // Receipt
             // 
@@ -58,7 +58,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(376, 418);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.reportViewer1);
+            this.Controls.Add(this.reportViewerReceipt);
             this.Name = "Receipt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Receipt";
@@ -70,7 +70,7 @@
 
         #endregion
 
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerReceipt;
         private System.Windows.Forms.Label label1;
     }
 }

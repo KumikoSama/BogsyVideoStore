@@ -414,7 +414,34 @@ namespace BogsyVideoStore.Forms
 
         private void btnSettlePenalty_Click(object sender, EventArgs e)
         {
-            
+            DialogResult result = MessageBox.Show("Confirm payment for this due transaction?", "Penalty Fee Payment", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                int totalPenalty = 0;
+
+                foreach (DataGridViewRow row in datagridTransactions.SelectedRows)
+                {
+                    int penaltyFees = int.Parse(row.Cells["Penalty Fee"].Value.ToString());
+                    totalPenalty += penaltyFees;
+
+                    ReceiptList.Receipts.Add(new ReceiptModel
+                    {
+                        CustomerName = row.Cells["Customer Name"].Value.ToString(),
+                        VideoTitle = row.Cells["Title"].Value.ToString(),
+                        Category = row.Cells["Category"].Value.ToString(),
+                        PenaltyFee = penaltyFees,
+                    });
+
+                    ReceiptModel.TotalAmount += totalPenalty;
+
+                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalTransaction.VideoID));
+                }
+
+                MessageBox.Show("Payments settled");
+                Receipt receipt = new Receipt(true);
+                receipt.Show();
+            }
         }
     }
 }

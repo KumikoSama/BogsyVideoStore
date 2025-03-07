@@ -45,7 +45,7 @@ namespace BogsyVideoStore.Forms
 
             this.Close();
 
-            Receipt receipt = new Receipt(GlobalTransaction.TotalAmount);
+            Receipt receipt = new Receipt(false, GlobalTransaction.TotalAmount);
             receipt.Show();
         }
 

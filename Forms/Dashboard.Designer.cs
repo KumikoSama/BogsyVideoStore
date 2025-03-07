@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.RentReturn = new System.Windows.Forms.TabPage();
+            this.btnSettlePenalty = new System.Windows.Forms.Button();
             this.btnOverdue = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbbxCategory = new System.Windows.Forms.ComboBox();
@@ -41,8 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
             this.datagridTransactions = new System.Windows.Forms.DataGridView();
-            this.btnRent = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
+            this.btnRent = new System.Windows.Forms.Button();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
             this.lnklblClearAll = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
@@ -60,12 +61,11 @@
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
             this.ReportsPage = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.cmbbxCustomerReport = new System.Windows.Forms.ComboBox();
             this.btnGenerateVideoReport = new System.Windows.Forms.Button();
             this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnSettlePenalty = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -113,6 +113,16 @@
             this.RentReturn.TabIndex = 0;
             this.RentReturn.Text = "Rent and Return";
             this.RentReturn.UseVisualStyleBackColor = true;
+            // 
+            // btnSettlePenalty
+            // 
+            this.btnSettlePenalty.Location = new System.Drawing.Point(102, 403);
+            this.btnSettlePenalty.Name = "btnSettlePenalty";
+            this.btnSettlePenalty.Size = new System.Drawing.Size(109, 25);
+            this.btnSettlePenalty.TabIndex = 28;
+            this.btnSettlePenalty.Text = "Settle Penalty Fees";
+            this.btnSettlePenalty.UseVisualStyleBackColor = true;
+            this.btnSettlePenalty.Click += new System.EventHandler(this.btnSettlePenalty_Click);
             // 
             // btnOverdue
             // 
@@ -241,16 +251,6 @@
             this.datagridTransactions.TabIndex = 10;
             this.datagridTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridTransactions_CellClick);
             // 
-            // btnRent
-            // 
-            this.btnRent.Location = new System.Drawing.Point(22, 403);
-            this.btnRent.Name = "btnRent";
-            this.btnRent.Size = new System.Drawing.Size(74, 25);
-            this.btnRent.TabIndex = 21;
-            this.btnRent.Text = "Rent";
-            this.btnRent.UseVisualStyleBackColor = true;
-            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
-            // 
             // btnReturn
             // 
             this.btnReturn.Location = new System.Drawing.Point(22, 402);
@@ -261,6 +261,16 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Visible = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            // 
+            // btnRent
+            // 
+            this.btnRent.Location = new System.Drawing.Point(22, 403);
+            this.btnRent.Name = "btnRent";
+            this.btnRent.Size = new System.Drawing.Size(74, 25);
+            this.btnRent.TabIndex = 21;
+            this.btnRent.Text = "Rent";
+            this.btnRent.UseVisualStyleBackColor = true;
+            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
             // CustomerLibrary
             // 
@@ -467,6 +477,16 @@
             this.ReportsPage.Text = "Reports Page";
             this.ReportsPage.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(23, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 20);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Reports";
+            // 
             // cmbbxCustomerReport
             // 
             this.cmbbxCustomerReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -506,27 +526,6 @@
             this.reportViewer.ServerReport.BearerToken = null;
             this.reportViewer.Size = new System.Drawing.Size(949, 341);
             this.reportViewer.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(23, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 20);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Reports";
-            // 
-            // btnSettlePenalty
-            // 
-            this.btnSettlePenalty.Location = new System.Drawing.Point(102, 403);
-            this.btnSettlePenalty.Name = "btnSettlePenalty";
-            this.btnSettlePenalty.Size = new System.Drawing.Size(109, 25);
-            this.btnSettlePenalty.TabIndex = 28;
-            this.btnSettlePenalty.Text = "Settle Penalty Fees";
-            this.btnSettlePenalty.UseVisualStyleBackColor = true;
-            this.btnSettlePenalty.Visible = false;
-            this.btnSettlePenalty.Click += new System.EventHandler(this.btnSettlePenalty_Click);
             // 
             // Dashboard
             // 
