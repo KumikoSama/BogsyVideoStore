@@ -157,7 +157,7 @@ namespace BogsyVideoStore.Classes
                 reportViewer.LocalReport.DataSources.Clear();
 
                 ReportDataSource reportDataSource = new ReportDataSource("NewTransaction", dt);
-                reportViewer.LocalReport.ReportPath = "Receipt.rdlc";
+                reportViewer.LocalReport.ReportPath = "TransactionReceipt.rdlc";
                 reportViewer.LocalReport.DataSources.Add(reportDataSource);
 
                 ReportParameter[] reportParams = new ReportParameter[]

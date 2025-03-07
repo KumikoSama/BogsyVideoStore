@@ -178,7 +178,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\FormFactory.cs" />
     <Compile Include="Classes\Queries.cs" />
     <Compile Include="Classes\Utility.cs" />
     <Compile Include="Classes\Validator.cs" />
@@ -208,6 +207,7 @@
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\GlobalConfig.cs" />
+    <Compile Include="Models\Receipt.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Program.cs" />
@@ -221,7 +221,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BogsyDataSet.xsd</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="bin\Debug\Receipt.rdlc" />
+    <EmbeddedResource Include="bin\Debug\PenaltyFeeReceipt.rdlc" />
+    <EmbeddedResource Include="bin\Debug\TransactionReceipt.rdlc" />
     <EmbeddedResource Include="bin\Debug\VideosReport.rdlc" />
     <EmbeddedResource Include="Forms\ManageVideo.resx">
       <DependentUpon>ManageVideo.cs</DependentUpon>
@@ -246,6 +247,7 @@
     </Compile>
     <EmbeddedResource Include="bin\Debug\CustomerReport.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BogsyVideoStore.Models.Receipt.datasource" />
     <None Include="Properties\DataSources\BogsyVideoStore.Models.Transaction.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

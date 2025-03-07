@@ -24,6 +24,7 @@ namespace BogsyVideoStore.Forms
         private void Receipt_Load(object sender, EventArgs e)
         {
             this.reportViewer1.RefreshReport();
+            this.BringToFront();
             Utility.GenerateReceipt(reportViewer1, totalAmount);
         }
     }

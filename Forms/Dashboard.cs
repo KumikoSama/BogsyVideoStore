@@ -59,7 +59,7 @@ namespace BogsyVideoStore.Forms
             datagridCustomer.Columns["CustomerID"].Visible = false;
             datagridTransactions.Columns["VideoID"].Visible = false;
             datagridVidLibrary.Columns["VideoID"].Visible = false;
-            this.reportViewer1.RefreshReport();
+            this.reportViewer.RefreshReport();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace BogsyVideoStore.Forms
 
             if (result == DialogResult.Yes)
             {
-                Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+                Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
 
                 MessageBox.Show("Video returned successfully");
 
@@ -402,15 +402,19 @@ namespace BogsyVideoStore.Forms
         {
             string customerID = cmbbxCustomerReport.Text != "All" ? cmbbxCustomerReport.SelectedValue.ToString() : null;
 
-            Utility.GenerateCustomerReport(reportViewer1, cmbbxCustomerReport.Text, customerID);
+            Utility.GenerateCustomerReport(reportViewer, cmbbxCustomerReport.Text, customerID);
         }
 
         private void btnGenerateVideoReport_Click(object sender, EventArgs e)
         {
-            Utility.GenerateVideoReport(reportViewer1);
+            Utility.GenerateVideoReport(reportViewer);
         }
 
         #endregion
 
+        private void btnSettlePenalty_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

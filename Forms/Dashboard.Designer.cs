@@ -63,9 +63,9 @@
             this.cmbbxCustomerReport = new System.Windows.Forms.ComboBox();
             this.btnGenerateVideoReport = new System.Windows.Forms.Button();
             this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnPayment = new System.Windows.Forms.Button();
+            this.btnSettlePenalty = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -92,7 +92,7 @@
             // 
             // RentReturn
             // 
-            this.RentReturn.Controls.Add(this.btnPayment);
+            this.RentReturn.Controls.Add(this.btnSettlePenalty);
             this.RentReturn.Controls.Add(this.btnOverdue);
             this.RentReturn.Controls.Add(this.label5);
             this.RentReturn.Controls.Add(this.cmbbxCategory);
@@ -104,8 +104,8 @@
             this.RentReturn.Controls.Add(this.label1);
             this.RentReturn.Controls.Add(this.cmbbxCustomer);
             this.RentReturn.Controls.Add(this.datagridTransactions);
-            this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Controls.Add(this.btnReturn);
+            this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Location = new System.Drawing.Point(4, 22);
             this.RentReturn.Name = "RentReturn";
             this.RentReturn.Padding = new System.Windows.Forms.Padding(3);
@@ -458,7 +458,7 @@
             this.ReportsPage.Controls.Add(this.cmbbxCustomerReport);
             this.ReportsPage.Controls.Add(this.btnGenerateVideoReport);
             this.ReportsPage.Controls.Add(this.btnGenerateCustomerReport);
-            this.ReportsPage.Controls.Add(this.reportViewer1);
+            this.ReportsPage.Controls.Add(this.reportViewer);
             this.ReportsPage.Location = new System.Drawing.Point(4, 22);
             this.ReportsPage.Name = "ReportsPage";
             this.ReportsPage.Padding = new System.Windows.Forms.Padding(3);
@@ -499,13 +499,13 @@
             this.btnGenerateCustomerReport.UseVisualStyleBackColor = true;
             this.btnGenerateCustomerReport.Click += new System.EventHandler(this.btnGenerateCustomerReport_Click);
             // 
-            // reportViewer1
+            // reportViewer
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(0, 56);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(949, 341);
-            this.reportViewer1.TabIndex = 0;
+            this.reportViewer.Location = new System.Drawing.Point(0, 56);
+            this.reportViewer.Name = "reportViewer";
+            this.reportViewer.ServerReport.BearerToken = null;
+            this.reportViewer.Size = new System.Drawing.Size(949, 341);
+            this.reportViewer.TabIndex = 0;
             // 
             // label7
             // 
@@ -517,14 +517,16 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "Reports";
             // 
-            // btnPayment
+            // btnSettlePenalty
             // 
-            this.btnPayment.Location = new System.Drawing.Point(102, 403);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(109, 25);
-            this.btnPayment.TabIndex = 28;
-            this.btnPayment.Text = "Settle Penalty Fees";
-            this.btnPayment.UseVisualStyleBackColor = true;
+            this.btnSettlePenalty.Location = new System.Drawing.Point(102, 403);
+            this.btnSettlePenalty.Name = "btnSettlePenalty";
+            this.btnSettlePenalty.Size = new System.Drawing.Size(109, 25);
+            this.btnSettlePenalty.TabIndex = 28;
+            this.btnSettlePenalty.Text = "Settle Penalty Fees";
+            this.btnSettlePenalty.UseVisualStyleBackColor = true;
+            this.btnSettlePenalty.Visible = false;
+            this.btnSettlePenalty.Click += new System.EventHandler(this.btnSettlePenalty_Click);
             // 
             // Dashboard
             // 
@@ -588,11 +590,11 @@
         private System.Windows.Forms.TextBox txtbxContactInfo;
         private System.Windows.Forms.LinkLabel lnklblClearAll;
         private System.Windows.Forms.TabPage ReportsPage;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
         private System.Windows.Forms.Button btnGenerateCustomerReport;
         private System.Windows.Forms.ComboBox cmbbxCustomerReport;
         private System.Windows.Forms.Button btnGenerateVideoReport;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnPayment;
+        private System.Windows.Forms.Button btnSettlePenalty;
     }
 }
