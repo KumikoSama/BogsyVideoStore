@@ -207,7 +207,6 @@
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\GlobalConfig.cs" />
-    <Compile Include="Models\ReceiptModel.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Program.cs" />

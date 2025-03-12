@@ -15,13 +15,11 @@ namespace BogsyVideoStore.Forms
 {
     public partial class Receipt : Form
     {
-        int totalAmount;
         bool isPenaltyFee;
 
-        public Receipt(bool isPenaltyFee, int totalAmount = 0)
+        public Receipt(bool isPenaltyFee)
         {
             InitializeComponent();
-            this.totalAmount = totalAmount;
             this.isPenaltyFee = isPenaltyFee;
         }
 
@@ -30,25 +28,43 @@ namespace BogsyVideoStore.Forms
             this.reportViewerReceipt.RefreshReport();
             this.BringToFront();
 
-            if (!isPenaltyFee)
-                Utility.GenerateReceipt(reportViewerReceipt, totalAmount);
-            else
-                GeneratePenaltyFeeReceipt();
+            lblTotal.Text = $"Total: ₱{GlobalTransaction.TotalAmount}.00";
         }
 
-        private void GeneratePenaltyFeeReceipt()
+        private void txtbxPayment_KeyPress(object sender, KeyPressEventArgs e)
         {
-            reportViewerReceipt.LocalReport.DataSources.Clear();
-
-            ReportDataSource reportDataSource = new ReportDataSource("Receipt", ReceiptList.Receipts);
-            reportViewerReceipt.LocalReport.ReportPath = "PenaltyFeeReceipt.rdlc";
-            reportViewerReceipt.LocalReport.DataSources.Add(reportDataSource);
-
-            ReportParameter reportParameter = new ReportParameter("TotalAmount", ReceiptModel.TotalAmount.ToString());
-            reportViewerReceipt.LocalReport.SetParameters(reportParameter);
-
-            reportViewerReceipt.RefreshReport();
-            reportViewerReceipt.Refresh();
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
         }
+
+        private void btnGenerateReceipt_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtbxPayment.Text))
+                MessageBox.Show("Enter payment");
+            else
+                Utility.GenerateReceipt(reportViewerReceipt, isPenaltyFee);
+        }
+
+        private void txtbxPayment_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtbxPayment.Text))
+                lblChange.Text = $"Change: 0.00";
+
+            GlobalTransaction.Payment = Convert.ToInt32(txtbxPayment.Text);
+            GlobalTransaction.Change = GlobalTransaction.Payment - GlobalTransaction.TotalAmount;
+            lblChange.Text = $"Change: {GlobalTransaction.Change}.00";
+        }
+
+        private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GlobalTransaction.TotalAmount = 0;
+        }
+
+        private void txtbxPayment_Leave(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtbxPayment.Text, out decimal amount))
+                txtbxPayment.Text = string.Format("{0:N0}", amount);
+        }
+
     }
 }

@@ -11,12 +11,13 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Globalization;
 using Microsoft.Reporting.WinForms;
+using System.Text.RegularExpressions;
 
 namespace BogsyVideoStore.Classes
 {
     public class Utility
     {
-        public static DataTable LoadData(string query, bool isCustomer, bool isStoredProcedure)
+        public static DataTable LoadData(string query, bool isStoredProcedure, bool ShowUnavailable = false)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
@@ -25,8 +26,8 @@ namespace BogsyVideoStore.Classes
                 if (isStoredProcedure)
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                if (isCustomer)
-                    cmd.Parameters.AddWithValue("@CustomerID", GlobalCustomer.CustomerID);
+                if (query == "LoadAllVideos")
+                    cmd.Parameters.AddWithValue("@ShowUnavailable", ShowUnavailable);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -79,7 +80,7 @@ namespace BogsyVideoStore.Classes
                             VideoID = int.Parse(reader["VideoID"].ToString()),
                             Title = reader["Title"].ToString(),
                             Category = reader["Category"].ToString(),
-                            Price = int.Parse(reader["Price"].ToString())
+                            Price = int.Parse(reader["Price"].ToString()),
                         });
                     }
                 }
@@ -141,38 +142,6 @@ namespace BogsyVideoStore.Classes
             comboBox.ValueMember = "CustomerID";
         }
 
-        public static void GenerateReceipt(ReportViewer reportViewer, decimal totalAmount)
-        {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand("SelectRecentTransaction", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@CustomerID", GlobalCustomer.CustomerID);
-
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                reportViewer.LocalReport.DataSources.Clear();
-
-                ReportDataSource reportDataSource = new ReportDataSource("NewTransaction", dt);
-                reportViewer.LocalReport.ReportPath = "TransactionReceipt.rdlc";
-                reportViewer.LocalReport.DataSources.Add(reportDataSource);
-
-                ReportParameter[] reportParams = new ReportParameter[]
-                {
-                    new ReportParameter("CustomerID", GlobalCustomer.CustomerID.ToString()),
-                    new ReportParameter("TotalAmount", totalAmount.ToString())
-                };
-
-                reportViewer.LocalReport.SetParameters(reportParams);
-
-                reportViewer.RefreshReport();
-                reportViewer.Refresh();
-            }
-        }
-
         public static void GenerateCustomerReport(ReportViewer reportViewer, string customerName, string customerid = null)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -196,7 +165,7 @@ namespace BogsyVideoStore.Classes
                 ReportParameter[] reportParams = new ReportParameter[]
                 {
                     new ReportParameter("CustomerID", customerid ?? null),
-                    new ReportParameter("CustomerName", customerName != "All" ? customerName : "(All Customers)") 
+                    new ReportParameter("CustomerName", customerName != "All" ? "Customer Name: " + customerName : "(All Customers)") 
                 };
 
                 reportViewer.LocalReport.SetParameters(reportParams);
@@ -228,10 +197,30 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void GetCategoryAndPrice()
+        public static void GenerateReceipt(ReportViewer reportViewerReceipt, bool isPenaltyFee)
         {
-            GlobalVideo.Category = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Category).FirstOrDefault();
-            GlobalVideo.Price = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Price).FirstOrDefault();
+            reportViewerReceipt.LocalReport.DataSources.Clear();
+
+            ReportDataSource reportDataSource = new ReportDataSource(isPenaltyFee ? "Receipt" : "NewTransaction", GlobalTransaction.TransactionList);
+            reportViewerReceipt.LocalReport.ReportPath = isPenaltyFee ? "PenaltyFeeReceipt.rdlc" : "TransactionReceipt.rdlc";
+            reportViewerReceipt.LocalReport.DataSources.Add(reportDataSource);
+
+            ReportParameter[] reportParameters = new ReportParameter[]
+            {
+                new ReportParameter("TotalAmount", GlobalTransaction.TotalAmount.ToString()),
+                new ReportParameter("Payment", GlobalTransaction.Payment.ToString()),
+                new ReportParameter("Change", GlobalTransaction.Change.ToString())
+            };
+
+            reportViewerReceipt.LocalReport.SetParameters(reportParameters);
+            reportViewerReceipt.RefreshReport();
+            reportViewerReceipt.Refresh();
+        }
+
+        public static void SplitColumnHeaderTexts(DataGridView dt)
+        {
+            foreach (DataGridViewColumn column in dt.Columns)
+                column.HeaderText = Regex.Replace(column.HeaderText, @"(?<!^)(?=[A-Z])", " ");
         }
 
         public static void HideColumns(DataGridView dt, params string[] columnNames)

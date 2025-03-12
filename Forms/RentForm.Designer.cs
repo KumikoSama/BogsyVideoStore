@@ -46,12 +46,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.btnRemove = new System.Windows.Forms.Button();
+            this.transactionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.datagridList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbxTitle
             // 
-            this.txtbxTitle.Location = new System.Drawing.Point(95, 66);
+            this.txtbxTitle.Location = new System.Drawing.Point(98, 66);
             this.txtbxTitle.Name = "txtbxTitle";
             this.txtbxTitle.ReadOnly = true;
             this.txtbxTitle.Size = new System.Drawing.Size(143, 20);
@@ -59,7 +61,7 @@
             // 
             // txtbxCategory
             // 
-            this.txtbxCategory.Location = new System.Drawing.Point(302, 66);
+            this.txtbxCategory.Location = new System.Drawing.Point(305, 66);
             this.txtbxCategory.Name = "txtbxCategory";
             this.txtbxCategory.ReadOnly = true;
             this.txtbxCategory.Size = new System.Drawing.Size(160, 20);
@@ -125,7 +127,8 @@
             // 
             // btnRent
             // 
-            this.btnRent.Location = new System.Drawing.Point(202, 174);
+            this.btnRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRent.Location = new System.Drawing.Point(468, 438);
             this.btnRent.Name = "btnRent";
             this.btnRent.Size = new System.Drawing.Size(75, 23);
             this.btnRent.TabIndex = 8;
@@ -167,11 +170,12 @@
             this.datagridList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridList.Size = new System.Drawing.Size(555, 225);
             this.datagridList.TabIndex = 13;
+            this.datagridList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.datagridList_DataBindingComplete);
             // 
             // cmbbxVideos
             // 
             this.cmbbxVideos.FormattingEnabled = true;
-            this.cmbbxVideos.Location = new System.Drawing.Point(95, 66);
+            this.cmbbxVideos.Location = new System.Drawing.Point(98, 66);
             this.cmbbxVideos.Name = "cmbbxVideos";
             this.cmbbxVideos.Size = new System.Drawing.Size(160, 21);
             this.cmbbxVideos.TabIndex = 14;
@@ -181,7 +185,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(438, 442);
+            this.label6.Location = new System.Drawing.Point(12, 441);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 17);
             this.label6.TabIndex = 15;
@@ -191,7 +195,7 @@
             // 
             this.lblTotalAmount.AutoSize = true;
             this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalAmount.Location = new System.Drawing.Point(479, 442);
+            this.lblTotalAmount.Location = new System.Drawing.Point(53, 441);
             this.lblTotalAmount.Name = "lblTotalAmount";
             this.lblTotalAmount.Size = new System.Drawing.Size(36, 17);
             this.lblTotalAmount.TabIndex = 16;
@@ -199,13 +203,17 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(12, 438);
+            this.btnRemove.Location = new System.Drawing.Point(202, 174);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 17;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // transactionBindingSource
+            // 
+            this.transactionBindingSource.DataSource = typeof(BogsyVideoStore.Models.Transaction);
             // 
             // RentForm
             // 
@@ -228,11 +236,14 @@
             this.Controls.Add(this.txtbxCategory);
             this.Controls.Add(this.txtbxTitle);
             this.Controls.Add(this.cmbbxVideos);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RentForm";
             this.Load += new System.EventHandler(this.RentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datagridList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,5 +268,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.BindingSource transactionBindingSource;
     }
 }

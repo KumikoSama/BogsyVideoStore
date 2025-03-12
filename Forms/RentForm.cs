@@ -2,6 +2,7 @@
 using BogsyVideoStore.Models;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BogsyVideoStore.Forms
@@ -14,7 +15,6 @@ namespace BogsyVideoStore.Forms
         public RentForm()
         {
             InitializeComponent();
-
             GlobalTransaction.TransactionList.Clear();
         }
 
@@ -36,40 +36,57 @@ namespace BogsyVideoStore.Forms
                 foreach (var transaction in GlobalTransaction.TransactionList)
                 {
                     Utility.ExecuteQuery("InsertToRental", true, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
-                            new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
+                        new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
                 }
             }
-            else MessageBox.Show("Add transaction to the list first");
+            else
+            {
+                MessageBox.Show("Add transaction to the list first");
+                return;
+            }
 
             MessageBox.Show("Video successfully rented");
 
             this.Close();
 
-            Receipt receipt = new Receipt(false, GlobalTransaction.TotalAmount);
+            Receipt receipt = new Receipt(false);
             receipt.Show();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            DateTime dueDate = DateTime.Now.AddDays(int.Parse(cmbbxDays.Text));
-
-            GlobalTransaction.TransactionList.Add(new Transaction
+            if (string.IsNullOrEmpty(txtbxTitle.Text))
             {
-                VideoID = GlobalVideo.VideoID,
-                Status = "On Rent",
-                DueDate = dueDate,
-                RentDate = DateTime.Now,
-                IsReturned = false,
-                PenaltyFee = 0,
-                RentFee = GlobalVideo.Price
-            });
+                MessageBox.Show("Select a video to rent");
+                return;
+            }
 
-            datagridList.DataSource = null;
-            datagridList.DataSource = GlobalTransaction.TransactionList;
+            if (datagridList.Rows.Count < 10)
+            {
+                DateTime dueDate = DateTime.Now.AddDays(int.Parse(cmbbxDays.Text));
+                GlobalVideo.Title = txtbxTitle.Text;
 
-            GlobalTransaction.TotalAmount = calculateTotal(int.Parse(txtbxPrice.Text), previousAmount);
-            previousAmount = GlobalTransaction.TotalAmount;
-            lblTotalAmount.Text = GlobalTransaction.TotalAmount.ToString();
+                GlobalTransaction.TransactionList.Add(new Transaction
+                {
+                    VideoID = GlobalVideo.VideoID,
+                    CustomerName = GlobalCustomer.CustomerName,
+                    VideoTitle = txtbxTitle.Text,
+                    Category = GlobalVideo.Category,
+                    Status = "On Rent",
+                    DueDate = dueDate,
+                    RentDate = DateTime.Now,
+                    PenaltyFee = 0,
+                    RentFee = GlobalVideo.Price
+                });
+
+                datagridList.DataSource = null;
+                datagridList.DataSource = GlobalTransaction.TransactionList;
+
+                GlobalTransaction.TotalAmount = calculateTotal(int.Parse(txtbxPrice.Text), previousAmount);
+                previousAmount = GlobalTransaction.TotalAmount;
+                lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount.ToString()}.00";
+            }
+            else MessageBox.Show("Limit of 10 videos reached.");
         }
 
         private void cmbbxDays_KeyPress(object sender, KeyPressEventArgs e)
@@ -80,7 +97,9 @@ namespace BogsyVideoStore.Forms
         private void cmbbxVideos_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalVideo.VideoID = int.Parse(cmbbxVideos.SelectedValue.ToString());
-            Utility.GetCategoryAndPrice();
+
+            GlobalVideo.Category = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Category).FirstOrDefault();
+            GlobalVideo.Price = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Price).FirstOrDefault();
 
             txtbxTitle.Text = cmbbxVideos.Text;
             txtbxCategory.Text = GlobalVideo.Category;
@@ -95,11 +114,20 @@ namespace BogsyVideoStore.Forms
 
             if (result == DialogResult.Yes)
             {
+                GlobalTransaction.TotalAmount -= int.Parse(datagridList.CurrentRow.Cells["RentFee"].Value.ToString());
+                lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount.ToString()}.00";
+
                 GlobalTransaction.TransactionList.RemoveAt(rowIndex);
                 datagridList.DataSource = null;
                 datagridList.DataSource = GlobalTransaction.TransactionList;
             }
             else return;
+        }
+
+        private void datagridList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Utility.HideColumns(datagridList, "CustomerName", "VideoID", "CustomerID", "DatePaid", "PenaltyFee");
+            Utility.SplitColumnHeaderTexts(datagridList);
         }
     }
 }

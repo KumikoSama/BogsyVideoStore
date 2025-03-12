@@ -42,8 +42,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
             this.datagridTransactions = new System.Windows.Forms.DataGridView();
-            this.btnReturn = new System.Windows.Forms.Button();
             this.btnRent = new System.Windows.Forms.Button();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
             this.lnklblClearAll = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
@@ -60,6 +60,8 @@
             this.btnEditVideo = new System.Windows.Forms.Button();
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
+            this.btnShowUnavailableVideos = new System.Windows.Forms.Button();
+            this.btnHideUnavailableVideos = new System.Windows.Forms.Button();
             this.ReportsPage = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbbxCustomerReport = new System.Windows.Forms.ComboBox();
@@ -104,8 +106,8 @@
             this.RentReturn.Controls.Add(this.label1);
             this.RentReturn.Controls.Add(this.cmbbxCustomer);
             this.RentReturn.Controls.Add(this.datagridTransactions);
-            this.RentReturn.Controls.Add(this.btnReturn);
             this.RentReturn.Controls.Add(this.btnRent);
+            this.RentReturn.Controls.Add(this.btnReturn);
             this.RentReturn.Location = new System.Drawing.Point(4, 22);
             this.RentReturn.Name = "RentReturn";
             this.RentReturn.Padding = new System.Windows.Forms.Padding(3);
@@ -116,12 +118,13 @@
             // 
             // btnSettlePenalty
             // 
-            this.btnSettlePenalty.Location = new System.Drawing.Point(102, 403);
+            this.btnSettlePenalty.Location = new System.Drawing.Point(22, 402);
             this.btnSettlePenalty.Name = "btnSettlePenalty";
             this.btnSettlePenalty.Size = new System.Drawing.Size(109, 25);
             this.btnSettlePenalty.TabIndex = 28;
             this.btnSettlePenalty.Text = "Settle Penalty Fees";
             this.btnSettlePenalty.UseVisualStyleBackColor = true;
+            this.btnSettlePenalty.Visible = false;
             this.btnSettlePenalty.Click += new System.EventHandler(this.btnSettlePenalty_Click);
             // 
             // btnOverdue
@@ -249,7 +252,18 @@
             this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridTransactions.Size = new System.Drawing.Size(894, 302);
             this.datagridTransactions.TabIndex = 10;
+            this.datagridTransactions.DataSourceChanged += new System.EventHandler(this.datagridTransactions_DataSourceChanged);
             this.datagridTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridTransactions_CellClick);
+            // 
+            // btnRent
+            // 
+            this.btnRent.Location = new System.Drawing.Point(22, 403);
+            this.btnRent.Name = "btnRent";
+            this.btnRent.Size = new System.Drawing.Size(74, 25);
+            this.btnRent.TabIndex = 21;
+            this.btnRent.Text = "Rent";
+            this.btnRent.UseVisualStyleBackColor = true;
+            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
             // btnReturn
             // 
@@ -261,16 +275,6 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Visible = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // btnRent
-            // 
-            this.btnRent.Location = new System.Drawing.Point(22, 403);
-            this.btnRent.Name = "btnRent";
-            this.btnRent.Size = new System.Drawing.Size(74, 25);
-            this.btnRent.TabIndex = 21;
-            this.btnRent.Text = "Rent";
-            this.btnRent.UseVisualStyleBackColor = true;
-            this.btnRent.Click += new System.EventHandler(this.btnRent_Click);
             // 
             // CustomerLibrary
             // 
@@ -395,6 +399,8 @@
             this.VideoLibrary.Controls.Add(this.btnEditVideo);
             this.VideoLibrary.Controls.Add(this.btnAddVideo);
             this.VideoLibrary.Controls.Add(this.datagridVidLibrary);
+            this.VideoLibrary.Controls.Add(this.btnShowUnavailableVideos);
+            this.VideoLibrary.Controls.Add(this.btnHideUnavailableVideos);
             this.VideoLibrary.Location = new System.Drawing.Point(4, 22);
             this.VideoLibrary.Name = "VideoLibrary";
             this.VideoLibrary.Size = new System.Drawing.Size(949, 444);
@@ -461,6 +467,26 @@
             this.datagridVidLibrary.TabIndex = 1;
             this.datagridVidLibrary.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridVidLibrary_CellClick);
             this.datagridVidLibrary.DoubleClick += new System.EventHandler(this.datagridVidLibrary_DoubleClick);
+            // 
+            // btnShowUnavailableVideos
+            // 
+            this.btnShowUnavailableVideos.Location = new System.Drawing.Point(27, 405);
+            this.btnShowUnavailableVideos.Name = "btnShowUnavailableVideos";
+            this.btnShowUnavailableVideos.Size = new System.Drawing.Size(138, 23);
+            this.btnShowUnavailableVideos.TabIndex = 19;
+            this.btnShowUnavailableVideos.Text = "Show Unavailable Videos";
+            this.btnShowUnavailableVideos.UseVisualStyleBackColor = true;
+            this.btnShowUnavailableVideos.Click += new System.EventHandler(this.btnShowUnavailableVideos_Click);
+            // 
+            // btnHideUnavailableVideos
+            // 
+            this.btnHideUnavailableVideos.Location = new System.Drawing.Point(27, 405);
+            this.btnHideUnavailableVideos.Name = "btnHideUnavailableVideos";
+            this.btnHideUnavailableVideos.Size = new System.Drawing.Size(138, 23);
+            this.btnHideUnavailableVideos.TabIndex = 20;
+            this.btnHideUnavailableVideos.Text = "Hide Unavailable Videos";
+            this.btnHideUnavailableVideos.UseVisualStyleBackColor = true;
+            this.btnHideUnavailableVideos.Click += new System.EventHandler(this.btnHideUnavailableVideos_Click);
             // 
             // ReportsPage
             // 
@@ -595,5 +621,7 @@
         private System.Windows.Forms.Button btnGenerateVideoReport;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnSettlePenalty;
+        private System.Windows.Forms.Button btnShowUnavailableVideos;
+        private System.Windows.Forms.Button btnHideUnavailableVideos;
     }
 }

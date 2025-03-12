@@ -10,10 +10,13 @@ namespace BogsyVideoStore.Models
     {
         public int VideoID { get; set; }
         public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string VideoTitle { get; set; }
+        public string Category { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime DueDate { get; set; }
+        public DateTime DatePaid { get; } = DateTime.Now;
         public string Status { get; set; }
-        public bool IsReturned { get; set; }
         public int PenaltyFee { get; set; }
         public int RentFee { get; set; }
     }
@@ -23,12 +26,8 @@ namespace BogsyVideoStore.Models
         public static List<Transaction> TransactionList = new List<Transaction>();
         public static int RentalID { get; set; }
         public static int VideoID { get; set; }
-        public static int CustomerID { get; set; }
-        public static DateTime RentDate { get; set; }
-        public static DateTime DueDate { get; set; }
-        public static string Status { get; set; }
-        public static int PenaltyFee { get; set; }
-        public static int RentFee { get; set; }
         public static int TotalAmount { get; set; }
+        public static int Change { get; set; }
+        public static int Payment { get; set; }
     }
 }

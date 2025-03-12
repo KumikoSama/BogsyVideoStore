@@ -13,7 +13,7 @@ namespace BogsyVideoStore.Models
         public string Category { get; set; }
         public int Price { get; set; }
         public int Copies { get; set; }
-        public int CopiesBorrowed { get; set; }
+        public int CopiesOnRent { get; set; }
     }
 
     public class GlobalVideo

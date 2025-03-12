@@ -47,9 +47,9 @@ namespace BogsyVideoStore.Forms
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            datagridTransactions.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), false, true);
-            datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), false, true);
-            datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), false, true);
+            datagridTransactions.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+            datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
+            datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
 
             cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
             Utility.LoadCustomers(cmbbxCustomer);
@@ -57,8 +57,8 @@ namespace BogsyVideoStore.Forms
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
 
             datagridCustomer.Columns["CustomerID"].Visible = false;
-            datagridTransactions.Columns["VideoID"].Visible = false;
             datagridVidLibrary.Columns["VideoID"].Visible = false;
+            Utility.SplitColumnHeaderTexts(datagridVidLibrary);
             this.reportViewer.RefreshReport();
         }
 
@@ -70,10 +70,10 @@ namespace BogsyVideoStore.Forms
                     datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadAllVideos.ToString(), "All", false);
                     break;
                 case "VideoLibrary":
-                    datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), false, true);
+                    datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
                     break;
                 case "CustomerLibrary":
-                    datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), false, true);
+                    datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
                     break;
             }
         }
@@ -117,7 +117,7 @@ namespace BogsyVideoStore.Forms
 
             btnReturn.Visible = false;
             btnRent.Visible = false;
-            Utility.HideColumns(datagridTransactions, "RentalID", "CustomerID", "VideoID");
+            btnSettlePenalty.Visible = false;
         }
 
         private void btnOngoingRent_Click(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace BogsyVideoStore.Forms
 
             btnReturn.Visible = true;
             btnRent.Visible = false;
-            Utility.HideColumns(datagridTransactions, "RentalID", "CustomerID", "VideoID");
+            btnSettlePenalty.Visible = false;
         }
 
         private void cmbbxCustomer_SelectedIndexChanged(object sender, EventArgs e)
@@ -170,8 +170,7 @@ namespace BogsyVideoStore.Forms
 
             btnReturn.Visible = false;
             btnRent.Visible = false;
-            
-            Utility.HideColumns(datagridTransactions,"VideoID", "CustomerID", "RentalID");
+            btnSettlePenalty.Visible = false;
         }
 
         private void datagridTransactions_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -201,6 +200,7 @@ namespace BogsyVideoStore.Forms
 
             btnReturn.Visible = false;
             btnRent.Visible = true;
+            btnSettlePenalty.Visible = false;
         }
 
         private void cmbbxCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -235,12 +235,54 @@ namespace BogsyVideoStore.Forms
 
             btnReturn.Visible = true;
             btnRent.Visible = false;
-            Utility.HideColumns(datagridTransactions, "VideoID", "CustomerID", "RentalID");
+            btnSettlePenalty.Visible = true;
         }
 
         private void cmbbxCategory_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void btnSettlePenalty_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Confirm payment for this due transaction?", "Penalty Fee Payment", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                int totalPenalty = 0;
+
+                foreach (DataGridViewRow row in datagridTransactions.SelectedRows)
+                {
+                    int penaltyFees = int.Parse(row.Cells["Penalty Fee"].Value.ToString());
+                    totalPenalty += penaltyFees;
+
+                    GlobalTransaction.TransactionList.Add(new Transaction
+                    {
+                        CustomerName = row.Cells["Customer Name"].Value.ToString(),
+                        VideoTitle = row.Cells["Title"].Value.ToString(),
+                        Category = row.Cells["Category"].Value.ToString(),
+                        PenaltyFee = penaltyFees,
+                    });
+
+                    GlobalTransaction.TotalAmount += totalPenalty;
+
+                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalTransaction.VideoID));
+                }
+
+                MessageBox.Show("Payments settled");
+                Receipt receipt = new Receipt(true);
+                receipt.Show();
+            }
+        }
+
+        private void datagridTransactions_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (currentDataDisplayed == DataDisplayed.AllVideos)
+                Utility.HideColumns(datagridTransactions, "VideoID");
+            else
+                Utility.HideColumns(datagridTransactions, "VideoID", "CustomerID", "RentalID");
+
+            Utility.SplitColumnHeaderTexts(datagridTransactions);
         }
 
         #endregion
@@ -264,7 +306,7 @@ namespace BogsyVideoStore.Forms
             Utility.ExecuteQuery(Queries.InsertToCustomerTable, false, new SqlParameter("@CustomerName", customer.CustomerName), new SqlParameter("@ContactInfo", customer.ContactInfo));
 
             MessageBox.Show("Customer successfully added");
-            datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), false, false);
+            datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), false);
             Utility.LoadCustomers(cmbbxCustomer);
         }
 
@@ -279,7 +321,7 @@ namespace BogsyVideoStore.Forms
                     Utility.ExecuteQuery(Queries.EditCustomerQuery, false, new SqlParameter("@CustomerName", txtbxFullName.Text.ToUpper()), new SqlParameter("@ContactInfo", txtbxContactInfo.Text), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID));
                 else return;
 
-                datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), false, true);
+                datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
             }
             else
                 MessageBox.Show("Fields are empty or in an incorrect format");
@@ -337,7 +379,7 @@ namespace BogsyVideoStore.Forms
             using (ManageVideo manageVideo = new ManageVideo(false))
                 manageVideo.ShowDialog();
 
-            datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), false, true);
+            datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
         }
 
         private void btnEditVideo_Click(object sender, EventArgs e)
@@ -347,7 +389,7 @@ namespace BogsyVideoStore.Forms
                 using (ManageVideo manageVideo = new ManageVideo(true))
                     manageVideo.ShowDialog();
 
-                datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), false, true);
+                datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
             }
             else
                 MessageBox.Show("Select one video");
@@ -364,7 +406,7 @@ namespace BogsyVideoStore.Forms
                 GlobalVideo.Category = selectedRow.Cells["Category"].Value.ToString();
                 GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
                 GlobalVideo.Copies = int.Parse(selectedRow.Cells["Copies"].Value.ToString());
-                GlobalVideo.CopiesBorrowed = int.Parse(selectedRow.Cells["Copies on Rent"].Value.ToString());
+                GlobalVideo.CopiesBorrowed = int.Parse(selectedRow.Cells["CopiesOnRent"].Value.ToString());
 
                 btnEditVideo.Enabled = true;
                 btnDeleteVideo.Enabled = true;
@@ -391,7 +433,19 @@ namespace BogsyVideoStore.Forms
             using (ManageVideo manageVideo = new ManageVideo(true))
                 manageVideo.ShowDialog();
 
-            datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), false, true);
+            datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+        }
+
+        private void btnShowUnavailableVideos_Click(object sender, EventArgs e)
+        {
+            Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true, true);
+            btnShowUnavailableVideos.Hide();
+        }
+
+        private void btnHideUnavailableVideos_Click(object sender, EventArgs e)
+        {
+            Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+            btnShowUnavailableVideos.Show();
         }
 
         #endregion
@@ -411,37 +465,5 @@ namespace BogsyVideoStore.Forms
         }
 
         #endregion
-
-        private void btnSettlePenalty_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Confirm payment for this due transaction?", "Penalty Fee Payment", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
-            {
-                int totalPenalty = 0;
-
-                foreach (DataGridViewRow row in datagridTransactions.SelectedRows)
-                {
-                    int penaltyFees = int.Parse(row.Cells["Penalty Fee"].Value.ToString());
-                    totalPenalty += penaltyFees;
-
-                    ReceiptList.Receipts.Add(new ReceiptModel
-                    {
-                        CustomerName = row.Cells["Customer Name"].Value.ToString(),
-                        VideoTitle = row.Cells["Title"].Value.ToString(),
-                        Category = row.Cells["Category"].Value.ToString(),
-                        PenaltyFee = penaltyFees,
-                    });
-
-                    ReceiptModel.TotalAmount += totalPenalty;
-
-                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalTransaction.VideoID));
-                }
-
-                MessageBox.Show("Payments settled");
-                Receipt receipt = new Receipt(true);
-                receipt.Show();
-            }
-        }
     }
 }
