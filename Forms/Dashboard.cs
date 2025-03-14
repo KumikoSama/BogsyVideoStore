@@ -53,13 +53,17 @@ namespace BogsyVideoStore.Forms
 
             cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
             Utility.LoadCustomers(cmbbxCustomer);
-            Utility.LoadCustomers(cmbbxCustomerReport);
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
 
             datagridCustomer.Columns["CustomerID"].Visible = false;
             datagridVidLibrary.Columns["VideoID"].Visible = false;
+
             Utility.SplitColumnHeaderTexts(datagridVidLibrary);
-            this.reportViewer.RefreshReport();
+            Utility.GenerateCustomerReport(reportViewerCustomer, "All");
+            Utility.GenerateVideoReport(reportViewerVideo);
+
+            this.reportViewerVideo.RefreshReport();
+            this.reportViewerCustomer.RefreshReport();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -265,11 +269,8 @@ namespace BogsyVideoStore.Forms
                     });
 
                     GlobalTransaction.TotalAmount += totalPenalty;
-
-                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalTransaction.VideoID));
                 }
 
-                MessageBox.Show("Payments settled");
                 Receipt receipt = new Receipt(true);
                 receipt.Show();
             }
@@ -288,6 +289,11 @@ namespace BogsyVideoStore.Forms
         #endregion
 
         #region CustomerLibrary
+
+        private void btnGenerateCustomerReport_Click(object sender, EventArgs e)
+        {
+            Utility.GenerateCustomerReport(reportViewerCustomer, "All");
+        }
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
@@ -315,7 +321,7 @@ namespace BogsyVideoStore.Forms
             if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
             {
                 DialogResult result = MessageBox.Show("Are you sure you'll edit this customer information?", "Customer Information",
-                MessageBoxButtons.YesNo);
+                    MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
                     Utility.ExecuteQuery(Queries.EditCustomerQuery, false, new SqlParameter("@CustomerName", txtbxFullName.Text.ToUpper()), new SqlParameter("@ContactInfo", txtbxContactInfo.Text), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID));
@@ -337,6 +343,8 @@ namespace BogsyVideoStore.Forms
                 txtbxContactInfo.Text = selectedCustomer.Cells["Contact Number"].Value.ToString();
 
                 GlobalCustomer.CustomerID = int.Parse(selectedCustomer.Cells["CustomerID"].Value.ToString());
+                Utility.GenerateCustomerReport(reportViewerCustomer, txtbxFullName.Text, GlobalCustomer.CustomerID.ToString());
+
                 btnAddCustomer.Enabled = false;
             }
         }
@@ -380,6 +388,7 @@ namespace BogsyVideoStore.Forms
                 manageVideo.ShowDialog();
 
             datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+            Utility.GenerateVideoReport(reportViewerVideo);
         }
 
         private void btnEditVideo_Click(object sender, EventArgs e)
@@ -390,6 +399,7 @@ namespace BogsyVideoStore.Forms
                     manageVideo.ShowDialog();
 
                 datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+                Utility.GenerateVideoReport(reportViewerVideo);
             }
             else
                 MessageBox.Show("Select one video");
@@ -423,7 +433,10 @@ namespace BogsyVideoStore.Forms
                 MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
+                {
                     Utility.ExecuteQuery(Queries.DeleteVideo, false, new SqlParameter("@VideoID", GlobalVideo.VideoID));
+                    Utility.GenerateVideoReport(reportViewerVideo);
+                }
                 else return;
             }
         }
@@ -448,22 +461,12 @@ namespace BogsyVideoStore.Forms
             btnShowUnavailableVideos.Show();
         }
 
-        #endregion
-
-        #region Reports
-
-        private void btnGenerateCustomerReport_Click(object sender, EventArgs e)
-        {
-            string customerID = cmbbxCustomerReport.Text != "All" ? cmbbxCustomerReport.SelectedValue.ToString() : null;
-
-            Utility.GenerateCustomerReport(reportViewer, cmbbxCustomerReport.Text, customerID);
-        }
-
         private void btnGenerateVideoReport_Click(object sender, EventArgs e)
         {
-            Utility.GenerateVideoReport(reportViewer);
+            Utility.GenerateVideoReport(reportViewerVideo);
         }
 
         #endregion
+
     }
 }

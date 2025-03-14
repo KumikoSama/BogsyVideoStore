@@ -20,42 +20,36 @@ namespace BogsyVideoStore.Forms
 
         private void RentForm_Load(object sender, EventArgs e)
         {
-            txtbxTitle.Text = GlobalVideo.Title;
-            txtbxCategory.Text = GlobalVideo.Category;
-            txtbxPrice.Text = GlobalVideo.Price.ToString();
-
             cmbbxVideos.SelectedIndexChanged -= cmbbxVideos_SelectedIndexChanged;
             Utility.LoadVideosInComboBox(cmbbxVideos);
             cmbbxVideos.SelectedIndexChanged += cmbbxVideos_SelectedIndexChanged;
+
+            cmbbxVideos.Text = GlobalVideo.Title;
+            txtbxCategory.Text = GlobalVideo.Category;
+            txtbxPrice.Text = GlobalVideo.Price.ToString();
+
+            btnAdd_Click(sender, e);
         }
 
         private void btnRent_Click(object sender, EventArgs e)
         {
             if (datagridList.DataSource != null)
             {
-                foreach (var transaction in GlobalTransaction.TransactionList)
-                {
-                    Utility.ExecuteQuery("InsertToRental", true, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
-                        new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
-                }
+                this.Close();
+
+                Receipt receipt = new Receipt(false);
+                receipt.Show();
             }
             else
             {
                 MessageBox.Show("Add transaction to the list first");
                 return;
             }
-
-            MessageBox.Show("Video successfully rented");
-
-            this.Close();
-
-            Receipt receipt = new Receipt(false);
-            receipt.Show();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtbxTitle.Text))
+            if (string.IsNullOrEmpty(cmbbxVideos.Text))
             {
                 MessageBox.Show("Select a video to rent");
                 return;
@@ -64,13 +58,13 @@ namespace BogsyVideoStore.Forms
             if (datagridList.Rows.Count < 10)
             {
                 DateTime dueDate = DateTime.Now.AddDays(int.Parse(cmbbxDays.Text));
-                GlobalVideo.Title = txtbxTitle.Text;
+                GlobalVideo.Title = cmbbxVideos.Text;
 
                 GlobalTransaction.TransactionList.Add(new Transaction
                 {
                     VideoID = GlobalVideo.VideoID,
                     CustomerName = GlobalCustomer.CustomerName,
-                    VideoTitle = txtbxTitle.Text,
+                    VideoTitle = cmbbxVideos.Text,
                     Category = GlobalVideo.Category,
                     Status = "On Rent",
                     DueDate = dueDate,
@@ -101,7 +95,6 @@ namespace BogsyVideoStore.Forms
             GlobalVideo.Category = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Category).FirstOrDefault();
             GlobalVideo.Price = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Price).FirstOrDefault();
 
-            txtbxTitle.Text = cmbbxVideos.Text;
             txtbxCategory.Text = GlobalVideo.Category;
             txtbxPrice.Text = GlobalVideo.Price.ToString();
         }

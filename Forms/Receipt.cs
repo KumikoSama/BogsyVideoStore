@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace BogsyVideoStore.Forms
@@ -42,22 +43,43 @@ namespace BogsyVideoStore.Forms
             if (string.IsNullOrEmpty(txtbxPayment.Text))
                 MessageBox.Show("Enter payment");
             else
+            {
+                if (!isPenaltyFee)
+                {
+                    foreach (var transaction in GlobalTransaction.TransactionList)
+                    {
+                        Utility.ExecuteQuery("InsertToRental", true, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
+                            new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
+                    }
+
+                    MessageBox.Show("Video successfully rented");
+                }
+                else
+                {
+                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalTransaction.VideoID));
+
+                    MessageBox.Show("Payments settled");
+                }
+
                 Utility.GenerateReceipt(reportViewerReceipt, isPenaltyFee);
+            }
         }
 
         private void txtbxPayment_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtbxPayment.Text))
-                lblChange.Text = $"Change: 0.00";
+                lblChange.Text = $"Change: ₱0.00";
 
             GlobalTransaction.Payment = Convert.ToInt32(txtbxPayment.Text);
             GlobalTransaction.Change = GlobalTransaction.Payment - GlobalTransaction.TotalAmount;
-            lblChange.Text = $"Change: {GlobalTransaction.Change}.00";
+            lblChange.Text = $"Change: ₱{GlobalTransaction.Change}.00";
         }
 
         private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
         {
             GlobalTransaction.TotalAmount = 0;
+            GlobalTransaction.Payment = 0;
+            GlobalTransaction.Change = 0;
         }
 
         private void txtbxPayment_Leave(object sender, EventArgs e)
