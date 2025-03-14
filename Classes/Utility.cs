@@ -61,9 +61,9 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void LoadVideosInComboBox(ComboBox comboBox)
+        public static void GetVideosInfo(ComboBox comboBox = null)
         {
-            string query = "SELECT VideoID, Title, Category, Price FROM VideoTable WHERE Copies > 0";
+            string query = "SELECT * FROM VideoTable WHERE Copies > 0";
             GlobalVideo.VideoList.Clear();
 
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -81,15 +81,20 @@ namespace BogsyVideoStore.Classes
                             Title = reader["Title"].ToString(),
                             Category = reader["Category"].ToString(),
                             Price = int.Parse(reader["Price"].ToString()),
+                            Copies = int.Parse(reader["Copies"].ToString()),
+                            CopiesOnRent = int.Parse(reader["CopiesOnRent"].ToString())
                         });
                     }
                 }
             }
 
-            comboBox.DataSource = null;
-            comboBox.DataSource = GlobalVideo.VideoList;
-            comboBox.DisplayMember = "Title";
-            comboBox.ValueMember = "VideoID";
+            if (comboBox != null)
+            {
+                comboBox.DataSource = null;
+                comboBox.DataSource = GlobalVideo.VideoList;
+                comboBox.DisplayMember = "Title";
+                comboBox.ValueMember = "VideoID"; 
+            }
         }
 
         public static DataTable LoadDataByCustomerAndCategory(string query, string category, bool isCustomer)

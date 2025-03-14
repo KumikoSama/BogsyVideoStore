@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace BogsyVideoStore.Forms
 {
@@ -36,6 +37,7 @@ namespace BogsyVideoStore.Forms
     public partial class Dashboard : Form
     {
         DataDisplayed currentDataDisplayed = DataDisplayed.AllVideos;
+        AutoCompleteStringCollection videos;
         string selectedCategory;
 
         public Dashboard()
@@ -43,6 +45,12 @@ namespace BogsyVideoStore.Forms
             InitializeComponent();
             Utility.ExecuteQuery(Queries.UpdateRentalTable, false);
             Utility.ExecuteQuery(Queries.UpdatePenaltyFee, false);
+
+            Utility.GetVideosInfo();
+            videos = new AutoCompleteStringCollection();
+
+            foreach (var title in GlobalVideo.VideoList)
+                videos.Add(title.Title);
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -50,38 +58,21 @@ namespace BogsyVideoStore.Forms
             datagridTransactions.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
             datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
             datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+            datagridCustomer.Columns["CustomerID"].Visible = false;
+            datagridVidLibrary.Columns["VideoID"].Visible = false;
 
             cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
             Utility.LoadCustomers(cmbbxCustomer);
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
 
-            datagridCustomer.Columns["CustomerID"].Visible = false;
-            datagridVidLibrary.Columns["VideoID"].Visible = false;
-
             Utility.SplitColumnHeaderTexts(datagridVidLibrary);
             Utility.GenerateCustomerReport(reportViewerCustomer, "All");
             Utility.GenerateVideoReport(reportViewerVideo);
 
-            this.reportViewerVideo.RefreshReport();
-            this.reportViewerCustomer.RefreshReport();
-            this.reportViewerCustomer.RefreshReport();
-            this.reportViewerVideo.RefreshReport();
-        }
+            txtbxSearch.AutoCompleteCustomSource = videos;
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (tabControl1.SelectedTab.Name)
-            {
-                case "RentReturn":
-                    datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadAllVideos.ToString(), "All", false);
-                    break;
-                case "VideoLibrary":
-                    datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
-                    break;
-                case "CustomerLibrary":
-                    datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
-                    break;
-            }
+            this.reportViewerCustomer.RefreshReport();
+            this.reportViewerVideo.RefreshReport();
         }
 
         #region RentalAndReturn
@@ -468,7 +459,14 @@ namespace BogsyVideoStore.Forms
             Utility.GenerateVideoReport(reportViewerVideo);
         }
 
-        #endregion
+        private void txtbxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtbxSearch.Text))
+                Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+            else
+                datagridVidLibrary.DataSource = GlobalVideo.VideoList.Where(video => video.Title.ToLower().StartsWith(txtbxSearch.Text.ToLower())).ToList();
+        }
 
+        #endregion
     }
 }

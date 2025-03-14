@@ -36,6 +36,8 @@ namespace BogsyVideoStore.Forms
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                 e.Handled = true;
+            if (char.IsDigit(e.KeyChar) && txtbxPayment.TextLength > 6)
+                e.Handled = true;
         }
 
         private void btnGenerateReceipt_Click(object sender, EventArgs e)
@@ -69,10 +71,12 @@ namespace BogsyVideoStore.Forms
         {
             if (string.IsNullOrEmpty(txtbxPayment.Text))
                 lblChange.Text = $"Change: ₱0.00";
-
-            GlobalTransaction.Payment = Convert.ToInt32(txtbxPayment.Text);
-            GlobalTransaction.Change = GlobalTransaction.Payment - GlobalTransaction.TotalAmount;
-            lblChange.Text = $"Change: ₱{GlobalTransaction.Change}.00";
+            else
+            {
+                GlobalTransaction.Payment = Convert.ToInt32(txtbxPayment.Text);
+                GlobalTransaction.Change = GlobalTransaction.Payment - GlobalTransaction.TotalAmount;
+                lblChange.Text = $"Change: ₱{GlobalTransaction.Change}.00";
+            }
         }
 
         private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
@@ -81,12 +85,5 @@ namespace BogsyVideoStore.Forms
             GlobalTransaction.Payment = 0;
             GlobalTransaction.Change = 0;
         }
-
-        private void txtbxPayment_Leave(object sender, EventArgs e)
-        {
-            if (decimal.TryParse(txtbxPayment.Text, out decimal amount))
-                txtbxPayment.Text = string.Format("{0:N0}", amount);
-        }
-
     }
 }

@@ -21,14 +21,15 @@ namespace BogsyVideoStore.Forms
         private void RentForm_Load(object sender, EventArgs e)
         {
             cmbbxVideos.SelectedIndexChanged -= cmbbxVideos_SelectedIndexChanged;
-            Utility.LoadVideosInComboBox(cmbbxVideos);
+            Utility.GetVideosInfo(cmbbxVideos);
             cmbbxVideos.SelectedIndexChanged += cmbbxVideos_SelectedIndexChanged;
 
             cmbbxVideos.Text = GlobalVideo.Title;
             txtbxCategory.Text = GlobalVideo.Category;
             txtbxPrice.Text = GlobalVideo.Price.ToString();
 
-            btnAdd_Click(sender, e);
+            if (!string.IsNullOrEmpty(cmbbxVideos.Text))
+                btnAdd_Click(sender, e);
         }
 
         private void btnRent_Click(object sender, EventArgs e)

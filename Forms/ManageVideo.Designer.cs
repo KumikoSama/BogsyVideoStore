@@ -43,7 +43,8 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(159, 377);
+            this.btnAdd.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(165, 374);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 26;
@@ -54,57 +55,63 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(119, 225);
+            this.label8.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(125, 228);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(31, 13);
+            this.label8.Size = new System.Drawing.Size(34, 14);
             this.label8.TabIndex = 25;
             this.label8.Text = "Price";
             // 
             // txtbxPrice
             // 
-            this.txtbxPrice.Location = new System.Drawing.Point(119, 241);
+            this.txtbxPrice.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxPrice.Location = new System.Drawing.Point(125, 244);
             this.txtbxPrice.Name = "txtbxPrice";
             this.txtbxPrice.ReadOnly = true;
-            this.txtbxPrice.Size = new System.Drawing.Size(160, 20);
+            this.txtbxPrice.Size = new System.Drawing.Size(160, 22);
             this.txtbxPrice.TabIndex = 24;
             this.txtbxPrice.Text = "50";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(119, 282);
+            this.label9.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(125, 285);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.Size = new System.Drawing.Size(43, 14);
             this.label9.TabIndex = 23;
             this.label9.Text = "Copies";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(119, 170);
+            this.label10.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(125, 173);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 13);
+            this.label10.Size = new System.Drawing.Size(54, 14);
             this.label10.TabIndex = 22;
             this.label10.Text = "Category";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(119, 113);
+            this.label11.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(125, 116);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(27, 13);
+            this.label11.Size = new System.Drawing.Size(29, 14);
             this.label11.TabIndex = 21;
             this.label11.Text = "Title";
             // 
             // cmbbxCategory
             // 
+            this.cmbbxCategory.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbbxCategory.FormattingEnabled = true;
             this.cmbbxCategory.Items.AddRange(new object[] {
             "DVD",
             "VCD"});
-            this.cmbbxCategory.Location = new System.Drawing.Point(119, 186);
+            this.cmbbxCategory.Location = new System.Drawing.Point(125, 189);
             this.cmbbxCategory.Name = "cmbbxCategory";
-            this.cmbbxCategory.Size = new System.Drawing.Size(160, 21);
+            this.cmbbxCategory.Size = new System.Drawing.Size(160, 22);
             this.cmbbxCategory.TabIndex = 20;
             this.cmbbxCategory.Text = "DVD";
             this.cmbbxCategory.SelectedIndexChanged += new System.EventHandler(this.cmbbxCategory_SelectedIndexChanged);
@@ -112,37 +119,44 @@
             // 
             // txtbxCopies
             // 
-            this.txtbxCopies.Location = new System.Drawing.Point(119, 298);
+            this.txtbxCopies.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxCopies.Location = new System.Drawing.Point(125, 301);
             this.txtbxCopies.Name = "txtbxCopies";
-            this.txtbxCopies.Size = new System.Drawing.Size(160, 20);
+            this.txtbxCopies.Size = new System.Drawing.Size(160, 22);
             this.txtbxCopies.TabIndex = 19;
             this.txtbxCopies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxCopies_KeyPress);
             // 
             // txtbxTitle
             // 
-            this.txtbxTitle.Location = new System.Drawing.Point(119, 132);
+            this.txtbxTitle.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxTitle.Location = new System.Drawing.Point(125, 135);
             this.txtbxTitle.Name = "txtbxTitle";
-            this.txtbxTitle.Size = new System.Drawing.Size(160, 20);
+            this.txtbxTitle.Size = new System.Drawing.Size(160, 22);
             this.txtbxTitle.TabIndex = 18;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(141, 60);
+            this.label5.AutoEllipsis = true;
+            this.label5.Font = new System.Drawing.Font("Bahnschrift SemiBold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(-2, 40);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 20);
+            this.label5.Size = new System.Drawing.Size(422, 40);
             this.label5.TabIndex = 27;
-            this.label5.Text = "Add New Video";
+            this.label5.Text = "Manage Video";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnEditVideo
             // 
-            this.btnEditVideo.Location = new System.Drawing.Point(159, 377);
+            this.btnEditVideo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.btnEditVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditVideo.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.btnEditVideo.Location = new System.Drawing.Point(165, 374);
             this.btnEditVideo.Name = "btnEditVideo";
             this.btnEditVideo.Size = new System.Drawing.Size(75, 23);
             this.btnEditVideo.TabIndex = 28;
             this.btnEditVideo.Text = "Edit";
-            this.btnEditVideo.UseVisualStyleBackColor = true;
+            this.btnEditVideo.UseVisualStyleBackColor = false;
             this.btnEditVideo.Visible = false;
             this.btnEditVideo.Click += new System.EventHandler(this.btnEditVideo_Click);
             // 
@@ -150,6 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.ClientSize = new System.Drawing.Size(422, 470);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label8);
@@ -164,7 +179,7 @@
             this.Controls.Add(this.btnAdd);
             this.Name = "ManageVideo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddNewBook";
+            this.Text = "Manage Video";
             this.Load += new System.EventHandler(this.ManageVideo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

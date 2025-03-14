@@ -169,11 +169,11 @@
             this.datagridList.AllowUserToResizeRows = false;
             this.datagridList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.datagridList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridList.Location = new System.Drawing.Point(0, 215);
+            this.datagridList.Location = new System.Drawing.Point(0, 198);
             this.datagridList.Name = "datagridList";
             this.datagridList.ReadOnly = true;
             this.datagridList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridList.Size = new System.Drawing.Size(555, 245);
+            this.datagridList.Size = new System.Drawing.Size(555, 262);
             this.datagridList.TabIndex = 13;
             this.datagridList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.datagridList_DataBindingComplete);
             // 

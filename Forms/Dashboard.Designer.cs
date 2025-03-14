@@ -55,6 +55,7 @@
             this.btnRent = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
+            this.reportViewerCustomer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
             this.datagridCustomer = new System.Windows.Forms.DataGridView();
             this.lnklblClearAll = new System.Windows.Forms.LinkLabel();
@@ -66,6 +67,9 @@
             this.btnEditCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.VideoLibrary = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.txtbxSearch = new System.Windows.Forms.TextBox();
+            this.reportViewerVideo = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnGenerateVideoReport = new System.Windows.Forms.Button();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,8 +78,6 @@
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.btnShowUnavailableVideos = new System.Windows.Forms.Button();
             this.btnHideUnavailableVideos = new System.Windows.Forms.Button();
-            this.reportViewerCustomer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.reportViewerVideo = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,6 +85,7 @@
             this.CustomerLibrary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).BeginInit();
             this.VideoLibrary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,7 +102,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1033, 501);
             this.tabControl1.TabIndex = 10;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // RentReturn
             // 
@@ -198,7 +200,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Bahnschrift SemiBold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
             this.label4.Location = new System.Drawing.Point(20, 15);
             this.label4.Name = "label4";
@@ -275,7 +277,7 @@
             // 
             // cmbbxCustomer
             // 
-            this.cmbbxCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbbxCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbbxCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbbxCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbbxCustomer.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -389,13 +391,21 @@
             this.CustomerLibrary.TabIndex = 1;
             this.CustomerLibrary.Text = "Customer Library";
             // 
+            // reportViewerCustomer
+            // 
+            this.reportViewerCustomer.Location = new System.Drawing.Point(572, 73);
+            this.reportViewerCustomer.Name = "reportViewerCustomer";
+            this.reportViewerCustomer.ServerReport.BearerToken = null;
+            this.reportViewerCustomer.Size = new System.Drawing.Size(432, 376);
+            this.reportViewerCustomer.TabIndex = 28;
+            // 
             // btnGenerateCustomerReport
             // 
             this.btnGenerateCustomerReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             this.btnGenerateCustomerReport.FlatAppearance.BorderSize = 0;
             this.btnGenerateCustomerReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateCustomerReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnGenerateCustomerReport.Location = new System.Drawing.Point(820, 25);
+            this.btnGenerateCustomerReport.Location = new System.Drawing.Point(820, 44);
             this.btnGenerateCustomerReport.Name = "btnGenerateCustomerReport";
             this.btnGenerateCustomerReport.Size = new System.Drawing.Size(184, 23);
             this.btnGenerateCustomerReport.TabIndex = 27;
@@ -432,7 +442,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.datagridCustomer.DefaultCellStyle = dataGridViewCellStyle5;
             this.datagridCustomer.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.datagridCustomer.Location = new System.Drawing.Point(27, 139);
+            this.datagridCustomer.Location = new System.Drawing.Point(27, 132);
             this.datagridCustomer.MultiSelect = false;
             this.datagridCustomer.Name = "datagridCustomer";
             this.datagridCustomer.ReadOnly = true;
@@ -446,7 +456,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.datagridCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridCustomer.Size = new System.Drawing.Size(530, 310);
+            this.datagridCustomer.Size = new System.Drawing.Size(530, 317);
             this.datagridCustomer.TabIndex = 25;
             this.datagridCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridCustomer_CellClick);
             // 
@@ -454,7 +464,7 @@
             // 
             this.lnklblClearAll.AutoSize = true;
             this.lnklblClearAll.LinkColor = System.Drawing.Color.DimGray;
-            this.lnklblClearAll.Location = new System.Drawing.Point(404, 100);
+            this.lnklblClearAll.Location = new System.Drawing.Point(423, 102);
             this.lnklblClearAll.Name = "lnklblClearAll";
             this.lnklblClearAll.Size = new System.Drawing.Size(80, 14);
             this.lnklblClearAll.TabIndex = 24;
@@ -466,7 +476,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(269, 54);
+            this.label6.Location = new System.Drawing.Point(269, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(123, 16);
             this.label6.TabIndex = 23;
@@ -474,9 +484,9 @@
             // 
             // txtbxContactInfo
             // 
-            this.txtbxContactInfo.Location = new System.Drawing.Point(272, 75);
+            this.txtbxContactInfo.Location = new System.Drawing.Point(272, 73);
             this.txtbxContactInfo.Name = "txtbxContactInfo";
-            this.txtbxContactInfo.Size = new System.Drawing.Size(212, 22);
+            this.txtbxContactInfo.Size = new System.Drawing.Size(231, 22);
             this.txtbxContactInfo.TabIndex = 22;
             this.txtbxContactInfo.TextChanged += new System.EventHandler(this.txtbxCustomerInformation_TextChanged);
             this.txtbxContactInfo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxContactInfo_KeyPress);
@@ -485,7 +495,7 @@
             // 
             this.lbl.AutoSize = true;
             this.lbl.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl.Location = new System.Drawing.Point(28, 54);
+            this.lbl.Location = new System.Drawing.Point(28, 52);
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(104, 16);
             this.lbl.TabIndex = 21;
@@ -493,9 +503,9 @@
             // 
             // txtbxFullName
             // 
-            this.txtbxFullName.Location = new System.Drawing.Point(30, 75);
+            this.txtbxFullName.Location = new System.Drawing.Point(30, 73);
             this.txtbxFullName.Name = "txtbxFullName";
-            this.txtbxFullName.Size = new System.Drawing.Size(213, 22);
+            this.txtbxFullName.Size = new System.Drawing.Size(232, 22);
             this.txtbxFullName.TabIndex = 20;
             this.txtbxFullName.TextChanged += new System.EventHandler(this.txtbxCustomerInformation_TextChanged);
             this.txtbxFullName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxFullName_KeyPress);
@@ -516,7 +526,7 @@
             this.btnEditCustomer.FlatAppearance.BorderSize = 0;
             this.btnEditCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnEditCustomer.Location = new System.Drawing.Point(87, 103);
+            this.btnEditCustomer.Location = new System.Drawing.Point(87, 102);
             this.btnEditCustomer.Name = "btnEditCustomer";
             this.btnEditCustomer.Size = new System.Drawing.Size(53, 23);
             this.btnEditCustomer.TabIndex = 13;
@@ -530,7 +540,7 @@
             this.btnAddCustomer.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             this.btnAddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAddCustomer.Location = new System.Drawing.Point(31, 103);
+            this.btnAddCustomer.Location = new System.Drawing.Point(31, 102);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(50, 23);
             this.btnAddCustomer.TabIndex = 12;
@@ -541,6 +551,8 @@
             // VideoLibrary
             // 
             this.VideoLibrary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.VideoLibrary.Controls.Add(this.pictureBox2);
+            this.VideoLibrary.Controls.Add(this.txtbxSearch);
             this.VideoLibrary.Controls.Add(this.reportViewerVideo);
             this.VideoLibrary.Controls.Add(this.btnGenerateVideoReport);
             this.VideoLibrary.Controls.Add(this.datagridVidLibrary);
@@ -556,6 +568,34 @@
             this.VideoLibrary.Size = new System.Drawing.Size(1025, 471);
             this.VideoLibrary.TabIndex = 2;
             this.VideoLibrary.Text = "Video Library";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
+            this.pictureBox2.Location = new System.Drawing.Point(27, 47);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(21, 21);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 30;
+            this.pictureBox2.TabStop = false;
+            // 
+            // txtbxSearch
+            // 
+            this.txtbxSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtbxSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtbxSearch.Location = new System.Drawing.Point(54, 47);
+            this.txtbxSearch.Name = "txtbxSearch";
+            this.txtbxSearch.Size = new System.Drawing.Size(289, 22);
+            this.txtbxSearch.TabIndex = 25;
+            this.txtbxSearch.TextChanged += new System.EventHandler(this.txtbxSearch_TextChanged);
+            // 
+            // reportViewerVideo
+            // 
+            this.reportViewerVideo.Location = new System.Drawing.Point(591, 46);
+            this.reportViewerVideo.Name = "reportViewerVideo";
+            this.reportViewerVideo.ServerReport.BearerToken = null;
+            this.reportViewerVideo.Size = new System.Drawing.Size(426, 379);
+            this.reportViewerVideo.TabIndex = 24;
             // 
             // btnGenerateVideoReport
             // 
@@ -590,17 +630,17 @@
             this.datagridVidLibrary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.datagridVidLibrary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             dataGridViewCellStyle8.Format = "D";
             dataGridViewCellStyle8.NullValue = null;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.datagridVidLibrary.DefaultCellStyle = dataGridViewCellStyle8;
             this.datagridVidLibrary.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.datagridVidLibrary.Location = new System.Drawing.Point(27, 46);
+            this.datagridVidLibrary.Location = new System.Drawing.Point(27, 74);
             this.datagridVidLibrary.MultiSelect = false;
             this.datagridVidLibrary.Name = "datagridVidLibrary";
             this.datagridVidLibrary.ReadOnly = true;
@@ -614,15 +654,16 @@
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridVidLibrary.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.datagridVidLibrary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridVidLibrary.Size = new System.Drawing.Size(569, 379);
+            this.datagridVidLibrary.Size = new System.Drawing.Size(558, 351);
             this.datagridVidLibrary.TabIndex = 21;
             this.datagridVidLibrary.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridVidLibrary_CellClick);
+            this.datagridVidLibrary.DoubleClick += new System.EventHandler(this.datagridVidLibrary_DoubleClick);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift SemiBold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
             this.label2.Location = new System.Drawing.Point(23, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 23);
@@ -636,7 +677,7 @@
             this.btnDeleteVideo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             this.btnDeleteVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnDeleteVideo.Location = new System.Drawing.Point(521, 431);
+            this.btnDeleteVideo.Location = new System.Drawing.Point(510, 431);
             this.btnDeleteVideo.Name = "btnDeleteVideo";
             this.btnDeleteVideo.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteVideo.TabIndex = 17;
@@ -651,7 +692,7 @@
             this.btnEditVideo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             this.btnEditVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnEditVideo.Location = new System.Drawing.Point(440, 431);
+            this.btnEditVideo.Location = new System.Drawing.Point(429, 431);
             this.btnEditVideo.Name = "btnEditVideo";
             this.btnEditVideo.Size = new System.Drawing.Size(75, 23);
             this.btnEditVideo.TabIndex = 16;
@@ -665,7 +706,7 @@
             this.btnAddVideo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             this.btnAddVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAddVideo.Location = new System.Drawing.Point(359, 431);
+            this.btnAddVideo.Location = new System.Drawing.Point(348, 431);
             this.btnAddVideo.Name = "btnAddVideo";
             this.btnAddVideo.Size = new System.Drawing.Size(75, 23);
             this.btnAddVideo.TabIndex = 15;
@@ -681,7 +722,7 @@
             this.btnShowUnavailableVideos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.btnShowUnavailableVideos.Location = new System.Drawing.Point(27, 431);
             this.btnShowUnavailableVideos.Name = "btnShowUnavailableVideos";
-            this.btnShowUnavailableVideos.Size = new System.Drawing.Size(155, 23);
+            this.btnShowUnavailableVideos.Size = new System.Drawing.Size(152, 23);
             this.btnShowUnavailableVideos.TabIndex = 19;
             this.btnShowUnavailableVideos.Text = "Show Unavailable Videos";
             this.btnShowUnavailableVideos.UseVisualStyleBackColor = false;
@@ -695,27 +736,11 @@
             this.btnHideUnavailableVideos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.btnHideUnavailableVideos.Location = new System.Drawing.Point(27, 431);
             this.btnHideUnavailableVideos.Name = "btnHideUnavailableVideos";
-            this.btnHideUnavailableVideos.Size = new System.Drawing.Size(155, 23);
+            this.btnHideUnavailableVideos.Size = new System.Drawing.Size(152, 23);
             this.btnHideUnavailableVideos.TabIndex = 20;
             this.btnHideUnavailableVideos.Text = "Hide Unavailable Videos";
             this.btnHideUnavailableVideos.UseVisualStyleBackColor = false;
             this.btnHideUnavailableVideos.Click += new System.EventHandler(this.btnHideUnavailableVideos_Click);
-            // 
-            // reportViewerCustomer
-            // 
-            this.reportViewerCustomer.Location = new System.Drawing.Point(572, 54);
-            this.reportViewerCustomer.Name = "reportViewerCustomer";
-            this.reportViewerCustomer.ServerReport.BearerToken = null;
-            this.reportViewerCustomer.Size = new System.Drawing.Size(432, 395);
-            this.reportViewerCustomer.TabIndex = 28;
-            // 
-            // reportViewerVideo
-            // 
-            this.reportViewerVideo.Location = new System.Drawing.Point(602, 46);
-            this.reportViewerVideo.Name = "reportViewerVideo";
-            this.reportViewerVideo.ServerReport.BearerToken = null;
-            this.reportViewerVideo.Size = new System.Drawing.Size(415, 379);
-            this.reportViewerVideo.TabIndex = 24;
             // 
             // Dashboard
             // 
@@ -742,6 +767,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).EndInit();
             this.VideoLibrary.ResumeLayout(false);
             this.VideoLibrary.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).EndInit();
             this.ResumeLayout(false);
 
@@ -788,5 +814,7 @@
         private System.Windows.Forms.Button btnGenerateCustomerReport;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewerCustomer;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewerVideo;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.TextBox txtbxSearch;
     }
 }
