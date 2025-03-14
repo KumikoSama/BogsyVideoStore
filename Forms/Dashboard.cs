@@ -64,6 +64,8 @@ namespace BogsyVideoStore.Forms
 
             this.reportViewerVideo.RefreshReport();
             this.reportViewerCustomer.RefreshReport();
+            this.reportViewerCustomer.RefreshReport();
+            this.reportViewerVideo.RefreshReport();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

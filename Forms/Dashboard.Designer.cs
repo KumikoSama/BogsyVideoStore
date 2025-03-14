@@ -56,7 +56,6 @@
             this.btnReturn = new System.Windows.Forms.Button();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
             this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
-            this.reportViewerCustomer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.datagridCustomer = new System.Windows.Forms.DataGridView();
             this.lnklblClearAll = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
@@ -68,7 +67,6 @@
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.VideoLibrary = new System.Windows.Forms.TabPage();
             this.btnGenerateVideoReport = new System.Windows.Forms.Button();
-            this.reportViewerVideo = new Microsoft.Reporting.WinForms.ReportViewer();
             this.datagridVidLibrary = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDeleteVideo = new System.Windows.Forms.Button();
@@ -76,6 +74,8 @@
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.btnShowUnavailableVideos = new System.Windows.Forms.Button();
             this.btnHideUnavailableVideos = new System.Windows.Forms.Button();
+            this.reportViewerCustomer = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.reportViewerVideo = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -370,8 +370,8 @@
             // CustomerLibrary
             // 
             this.CustomerLibrary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.CustomerLibrary.Controls.Add(this.btnGenerateCustomerReport);
             this.CustomerLibrary.Controls.Add(this.reportViewerCustomer);
+            this.CustomerLibrary.Controls.Add(this.btnGenerateCustomerReport);
             this.CustomerLibrary.Controls.Add(this.datagridCustomer);
             this.CustomerLibrary.Controls.Add(this.lnklblClearAll);
             this.CustomerLibrary.Controls.Add(this.label6);
@@ -402,14 +402,6 @@
             this.btnGenerateCustomerReport.Text = "Generate All Customers Report";
             this.btnGenerateCustomerReport.UseVisualStyleBackColor = false;
             this.btnGenerateCustomerReport.Click += new System.EventHandler(this.btnGenerateCustomerReport_Click);
-            // 
-            // reportViewerCustomer
-            // 
-            this.reportViewerCustomer.Location = new System.Drawing.Point(563, 54);
-            this.reportViewerCustomer.Name = "reportViewerCustomer";
-            this.reportViewerCustomer.ServerReport.BearerToken = null;
-            this.reportViewerCustomer.Size = new System.Drawing.Size(441, 395);
-            this.reportViewerCustomer.TabIndex = 26;
             // 
             // datagridCustomer
             // 
@@ -549,8 +541,8 @@
             // VideoLibrary
             // 
             this.VideoLibrary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.VideoLibrary.Controls.Add(this.btnGenerateVideoReport);
             this.VideoLibrary.Controls.Add(this.reportViewerVideo);
+            this.VideoLibrary.Controls.Add(this.btnGenerateVideoReport);
             this.VideoLibrary.Controls.Add(this.datagridVidLibrary);
             this.VideoLibrary.Controls.Add(this.label2);
             this.VideoLibrary.Controls.Add(this.btnDeleteVideo);
@@ -578,14 +570,6 @@
             this.btnGenerateVideoReport.Text = "Generate Video Report";
             this.btnGenerateVideoReport.UseVisualStyleBackColor = false;
             this.btnGenerateVideoReport.Click += new System.EventHandler(this.btnGenerateVideoReport_Click);
-            // 
-            // reportViewerVideo
-            // 
-            this.reportViewerVideo.Location = new System.Drawing.Point(602, 46);
-            this.reportViewerVideo.Name = "reportViewerVideo";
-            this.reportViewerVideo.ServerReport.BearerToken = null;
-            this.reportViewerVideo.Size = new System.Drawing.Size(403, 379);
-            this.reportViewerVideo.TabIndex = 22;
             // 
             // datagridVidLibrary
             // 
@@ -717,6 +701,22 @@
             this.btnHideUnavailableVideos.UseVisualStyleBackColor = false;
             this.btnHideUnavailableVideos.Click += new System.EventHandler(this.btnHideUnavailableVideos_Click);
             // 
+            // reportViewerCustomer
+            // 
+            this.reportViewerCustomer.Location = new System.Drawing.Point(572, 54);
+            this.reportViewerCustomer.Name = "reportViewerCustomer";
+            this.reportViewerCustomer.ServerReport.BearerToken = null;
+            this.reportViewerCustomer.Size = new System.Drawing.Size(432, 395);
+            this.reportViewerCustomer.TabIndex = 28;
+            // 
+            // reportViewerVideo
+            // 
+            this.reportViewerVideo.Location = new System.Drawing.Point(602, 46);
+            this.reportViewerVideo.Name = "reportViewerVideo";
+            this.reportViewerVideo.ServerReport.BearerToken = null;
+            this.reportViewerVideo.Size = new System.Drawing.Size(415, 379);
+            this.reportViewerVideo.TabIndex = 24;
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -783,10 +783,10 @@
         private System.Windows.Forms.Button btnRent;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.DataGridView datagridCustomer;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewerCustomer;
         private System.Windows.Forms.DataGridView datagridVidLibrary;
         private System.Windows.Forms.Button btnGenerateVideoReport;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewerVideo;
         private System.Windows.Forms.Button btnGenerateCustomerReport;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerCustomer;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerVideo;
     }
 }
