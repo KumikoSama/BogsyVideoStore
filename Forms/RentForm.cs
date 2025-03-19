@@ -1,6 +1,5 @@
 ﻿using BogsyVideoStore.Classes;
 using BogsyVideoStore.Models;
-using Microsoft.Data.SqlClient;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,25 +15,27 @@ namespace BogsyVideoStore.Forms
         {
             InitializeComponent();
             GlobalTransaction.TransactionList.Clear();
+            GlobalCustomer.CustomerList.Clear();
         }
 
         private void RentForm_Load(object sender, EventArgs e)
         {
             cmbbxVideos.SelectedIndexChanged -= cmbbxVideos_SelectedIndexChanged;
+            cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
             Utility.GetVideosInfo(cmbbxVideos);
+            Utility.LoadCustomers(cmbbxCustomer);
+            cmbbxCustomer.Text = "";
+            cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
             cmbbxVideos.SelectedIndexChanged += cmbbxVideos_SelectedIndexChanged;
 
             cmbbxVideos.Text = GlobalVideo.Title;
             txtbxCategory.Text = GlobalVideo.Category;
             txtbxPrice.Text = GlobalVideo.Price.ToString();
-
-            if (!string.IsNullOrEmpty(cmbbxVideos.Text))
-                btnAdd_Click(sender, e);
         }
 
         private void btnRent_Click(object sender, EventArgs e)
         {
-            if (datagridList.DataSource != null)
+            if (GlobalTransaction.TransactionList.Count > 0)
             {
                 this.Close();
 
@@ -50,9 +51,9 @@ namespace BogsyVideoStore.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbbxVideos.Text))
+            if (string.IsNullOrEmpty(cmbbxCustomer.Text))
             {
-                MessageBox.Show("Select a video to rent");
+                MessageBox.Show("Select a customer.");
                 return;
             }
 
@@ -114,6 +115,9 @@ namespace BogsyVideoStore.Forms
                 GlobalTransaction.TransactionList.RemoveAt(rowIndex);
                 datagridList.DataSource = null;
                 datagridList.DataSource = GlobalTransaction.TransactionList;
+
+                if (GlobalTransaction.TransactionList.Count == 0)
+                    cmbbxCustomer.Enabled = true;
             }
             else return;
         }
@@ -122,6 +126,17 @@ namespace BogsyVideoStore.Forms
         {
             Utility.HideColumns(datagridList, "CustomerName", "VideoID", "CustomerID", "DatePaid", "PenaltyFee");
             Utility.SplitColumnHeaderTexts(datagridList);
+
+            cmbbxCustomer.Enabled = false;
+        }
+
+        private void cmbbxCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbbxCustomer.Text))
+            {
+                GlobalCustomer.CustomerName = cmbbxCustomer.Text;
+                GlobalCustomer.CustomerID = int.Parse(cmbbxCustomer.SelectedValue.ToString());
+            }
         }
     }
 }

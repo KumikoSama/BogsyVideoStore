@@ -119,10 +119,6 @@ namespace BogsyVideoStore.Classes
         public static void LoadCustomers(ComboBox comboBox)
         {
             string query = "SELECT CustomerID, CustomerName FROM CustomerTable";
-            var customers = new List<Customer>
-            {
-                new Customer { CustomerName = "All", CustomerID = 0 },
-            };
 
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
@@ -133,7 +129,7 @@ namespace BogsyVideoStore.Classes
                 {
                     while (reader.Read())
                     {
-                        customers.Add(new Customer
+                        GlobalCustomer.CustomerList.Add(new Customer
                         {
                             CustomerID = int.Parse(reader["CustomerID"].ToString()),
                             CustomerName = reader["CustomerName"].ToString()
@@ -142,7 +138,7 @@ namespace BogsyVideoStore.Classes
                 }
             }
 
-            comboBox.DataSource = customers;
+            comboBox.DataSource = GlobalCustomer.CustomerList;
             comboBox.DisplayMember = "CustomerName";
             comboBox.ValueMember = "CustomerID";
         }

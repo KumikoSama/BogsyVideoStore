@@ -15,6 +15,7 @@ namespace BogsyVideoStore.Models
 
     public class GlobalCustomer
     {
+        public static List<Customer> CustomerList = new List<Customer>();
         public static int CustomerID { get; set; }
         public static string CustomerName { get; set; }
         public static string ContactInfo { get; set; }

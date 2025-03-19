@@ -62,7 +62,10 @@ namespace BogsyVideoStore.Forms
             datagridVidLibrary.Columns["VideoID"].Visible = false;
 
             cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
+
+            GlobalCustomer.CustomerList.Add(new Customer { CustomerName = "All" });
             Utility.LoadCustomers(cmbbxCustomer);
+
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
 
             Utility.SplitColumnHeaderTexts(datagridVidLibrary);
@@ -79,13 +82,13 @@ namespace BogsyVideoStore.Forms
 
         private void btnRent_Click(object sender, EventArgs e)
         {
-            if (cmbbxCustomer.Text == "All")
-                MessageBox.Show("Choose a customer");
-            else
+            if (GlobalVideo.VideoID != 0)
             {
                 RentForm rentForm = new RentForm();
-                rentForm.ShowDialog();
+                rentForm.ShowDialog(); 
             }
+            else
+                MessageBox.Show("Choose a video to rent");
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -100,7 +103,7 @@ namespace BogsyVideoStore.Forms
 
                 if (currentDataDisplayed == DataDisplayed.OngoingRent)
                     datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadOnGoingRent.ToString(), cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
-                else if(currentDataDisplayed == DataDisplayed.OverdueRent)
+                else if (currentDataDisplayed == DataDisplayed.OverdueRent)
                     datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadOverdueRent.ToString(), cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
             }
             else return;
@@ -419,7 +422,7 @@ namespace BogsyVideoStore.Forms
         private void btnDeleteVideo_Click(object sender, EventArgs e)
         {
             if (GlobalVideo.CopiesBorrowed > 0)
-                MessageBox.Show("You can't delete this yet! There's still copies that are being borrowed.");
+                MessageBox.Show("You can't delete this yet! There's still copies that are currently on rent.");
             else
             {
                 DialogResult result = MessageBox.Show("Are you sure you'll delete this video?", "Video Deletion Confirmation",
@@ -462,7 +465,7 @@ namespace BogsyVideoStore.Forms
         private void txtbxSearch_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtbxSearch.Text))
-                Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
+                datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
             else
                 datagridVidLibrary.DataSource = GlobalVideo.VideoList.Where(video => video.Title.ToLower().StartsWith(txtbxSearch.Text.ToLower())).ToList();
         }

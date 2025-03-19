@@ -58,7 +58,7 @@ namespace BogsyVideoStore.Forms
                 }
                 else
                 {
-                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalTransaction.VideoID));
+                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
 
                     MessageBox.Show("Payments settled");
                 }
@@ -84,6 +84,7 @@ namespace BogsyVideoStore.Forms
             GlobalTransaction.TotalAmount = 0;
             GlobalTransaction.Payment = 0;
             GlobalTransaction.Change = 0;
+            GlobalTransaction.TransactionList.Clear();
         }
     }
 }
