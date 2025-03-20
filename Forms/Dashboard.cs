@@ -37,7 +37,7 @@ namespace BogsyVideoStore.Forms
     public partial class Dashboard : Form
     {
         DataDisplayed currentDataDisplayed = DataDisplayed.AllVideos;
-        AutoCompleteStringCollection videos;
+        AutoCompleteStringCollection videos, customers;
         string selectedCategory;
 
         public Dashboard()
@@ -71,11 +71,17 @@ namespace BogsyVideoStore.Forms
 
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
 
+            customers = new AutoCompleteStringCollection();
+
+            foreach (var customer in GlobalCustomer.CustomerList)
+                customers.Add(customer.CustomerName);
+
             Utility.SplitColumnHeaderTexts(datagridVidLibrary);
             Utility.GenerateCustomerReport(reportViewerCustomer);
             Utility.GenerateVideoReport(reportViewerVideo);
 
             txtbxSearchVideo.AutoCompleteCustomSource = videos;
+            txtbxSearchCustomer.AutoCompleteCustomSource = customers;
 
             this.reportViewerCustomer.RefreshReport();
             this.reportViewerVideo.RefreshReport();
@@ -270,8 +276,10 @@ namespace BogsyVideoStore.Forms
                     GlobalTransaction.TotalAmount += totalPenalty;
                 }
 
-                Receipt receipt = new Receipt(true);
-                receipt.Show();
+                using (Receipt receipt = new Receipt(true))
+                    receipt.ShowDialog();
+
+                datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadOverdueRent.ToString(), cmbbxCategory.SelectedItem.ToString(), cmbbxCustomer.Text != "All");
             }
         }
 
@@ -436,5 +444,20 @@ namespace BogsyVideoStore.Forms
         }
 
         #endregion
+
+        private void cmbbxSortByCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedCategory = cmbbxSortByCategory.Text;
+
+            datagridVidLibrary.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadAllVideos.ToString(), selectedCategory, false);
+        }
+
+        private void txtbxSearchCustomer_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtbxSearchCustomer.Text))
+                datagridCustomer.DataSource = GlobalCustomer.CustomerList.Where(customer => customer.CustomerName.ToLower().StartsWith(txtbxSearchCustomer.Text.ToLower())).ToList();
+            else
+                datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
+        }
     }
 }

@@ -51,12 +51,6 @@ namespace BogsyVideoStore.Forms
         {
             if (Validator.ValidateContactInfo(txtbxContactInfo.Text) && !string.IsNullOrEmpty(txtbxFullName.Text))
             {
-                if (Validator.ValidateCustomerInformation(txtbxFullName.Text, txtbxContactInfo.Text))
-                {
-                    MessageBox.Show("Customer information does not exist");
-                    return;
-                }
-
                 DialogResult result = MessageBox.Show("Are you sure you'll edit this customer information?", "Customer Information",
                     MessageBoxButtons.YesNo);
 

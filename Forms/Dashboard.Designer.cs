@@ -73,7 +73,7 @@
             this.btnShowUnavailableVideos = new System.Windows.Forms.Button();
             this.btnHideUnavailableVideos = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbbxSortByCategory = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.txtbxSearchCustomer = new System.Windows.Forms.TextBox();
@@ -489,7 +489,7 @@
             // 
             this.VideoLibrary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.VideoLibrary.Controls.Add(this.label7);
-            this.VideoLibrary.Controls.Add(this.comboBox1);
+            this.VideoLibrary.Controls.Add(this.cmbbxSortByCategory);
             this.VideoLibrary.Controls.Add(this.txtbxSearchVideo);
             this.VideoLibrary.Controls.Add(this.reportViewerVideo);
             this.VideoLibrary.Controls.Add(this.btnGenerateVideoReport);
@@ -682,21 +682,22 @@
             this.label7.TabIndex = 32;
             this.label7.Text = "Category:";
             // 
-            // comboBox1
+            // cmbbxSortByCategory
             // 
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.comboBox1.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbbxSortByCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbbxSortByCategory.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxSortByCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.cmbbxSortByCategory.FormattingEnabled = true;
+            this.cmbbxSortByCategory.Items.AddRange(new object[] {
             "All",
             "VCD",
             "DVD"});
-            this.comboBox1.Location = new System.Drawing.Point(465, 47);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(120, 22);
-            this.comboBox1.TabIndex = 31;
-            this.comboBox1.Text = "All";
+            this.cmbbxSortByCategory.Location = new System.Drawing.Point(465, 47);
+            this.cmbbxSortByCategory.Name = "cmbbxSortByCategory";
+            this.cmbbxSortByCategory.Size = new System.Drawing.Size(120, 22);
+            this.cmbbxSortByCategory.TabIndex = 31;
+            this.cmbbxSortByCategory.Text = "All";
+            this.cmbbxSortByCategory.SelectedIndexChanged += new System.EventHandler(this.cmbbxSortByCategory_SelectedIndexChanged);
             // 
             // pictureBox1
             // 
@@ -726,6 +727,7 @@
             this.txtbxSearchCustomer.Name = "txtbxSearchCustomer";
             this.txtbxSearchCustomer.Size = new System.Drawing.Size(338, 22);
             this.txtbxSearchCustomer.TabIndex = 31;
+            this.txtbxSearchCustomer.TextChanged += new System.EventHandler(this.txtbxSearchCustomer_TextChanged);
             // 
             // pictureBox3
             // 
@@ -809,7 +811,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox txtbxSearchVideo;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbbxSortByCategory;
         private System.Windows.Forms.TextBox txtbxSearchCustomer;
         private System.Windows.Forms.PictureBox pictureBox3;
     }
