@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageVideo));
             this.btnAdd = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtbxPrice = new System.Windows.Forms.TextBox();
@@ -104,12 +105,13 @@
             // 
             // cmbbxCategory
             // 
+            this.cmbbxCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbbxCategory.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbbxCategory.FormattingEnabled = true;
             this.cmbbxCategory.Items.AddRange(new object[] {
             "DVD",
             "VCD"});
-            this.cmbbxCategory.Location = new System.Drawing.Point(125, 189);
+            this.cmbbxCategory.Location = new System.Drawing.Point(125, 191);
             this.cmbbxCategory.Name = "cmbbxCategory";
             this.cmbbxCategory.Size = new System.Drawing.Size(160, 22);
             this.cmbbxCategory.TabIndex = 20;
@@ -177,6 +179,7 @@
             this.Controls.Add(this.txtbxTitle);
             this.Controls.Add(this.btnEditVideo);
             this.Controls.Add(this.btnAdd);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ManageVideo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage Video";

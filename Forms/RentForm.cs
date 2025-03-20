@@ -43,10 +43,7 @@ namespace BogsyVideoStore.Forms
                 receipt.Show();
             }
             else
-            {
                 MessageBox.Show("Add transaction to the list first");
-                return;
-            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -54,6 +51,16 @@ namespace BogsyVideoStore.Forms
             if (string.IsNullOrEmpty(cmbbxCustomer.Text))
             {
                 MessageBox.Show("Select a customer.");
+                return;
+            }
+            else if (!GlobalCustomer.CustomerList.Select(customer => customer.CustomerName).Contains(cmbbxCustomer.Text))
+            {
+                MessageBox.Show("This customer doesn't exist in your list of customers");
+                return;
+            }
+            else if (!GlobalVideo.VideoList.Select(video => video.Title).Contains(cmbbxVideos.Text))
+            {
+                MessageBox.Show("This video doesn't exist in your list of videos");
                 return;
             }
 

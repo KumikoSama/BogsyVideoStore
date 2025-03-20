@@ -45,10 +45,8 @@ namespace BogsyVideoStore.Classes
 
                 string phonenumpattern = @"^\+63\d{10}$";
 
-                if (Regex.IsMatch(contactinfo, phonenumpattern))
-                    return true;
-                else 
-                    throw new FormatException("Invalid phone number");
+                if (Regex.IsMatch(contactinfo, phonenumpattern)) return true;
+                else throw new Exception("Phone number is in an invalid format");
             }
             catch (Exception ex)
             {
