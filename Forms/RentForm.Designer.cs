@@ -40,7 +40,6 @@
             this.btnRent = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.datagridList = new System.Windows.Forms.DataGridView();
             this.cmbbxVideos = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,7 +47,10 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.transactionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.datagridList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -144,7 +146,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Bahnschrift SemiBold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(85, 43);
+            this.label5.Location = new System.Drawing.Point(79, 43);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 23);
             this.label5.TabIndex = 9;
@@ -189,7 +191,7 @@
             this.cmbbxVideos.FormattingEnabled = true;
             this.cmbbxVideos.Location = new System.Drawing.Point(83, 173);
             this.cmbbxVideos.Name = "cmbbxVideos";
-            this.cmbbxVideos.Size = new System.Drawing.Size(173, 22);
+            this.cmbbxVideos.Size = new System.Drawing.Size(204, 22);
             this.cmbbxVideos.TabIndex = 14;
             this.cmbbxVideos.SelectedIndexChanged += new System.EventHandler(this.cmbbxVideos_SelectedIndexChanged);
             // 
@@ -236,7 +238,7 @@
             this.cmbbxCustomer.FormattingEnabled = true;
             this.cmbbxCustomer.Location = new System.Drawing.Point(83, 116);
             this.cmbbxCustomer.Name = "cmbbxCustomer";
-            this.cmbbxCustomer.Size = new System.Drawing.Size(173, 22);
+            this.cmbbxCustomer.Size = new System.Drawing.Size(204, 22);
             this.cmbbxCustomer.TabIndex = 18;
             this.cmbbxCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbbxCustomer_SelectedIndexChanged);
             // 
@@ -254,12 +256,28 @@
             // 
             this.transactionBindingSource.DataSource = typeof(BogsyVideoStore.Models.Transaction);
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(257, 115);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(30, 23);
+            this.panel1.TabIndex = 31;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(257, 172);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(30, 23);
+            this.panel2.TabIndex = 31;
+            // 
             // RentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.ClientSize = new System.Drawing.Size(806, 501);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbbxCustomer);
             this.Controls.Add(this.btnRemove);
@@ -302,14 +320,16 @@
         private System.Windows.Forms.Button btnRent;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.DataGridView datagridList;
         private System.Windows.Forms.ComboBox cmbbxVideos;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.BindingSource transactionBindingSource;
         private System.Windows.Forms.ComboBox cmbbxCustomer;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.BindingSource transactionBindingSource;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

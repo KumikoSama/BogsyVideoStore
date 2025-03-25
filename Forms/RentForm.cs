@@ -23,7 +23,7 @@ namespace BogsyVideoStore.Forms
             cmbbxVideos.SelectedIndexChanged -= cmbbxVideos_SelectedIndexChanged;
             cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
             Utility.GetVideosInfo(cmbbxVideos);
-            Utility.LoadCustomers(cmbbxCustomer);
+            Utility.GetCustomersInfo(cmbbxCustomer);
             cmbbxCustomer.Text = "";
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
             cmbbxVideos.SelectedIndexChanged += cmbbxVideos_SelectedIndexChanged;
@@ -118,7 +118,7 @@ namespace BogsyVideoStore.Forms
             {
                 GlobalTransaction.TotalAmount -= int.Parse(datagridList.CurrentRow.Cells["RentFee"].Value.ToString());
                 lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount.ToString()}.00";
-
+                 
                 GlobalTransaction.TransactionList.RemoveAt(rowIndex);
                 datagridList.DataSource = null;
                 datagridList.DataSource = GlobalTransaction.TransactionList;

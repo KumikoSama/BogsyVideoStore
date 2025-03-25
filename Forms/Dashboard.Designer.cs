@@ -45,16 +45,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbbxCategory = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnAllVideos = new System.Windows.Forms.Button();
             this.btnAllTransactions = new System.Windows.Forms.Button();
             this.btnOngoingRent = new System.Windows.Forms.Button();
             this.btnPastTransactions = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbbxCustomer = new System.Windows.Forms.ComboBox();
+            this.txtbxSearchCustomerTransactions = new System.Windows.Forms.ComboBox();
             this.datagridTransactions = new System.Windows.Forms.DataGridView();
             this.btnRent = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.CustomerLibrary = new System.Windows.Forms.TabPage();
+            this.txtbxSearchCustomer = new System.Windows.Forms.TextBox();
             this.reportViewerCustomer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnGenerateCustomerReport = new System.Windows.Forms.Button();
             this.datagridCustomer = new System.Windows.Forms.DataGridView();
@@ -62,6 +62,8 @@
             this.btnEditCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.VideoLibrary = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbbxSortByCategory = new System.Windows.Forms.ComboBox();
             this.txtbxSearchVideo = new System.Windows.Forms.TextBox();
             this.reportViewerVideo = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnGenerateVideoReport = new System.Windows.Forms.Button();
@@ -72,12 +74,23 @@
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.btnShowUnavailableVideos = new System.Windows.Forms.Button();
             this.btnHideUnavailableVideos = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbbxSortByCategory = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.Calendar = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAllVideos = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.txtbxSearchCustomer = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
@@ -85,9 +98,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).BeginInit();
             this.VideoLibrary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).BeginInit();
+            this.Calendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -96,6 +112,7 @@
             this.tabControl1.Controls.Add(this.RentReturn);
             this.tabControl1.Controls.Add(this.CustomerLibrary);
             this.tabControl1.Controls.Add(this.VideoLibrary);
+            this.tabControl1.Controls.Add(this.Calendar);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -107,6 +124,7 @@
             // RentReturn
             // 
             this.RentReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.RentReturn.Controls.Add(this.panel1);
             this.RentReturn.Controls.Add(this.btnSettlePenalty);
             this.RentReturn.Controls.Add(this.pictureBox1);
             this.RentReturn.Controls.Add(this.btnOverdue);
@@ -118,7 +136,7 @@
             this.RentReturn.Controls.Add(this.btnOngoingRent);
             this.RentReturn.Controls.Add(this.btnPastTransactions);
             this.RentReturn.Controls.Add(this.label1);
-            this.RentReturn.Controls.Add(this.cmbbxCustomer);
+            this.RentReturn.Controls.Add(this.txtbxSearchCustomerTransactions);
             this.RentReturn.Controls.Add(this.datagridTransactions);
             this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Controls.Add(this.btnReturn);
@@ -199,20 +217,6 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "Rental and Return";
             // 
-            // btnAllVideos
-            // 
-            this.btnAllVideos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
-            this.btnAllVideos.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAllVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAllVideos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAllVideos.Location = new System.Drawing.Point(484, 426);
-            this.btnAllVideos.Name = "btnAllVideos";
-            this.btnAllVideos.Size = new System.Drawing.Size(74, 26);
-            this.btnAllVideos.TabIndex = 23;
-            this.btnAllVideos.Text = "All Videos";
-            this.btnAllVideos.UseVisualStyleBackColor = false;
-            this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
-            // 
             // btnAllTransactions
             // 
             this.btnAllTransactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
@@ -266,21 +270,21 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Choose or search for a customer:";
             // 
-            // cmbbxCustomer
+            // txtbxSearchCustomerTransactions
             // 
-            this.cmbbxCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbbxCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbbxCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbbxCustomer.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbbxCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
-            this.cmbbxCustomer.FormattingEnabled = true;
-            this.cmbbxCustomer.Items.AddRange(new object[] {
+            this.txtbxSearchCustomerTransactions.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtbxSearchCustomerTransactions.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.txtbxSearchCustomerTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtbxSearchCustomerTransactions.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxSearchCustomerTransactions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.txtbxSearchCustomerTransactions.FormattingEnabled = true;
+            this.txtbxSearchCustomerTransactions.Items.AddRange(new object[] {
             "All"});
-            this.cmbbxCustomer.Location = new System.Drawing.Point(51, 68);
-            this.cmbbxCustomer.Name = "cmbbxCustomer";
-            this.cmbbxCustomer.Size = new System.Drawing.Size(438, 22);
-            this.cmbbxCustomer.TabIndex = 13;
-            this.cmbbxCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbbxCustomer_SelectedIndexChanged);
+            this.txtbxSearchCustomerTransactions.Location = new System.Drawing.Point(51, 68);
+            this.txtbxSearchCustomerTransactions.Name = "txtbxSearchCustomerTransactions";
+            this.txtbxSearchCustomerTransactions.Size = new System.Drawing.Size(485, 22);
+            this.txtbxSearchCustomerTransactions.TabIndex = 13;
+            this.txtbxSearchCustomerTransactions.SelectedIndexChanged += new System.EventHandler(this.cmbbxCustomer_SelectedIndexChanged);
             // 
             // datagridTransactions
             // 
@@ -363,13 +367,13 @@
             // 
             this.CustomerLibrary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.CustomerLibrary.Controls.Add(this.txtbxSearchCustomer);
-            this.CustomerLibrary.Controls.Add(this.pictureBox3);
             this.CustomerLibrary.Controls.Add(this.reportViewerCustomer);
             this.CustomerLibrary.Controls.Add(this.btnGenerateCustomerReport);
             this.CustomerLibrary.Controls.Add(this.datagridCustomer);
             this.CustomerLibrary.Controls.Add(this.label3);
             this.CustomerLibrary.Controls.Add(this.btnEditCustomer);
             this.CustomerLibrary.Controls.Add(this.btnAddCustomer);
+            this.CustomerLibrary.Controls.Add(this.pictureBox3);
             this.CustomerLibrary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
             this.CustomerLibrary.Location = new System.Drawing.Point(4, 26);
             this.CustomerLibrary.Name = "CustomerLibrary";
@@ -377,6 +381,16 @@
             this.CustomerLibrary.Size = new System.Drawing.Size(1025, 471);
             this.CustomerLibrary.TabIndex = 1;
             this.CustomerLibrary.Text = "Customer Library";
+            // 
+            // txtbxSearchCustomer
+            // 
+            this.txtbxSearchCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtbxSearchCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtbxSearchCustomer.Location = new System.Drawing.Point(54, 45);
+            this.txtbxSearchCustomer.Name = "txtbxSearchCustomer";
+            this.txtbxSearchCustomer.Size = new System.Drawing.Size(338, 22);
+            this.txtbxSearchCustomer.TabIndex = 31;
+            this.txtbxSearchCustomer.TextChanged += new System.EventHandler(this.txtbxSearchCustomer_TextChanged);
             // 
             // reportViewerCustomer
             // 
@@ -507,6 +521,34 @@
             this.VideoLibrary.Size = new System.Drawing.Size(1025, 471);
             this.VideoLibrary.TabIndex = 2;
             this.VideoLibrary.Text = "Video Library";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label7.Location = new System.Drawing.Point(400, 49);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 16);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Category:";
+            // 
+            // cmbbxSortByCategory
+            // 
+            this.cmbbxSortByCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmbbxSortByCategory.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxSortByCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.cmbbxSortByCategory.FormattingEnabled = true;
+            this.cmbbxSortByCategory.Items.AddRange(new object[] {
+            "All",
+            "VCD",
+            "DVD"});
+            this.cmbbxSortByCategory.Location = new System.Drawing.Point(465, 47);
+            this.cmbbxSortByCategory.Name = "cmbbxSortByCategory";
+            this.cmbbxSortByCategory.Size = new System.Drawing.Size(120, 22);
+            this.cmbbxSortByCategory.TabIndex = 31;
+            this.cmbbxSortByCategory.Text = "All";
+            this.cmbbxSortByCategory.SelectedIndexChanged += new System.EventHandler(this.cmbbxSortByCategory_SelectedIndexChanged);
             // 
             // txtbxSearchVideo
             // 
@@ -671,33 +713,141 @@
             this.btnHideUnavailableVideos.UseVisualStyleBackColor = false;
             this.btnHideUnavailableVideos.Click += new System.EventHandler(this.btnHideUnavailableVideos_Click);
             // 
-            // label7
+            // panel1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
-            this.label7.Location = new System.Drawing.Point(400, 49);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 16);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Category:";
+            this.panel1.Location = new System.Drawing.Point(509, 68);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(30, 23);
+            this.panel1.TabIndex = 30;
             // 
-            // cmbbxSortByCategory
+            // Calendar
             // 
-            this.cmbbxSortByCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbbxSortByCategory.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbbxSortByCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
-            this.cmbbxSortByCategory.FormattingEnabled = true;
-            this.cmbbxSortByCategory.Items.AddRange(new object[] {
-            "All",
-            "VCD",
-            "DVD"});
-            this.cmbbxSortByCategory.Location = new System.Drawing.Point(465, 47);
-            this.cmbbxSortByCategory.Name = "cmbbxSortByCategory";
-            this.cmbbxSortByCategory.Size = new System.Drawing.Size(120, 22);
-            this.cmbbxSortByCategory.TabIndex = 31;
-            this.cmbbxSortByCategory.Text = "All";
-            this.cmbbxSortByCategory.SelectedIndexChanged += new System.EventHandler(this.cmbbxSortByCategory_SelectedIndexChanged);
+            this.Calendar.Controls.Add(this.pictureBox5);
+            this.Calendar.Controls.Add(this.pictureBox4);
+            this.Calendar.Controls.Add(this.label14);
+            this.Calendar.Controls.Add(this.label13);
+            this.Calendar.Controls.Add(this.label12);
+            this.Calendar.Controls.Add(this.label11);
+            this.Calendar.Controls.Add(this.label10);
+            this.Calendar.Controls.Add(this.label9);
+            this.Calendar.Controls.Add(this.label8);
+            this.Calendar.Controls.Add(this.label6);
+            this.Calendar.Controls.Add(this.flowLayoutPanel1);
+            this.Calendar.Location = new System.Drawing.Point(4, 26);
+            this.Calendar.Name = "Calendar";
+            this.Calendar.Size = new System.Drawing.Size(1025, 471);
+            this.Calendar.TabIndex = 3;
+            this.Calendar.Text = "Calendar";
+            this.Calendar.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(39, 78);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(574, 367);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // btnAllVideos
+            // 
+            this.btnAllVideos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.btnAllVideos.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.btnAllVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAllVideos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.btnAllVideos.Location = new System.Drawing.Point(484, 426);
+            this.btnAllVideos.Name = "btnAllVideos";
+            this.btnAllVideos.Size = new System.Drawing.Size(74, 26);
+            this.btnAllVideos.TabIndex = 23;
+            this.btnAllVideos.Text = "All Videos";
+            this.btnAllVideos.UseVisualStyleBackColor = false;
+            this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label6.Location = new System.Drawing.Point(53, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 16);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "Sunday";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label8.Location = new System.Drawing.Point(138, 59);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 16);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "Monday";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label9.Location = new System.Drawing.Point(217, 59);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 16);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Tuesday";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label10.Location = new System.Drawing.Point(290, 59);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 16);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Wednesday";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label11.Location = new System.Drawing.Point(376, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(60, 16);
+            this.label11.TabIndex = 33;
+            this.label11.Text = "Thursday";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label12.Location = new System.Drawing.Point(469, 59);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 16);
+            this.label12.TabIndex = 33;
+            this.label12.Text = "Friday";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label13.Location = new System.Drawing.Point(542, 59);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(59, 16);
+            this.label13.TabIndex = 33;
+            this.label13.Text = "Saturday";
+            // 
+            // label14
+            // 
+            this.label14.AutoEllipsis = true;
+            this.label14.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label14.Location = new System.Drawing.Point(36, 23);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(209, 22);
+            this.label14.TabIndex = 34;
+            this.label14.Text = "Month";
             // 
             // pictureBox1
             // 
@@ -709,6 +859,16 @@
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
+            this.pictureBox3.Location = new System.Drawing.Point(27, 45);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(21, 21);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 32;
+            this.pictureBox3.TabStop = false;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
@@ -719,25 +879,25 @@
             this.pictureBox2.TabIndex = 30;
             this.pictureBox2.TabStop = false;
             // 
-            // txtbxSearchCustomer
+            // pictureBox5
             // 
-            this.txtbxSearchCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtbxSearchCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtbxSearchCustomer.Location = new System.Drawing.Point(54, 45);
-            this.txtbxSearchCustomer.Name = "txtbxSearchCustomer";
-            this.txtbxSearchCustomer.Size = new System.Drawing.Size(338, 22);
-            this.txtbxSearchCustomer.TabIndex = 31;
-            this.txtbxSearchCustomer.TextChanged += new System.EventHandler(this.txtbxSearchCustomer_TextChanged);
+            this.pictureBox5.Image = global::BogsyVideoStore.Properties.Resources.nexticon;
+            this.pictureBox5.Location = new System.Drawing.Point(285, 23);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(28, 22);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 35;
+            this.pictureBox5.TabStop = false;
             // 
-            // pictureBox3
+            // pictureBox4
             // 
-            this.pictureBox3.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
-            this.pictureBox3.Location = new System.Drawing.Point(27, 45);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(21, 21);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 32;
-            this.pictureBox3.TabStop = false;
+            this.pictureBox4.Image = global::BogsyVideoStore.Properties.Resources.previousicon;
+            this.pictureBox4.Location = new System.Drawing.Point(251, 23);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(28, 22);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 35;
+            this.pictureBox4.TabStop = false;
             // 
             // Dashboard
             // 
@@ -765,9 +925,13 @@
             this.VideoLibrary.ResumeLayout(false);
             this.VideoLibrary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).EndInit();
+            this.Calendar.ResumeLayout(false);
+            this.Calendar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -798,7 +962,7 @@
         private System.Windows.Forms.Button btnOngoingRent;
         private System.Windows.Forms.Button btnPastTransactions;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbbxCustomer;
+        private System.Windows.Forms.ComboBox txtbxSearchCustomerTransactions;
         private System.Windows.Forms.DataGridView datagridTransactions;
         private System.Windows.Forms.Button btnRent;
         private System.Windows.Forms.Button btnReturn;
@@ -814,5 +978,18 @@
         private System.Windows.Forms.ComboBox cmbbxSortByCategory;
         private System.Windows.Forms.TextBox txtbxSearchCustomer;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabPage Calendar;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }

@@ -182,6 +182,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="calendarDays.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="calendarDays.Designer.cs">
+      <DependentUpon>calendarDays.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Queries.cs" />
     <Compile Include="Classes\Utility.cs" />
     <Compile Include="Classes\Validator.cs" />
@@ -233,6 +239,9 @@
     <EmbeddedResource Include="bin\Debug\PenaltyFeeReceipt.rdlc" />
     <EmbeddedResource Include="bin\Debug\TransactionReceipt.rdlc" />
     <EmbeddedResource Include="bin\Debug\VideosReport.rdlc" />
+    <EmbeddedResource Include="calendarDays.resx">
+      <DependentUpon>calendarDays.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManageCustomer.resx">
       <DependentUpon>ManageCustomer.cs</DependentUpon>
     </EmbeddedResource>
@@ -288,6 +297,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\magnifying-glass-solid.png" />
+    <None Include="Resources\refresh_brown.png" />
+    <None Include="Resources\previousicon.png" />
+    <None Include="Resources\nexticon.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -116,7 +116,7 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void LoadCustomers(ComboBox comboBox)
+        public static void GetCustomersInfo(ComboBox comboBox)
         {
             string query = "SELECT * FROM CustomerTable";
 
