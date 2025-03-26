@@ -300,6 +300,19 @@
     <None Include="Resources\refresh_brown.png" />
     <None Include="Resources\previousicon.png" />
     <None Include="Resources\nexticon.png" />
+    <None Include="Resources\videos-solid-24.png" />
+    <None Include="Resources\spreadsheet-regular-24.png" />
+    <None Include="Resources\file-regular-24.png" />
+    <None Include="Resources\calendar-exclamation-solid-24.png" />
+    <None Include="Resources\archive-regular-24.png" />
+    <None Include="Resources\refresh-regular-24.png" />
+    <None Include="Resources\BVSLogo-removebg-preview.png" />
+    <None Include="Resources\calendar-solid-24.png" />
+    <None Include="Resources\left-arrow-circle-regular-24.png" />
+    <None Include="Resources\right-arrow-circle-regular-24.png" />
+    <None Include="Resources\film-regular-24.png" />
+    <None Include="Resources\disc-solid-24.png" />
+    <None Include="Resources\film-solid-24.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

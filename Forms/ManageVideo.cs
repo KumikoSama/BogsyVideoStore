@@ -32,6 +32,7 @@ namespace BogsyVideoStore.Forms
                 txtbxPrice.Text = GlobalVideo.Price.ToString();
                 txtbxCopies.Text = GlobalVideo.Copies.ToString();
                 cmbbxCategory.Text = GlobalVideo.Category;
+                cmbbxRating.Text = GlobalVideo.Rating;
             }
         }
 
@@ -76,9 +77,10 @@ namespace BogsyVideoStore.Forms
                 GlobalVideo.Price = int.Parse(txtbxPrice.Text);
                 GlobalVideo.Copies = int.Parse(txtbxCopies.Text);
                 GlobalVideo.Category = cmbbxCategory.Text;
+                GlobalVideo.Category = cmbbxRating.Text;
 
                 Utility.ExecuteQuery(Queries.EditVideo, false, new SqlParameter("@Title", GlobalVideo.Title), new SqlParameter("@Category", GlobalVideo.Category),
-                    new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.Copies), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+                    new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.Copies), new SqlParameter("@Rating", GlobalVideo.Rating), new SqlParameter("@VideoID", GlobalVideo.VideoID));
 
                 this.Close();
             }

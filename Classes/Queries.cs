@@ -14,7 +14,7 @@ namespace BogsyVideoStore.Classes
         public static string GetMemberID { get; } = "SELECT CustomerID FROM CustomerTable WHERE CustomerName = @CustomerName";
         public static string DeleteVideo { get; } = "DELETE FROM VideoTable WHERE VideoID = @VideoID";
         public static string InsertToCustomerTable { get; } = "INSERT INTO CustomerTable (CustomerName, ContactInfo) VALUES (@CustomerName, @ContactInfo)";
-        public static string EditVideo { get; } = "UPDATE VideoTable SET Title = @Title, Category = @Category, Price = @Price, Copies = @Copies WHERE VideoID = @VideoID";
+        public static string EditVideo { get; } = "UPDATE VideoTable SET Title = @Title, Category = @Category, Price = @Price, Copies = @Copies, Rating = @Rating WHERE VideoID = @VideoID";
         public static string AddNewVideo { get; } = "INSERT INTO VideoTable (Title, Category, Price, Copies) VALUES (@Title, @Category, @Price, @Copies)";
     }
 }

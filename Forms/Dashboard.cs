@@ -75,6 +75,7 @@ namespace BogsyVideoStore.Forms
 
             datagridCustomer.Columns["CustomerID"].Visible = false;
             datagridVidLibrary.Columns["VideoID"].Visible = false;
+            datagridTransactions.Columns["VideoID"].Visible = false;
 
             Utility.SplitColumnHeaderTexts(datagridVidLibrary);
             Utility.GenerateCustomerReport(reportViewerCustomer);
@@ -84,6 +85,7 @@ namespace BogsyVideoStore.Forms
             txtbxSearchCustomer.AutoCompleteCustomSource = customers;
 
             this.reportViewerCustomer.RefreshReport();
+            this.reportViewerVideo.RefreshReport();
             this.reportViewerVideo.RefreshReport();
         }
 
@@ -389,6 +391,7 @@ namespace BogsyVideoStore.Forms
                 GlobalVideo.Price = int.Parse(selectedRow.Cells["Price"].Value.ToString());
                 GlobalVideo.Copies = int.Parse(selectedRow.Cells["Copies"].Value.ToString());
                 GlobalVideo.CopiesBorrowed = int.Parse(selectedRow.Cells["CopiesOnRent"].Value.ToString());
+                GlobalVideo.Rating = selectedRow.Cells["Rating"].Value.ToString();
 
                 btnEditVideo.Enabled = true;
                 btnDeleteVideo.Enabled = true;
@@ -454,6 +457,15 @@ namespace BogsyVideoStore.Forms
             selectedCategory = cmbbxSortByCategory.Text;
 
             datagridVidLibrary.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadAllVideos.ToString(), selectedCategory, false);
+        }
+
+        private void btnCalendar_Click(object sender, EventArgs e)
+        {
+            if (pnlCalendar.Visible == false)
+            {
+                pnlCalendar.Show();
+                pnlCalendar.Location = new Point(475, 0);
+            }
         }
 
         private void txtbxSearchCustomer_TextChanged(object sender, EventArgs e)

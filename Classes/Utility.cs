@@ -82,7 +82,8 @@ namespace BogsyVideoStore.Classes
                             Category = reader["Category"].ToString(),
                             Price = int.Parse(reader["Price"].ToString()),
                             Copies = int.Parse(reader["Copies"].ToString()),
-                            CopiesOnRent = int.Parse(reader["CopiesOnRent"].ToString())
+                            CopiesOnRent = int.Parse(reader["CopiesOnRent"].ToString()),
+                            Rating = reader["Rating"].ToString()
                         });
                     }
                 }
@@ -218,6 +219,8 @@ namespace BogsyVideoStore.Classes
             reportViewerReceipt.RefreshReport();
             reportViewerReceipt.Refresh();
         }
+
+
 
         public static void SplitColumnHeaderTexts(DataGridView dt)
         {
