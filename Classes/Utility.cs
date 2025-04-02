@@ -61,6 +61,36 @@ namespace BogsyVideoStore.Classes
             }
         }
 
+        public static void GetTransactions()
+        {
+            string query = "SELECT * FROM RentalTable";
+            GlobalTransaction.TransactionList.Clear();
+
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        GlobalTransaction.TransactionList.Add(new Transaction
+                        {
+                            RentalID = int.Parse(reader["RentalID"].ToString()),
+                            VideoID = int.Parse(reader["VideoID"].ToString()),
+                            CustomerID = int.Parse(reader["CustomerID"].ToString()),
+                            RentDate = Convert.ToDateTime(reader["RentDate"].ToString()),
+                            DueDate = Convert.ToDateTime(reader["DueDate"].ToString()),
+                            ReturnDate = reader["ReturnDate"].ToString() ?? null,
+                            RentFee = int.Parse(reader["RentFee"].ToString()),
+                            Status = reader["Status"].ToString()
+                        });
+                    }
+                }
+            }
+        }
+
         public static void GetVideosInfo(ComboBox comboBox = null)
         {
             string query = "SELECT * FROM VideoTable WHERE Copies > 0";
@@ -219,8 +249,6 @@ namespace BogsyVideoStore.Classes
             reportViewerReceipt.RefreshReport();
             reportViewerReceipt.Refresh();
         }
-
-
 
         public static void SplitColumnHeaderTexts(DataGridView dt)
         {

@@ -8,6 +8,7 @@ namespace BogsyVideoStore.Models
 {
     public class Transaction
     {
+        public int RentalID { get; set; }
         public int VideoID { get; set; }
         public int CustomerID { get; set; }
         public string CustomerName { get; set; }
@@ -15,6 +16,7 @@ namespace BogsyVideoStore.Models
         public string Category { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime DueDate { get; set; }
+        public string ReturnDate { get; set; }
         public DateTime DatePaid { get; } = DateTime.Now;
         public string Status { get; set; }
         public int PenaltyFee { get; set; }

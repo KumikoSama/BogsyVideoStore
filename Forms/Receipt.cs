@@ -64,6 +64,7 @@ namespace BogsyVideoStore.Forms
                 }
 
                 Utility.GenerateReceipt(reportViewerReceipt, isPenaltyFee);
+                pnlPayment.Hide();
             }
         }
 

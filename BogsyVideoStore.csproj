@@ -209,6 +209,12 @@
     <Compile Include="Forms\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PaymentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentWindow.Designer.cs">
+      <DependentUpon>PaymentWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Receipt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,7 @@
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\GlobalConfig.cs" />
+    <Compile Include="Models\ItemJournal.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Program.cs" />
@@ -250,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PaymentWindow.resx">
+      <DependentUpon>PaymentWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Receipt.resx">
       <DependentUpon>Receipt.cs</DependentUpon>
@@ -313,6 +323,8 @@
     <None Include="Resources\film-regular-24.png" />
     <None Include="Resources\disc-solid-24.png" />
     <None Include="Resources\film-solid-24.png" />
+    <None Include="Resources\spreadsheet-regular-24%281%29.png" />
+    <None Include="Resources\book-bookmark-regular-24.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

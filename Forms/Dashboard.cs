@@ -12,6 +12,7 @@ using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
+using System.Globalization;
 
 namespace BogsyVideoStore.Forms
 {
@@ -21,7 +22,8 @@ namespace BogsyVideoStore.Forms
         AllTransactions,
         PreviousTransactions,
         OngoingRent,
-        OverdueRent
+        OverdueRent,
+        ItemLedgerEntry
     }
 
     enum StoredProcedures
@@ -38,7 +40,10 @@ namespace BogsyVideoStore.Forms
     {
         DataDisplayed currentDataDisplayed = DataDisplayed.AllVideos;
         AutoCompleteStringCollection videos, customers;
-        string selectedCategory;
+        string selectedCategory, monthName;
+        public static int _month, _year;
+        bool isTransactionColumnsHidden = false;
+        bool isVideoColumnsHiddeon = false;
 
         public Dashboard()
         {
@@ -47,6 +52,7 @@ namespace BogsyVideoStore.Forms
 
             Utility.ExecuteQuery(Queries.UpdateRentalTable, false);
             Utility.ExecuteQuery(Queries.UpdatePenaltyFee, false);
+            Utility.GetTransactions();
 
             Utility.GetVideosInfo();
             videos = new AutoCompleteStringCollection();
@@ -75,7 +81,6 @@ namespace BogsyVideoStore.Forms
 
             datagridCustomer.Columns["CustomerID"].Visible = false;
             datagridVidLibrary.Columns["VideoID"].Visible = false;
-            datagridTransactions.Columns["VideoID"].Visible = false;
 
             Utility.SplitColumnHeaderTexts(datagridVidLibrary);
             Utility.GenerateCustomerReport(reportViewerCustomer);
@@ -83,9 +88,9 @@ namespace BogsyVideoStore.Forms
 
             txtbxSearchVideo.AutoCompleteCustomSource = videos;
             txtbxSearchCustomer.AutoCompleteCustomSource = customers;
+            txtbxDescription.AutoCompleteCustomSource = videos;
 
             this.reportViewerCustomer.RefreshReport();
-            this.reportViewerVideo.RefreshReport();
             this.reportViewerVideo.RefreshReport();
         }
 
@@ -287,11 +292,127 @@ namespace BogsyVideoStore.Forms
         private void datagridTransactions_DataSourceChanged(object sender, EventArgs e)
         {
             if (currentDataDisplayed == DataDisplayed.AllVideos)
-                Utility.HideColumns(datagridTransactions, "VideoID");
+            {
+                if (!isVideoColumnsHiddeon)
+                {
+                    Utility.HideColumns(datagridTransactions, "VideoID");
+                    isVideoColumnsHiddeon = true; 
+                }
+            }
+            else if (currentDataDisplayed == DataDisplayed.ItemLedgerEntry)
+                datagridTransactions.Columns["EntryNo."].Visible = false;
             else
-                Utility.HideColumns(datagridTransactions, "VideoID", "CustomerID", "RentalID");
+            {
+                if (!isTransactionColumnsHidden)
+                {
+                    Utility.HideColumns(datagridTransactions, "VideoID", "CustomerID", "RentalID");
+                    isTransactionColumnsHidden = true;
+                }
+            }
 
             Utility.SplitColumnHeaderTexts(datagridTransactions);
+        }
+
+        private void btnCalendar_Click(object sender, EventArgs e)
+        {
+            if (pnlCalendar.Visible == false)
+            {
+                pnlCalendar.Show();
+                pnlCalendar.Location = new Point(664, 0);
+
+                ShowDays(DateTime.Now.Month, DateTime.Now.Year);
+            }
+        }
+
+        private void Dashboard_Click(object sender, EventArgs e)
+        {
+            if (!pnlCalendar.Bounds.Contains(PointToClient(MousePosition)))
+            {
+                pnlCalendar.Visible = false;
+                flwpnlCalendar.Controls.Clear();
+            }
+        }
+
+        private void btnItemLedgerEntry_Click(object sender, EventArgs e)
+        {
+            currentDataDisplayed = DataDisplayed.ItemLedgerEntry;
+
+            datagridTransactions.DataSource = Utility.LoadData(Queries.LoadItemLedgerEntry, false);
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            _month -= 1;
+
+            if (_month < 1)
+            {
+                _month = 12;
+                _year -= 1;
+            }
+
+            ShowDays(_month, _year);
+        }
+
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            _month += 1;
+
+            if (_month > 12)
+            {
+                _month = 1;
+                _year += 1;
+            }
+
+            ShowDays(_month, _year);
+        }
+
+        public void Days_Click(object sender, EventArgs e)
+        {
+            calendarDays clickedControl = sender as calendarDays;
+            if (clickedControl != null)
+            {
+                DateTime selecteddate = new DateTime(_year, _month, int.Parse(clickedControl.SelectedDay));
+
+                datagridTransactions.DataSource = null;
+                datagridTransactions.DataSource = GlobalTransaction.TransactionList.Where(transaction => transaction.RentDate == selecteddate).ToList();
+
+                pnlCalendar.Hide();
+            }
+        }
+
+        private void ShowDays(int month, int year)
+        {
+            flwpnlCalendar.Controls.Clear();
+            DateTime date;
+            _month = month;
+            _year = year;
+
+            monthName = new DateTimeFormatInfo().GetMonthName(month);
+            lblMonth.Text = monthName.ToUpper() + " " + year;
+            DateTime startedTheMonth = new DateTime(year, month, 1);
+            int day = DateTime.DaysInMonth(year, month);
+            int week = Convert.ToInt32(startedTheMonth.DayOfWeek.ToString("d")) + 1;
+
+            for (int i = 1; i < week; i++)
+            {
+                calendarDays days = new calendarDays("");
+                flwpnlCalendar.Controls.Add(days);
+            }
+
+            for (int i = 1; i <= day; i++)
+            {
+                calendarDays days = new calendarDays(i + "");
+                date = new DateTime(year, month, i);
+
+                if (GlobalTransaction.TransactionList.Any(transaction => transaction.RentDate == date))
+                {
+
+                }
+
+                days.Click += Days_Click;
+                flwpnlCalendar.Controls.Add(days);
+            }
         }
 
         #endregion
@@ -352,6 +473,14 @@ namespace BogsyVideoStore.Forms
                 e.Handled = true;
         }
 
+        private void txtbxSearchCustomer_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtbxSearchCustomer.Text))
+                datagridCustomer.DataSource = GlobalCustomer.CustomerList.Where(customer => customer.CustomerName.ToLower().StartsWith(txtbxSearchCustomer.Text.ToLower())).ToList();
+            else
+                datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
+        }
+
         #endregion
 
         #region VideoLibrary
@@ -373,7 +502,7 @@ namespace BogsyVideoStore.Forms
                     manageVideo.ShowDialog();
 
                 datagridVidLibrary.DataSource = Utility.LoadData(StoredProcedures.LoadAllVideos.ToString(), true);
-                Utility.GenerateVideoReport(reportViewerVideo);
+                Utility.GenerateVideoReport(reportViewerVideo); 
             }
             else
                 MessageBox.Show("Select one video");
@@ -450,7 +579,6 @@ namespace BogsyVideoStore.Forms
                 datagridVidLibrary.DataSource = GlobalVideo.VideoList.Where(video => video.Title.ToLower().StartsWith(txtbxSearchVideo.Text.ToLower())).ToList();
         }
 
-        #endregion
 
         private void cmbbxSortByCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -459,21 +587,62 @@ namespace BogsyVideoStore.Forms
             datagridVidLibrary.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadAllVideos.ToString(), selectedCategory, false);
         }
 
-        private void btnCalendar_Click(object sender, EventArgs e)
+
+        private void cmbbxRating_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (pnlCalendar.Visible == false)
+
+        }
+
+        #endregion
+
+        #region ItemJournal
+
+        private void txtbxVideoID_TextChanged(object sender, EventArgs e)
+        {
+            int videoid = int.Parse(txtbxVideoID.Text);
+            string name = GlobalVideo.VideoList.Where(video => video.VideoID == videoid).Select(video => video.Title).FirstOrDefault();
+
+            txtbxDescription.Text = name;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            GlobalItemJournal.ItemsList.Add(new ItemJournal
             {
-                pnlCalendar.Show();
-                pnlCalendar.Location = new Point(475, 0);
+                DocumentNo = txtbxDocumentNo.Text,
+                VideoID = int.Parse(txtbxVideoID.Text),
+                Description = txtbxDescription.Text,
+                SerialNo = txtbxSerialNo.Text,
+                EntryType = cmbbxEntryType.Text
+            });
+
+            datagridItemJournal.DataSource = GlobalItemJournal.ItemsList;
+        }
+
+        private void btnPost_Click(object sender, EventArgs e)
+        {
+            foreach (var item in GlobalItemJournal.ItemsList)
+            {
+                Utility.ExecuteQuery(Queries.AddIntoItemLedgerEntry, false, new SqlParameter("@DocumentNo", item.DocumentNo), new SqlParameter("@VideoID", item.VideoID), new SqlParameter("@Description", item.Description),
+                    new SqlParameter("@Quantity", item.Quantity), new SqlParameter("@SerialNo", item.SerialNo), new SqlParameter("@Type", item.EntryType));
+            }
+
+            MessageBox.Show("Item posted successfully");
+        }
+
+        private void btnRemoveItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = datagridItemJournal.SelectedRows[0].Index;
+
+            if (MessageBox.Show("Remove selected item?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                GlobalItemJournal.ItemsList.RemoveAt(rowIndex);
+
+                datagridItemJournal.DataSource = null;
+                datagridItemJournal.DataSource = GlobalItemJournal.ItemsList;
             }
         }
 
-        private void txtbxSearchCustomer_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtbxSearchCustomer.Text))
-                datagridCustomer.DataSource = GlobalCustomer.CustomerList.Where(customer => customer.CustomerName.ToLower().StartsWith(txtbxSearchCustomer.Text.ToLower())).ToList();
-            else
-                datagridCustomer.DataSource = Utility.LoadData(StoredProcedures.LoadAllCustomers.ToString(), true);
-        }
+        #endregion
     }
 }

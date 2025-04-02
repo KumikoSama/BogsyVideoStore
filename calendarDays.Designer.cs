@@ -28,86 +28,98 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlDay = new System.Windows.Forms.Panel();
+            this.flwpnlCustomerNames = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.chckbxCheckDay = new System.Windows.Forms.CheckBox();
+            this.lblDay = new System.Windows.Forms.Label();
+            this.pnlDay.SuspendLayout();
+            this.flwpnlCustomerNames.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlDay
             // 
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Controls.Add(this.checkBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(1, 1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(74, 65);
-            this.panel1.TabIndex = 0;
+            this.pnlDay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(102)))), ((int)(((byte)(90)))));
+            this.pnlDay.Controls.Add(this.flwpnlCustomerNames);
+            this.pnlDay.Controls.Add(this.chckbxCheckDay);
+            this.pnlDay.Controls.Add(this.lblDay);
+            this.pnlDay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDay.Location = new System.Drawing.Point(1, 1);
+            this.pnlDay.Name = "pnlDay";
+            this.pnlDay.Size = new System.Drawing.Size(88, 88);
+            this.pnlDay.TabIndex = 0;
+            this.pnlDay.Click += new System.EventHandler(this.pnlDay_Click);
             // 
-            // label1
+            // flwpnlCustomerNames
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(51, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 14);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "00";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 23);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(68, 39);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flwpnlCustomerNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flwpnlCustomerNames.Controls.Add(this.label2);
+            this.flwpnlCustomerNames.Location = new System.Drawing.Point(0, 36);
+            this.flwpnlCustomerNames.Name = "flwpnlCustomerNames";
+            this.flwpnlCustomerNames.Size = new System.Drawing.Size(88, 52);
+            this.flwpnlCustomerNames.TabIndex = 2;
+            this.flwpnlCustomerNames.Click += new System.EventHandler(this.pnlDay_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 12);
+            this.label2.Size = new System.Drawing.Size(73, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Customer name";
+            // 
+            // chckbxCheckDay
+            // 
+            this.chckbxCheckDay.AutoSize = true;
+            this.chckbxCheckDay.Location = new System.Drawing.Point(3, 3);
+            this.chckbxCheckDay.Name = "chckbxCheckDay";
+            this.chckbxCheckDay.Size = new System.Drawing.Size(15, 14);
+            this.chckbxCheckDay.TabIndex = 1;
+            this.chckbxCheckDay.UseVisualStyleBackColor = true;
+            this.chckbxCheckDay.Visible = false;
+            // 
+            // lblDay
+            // 
+            this.lblDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDay.AutoSize = true;
+            this.lblDay.BackColor = System.Drawing.Color.Transparent;
+            this.lblDay.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDay.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDay.Location = new System.Drawing.Point(61, 3);
+            this.lblDay.Name = "lblDay";
+            this.lblDay.Size = new System.Drawing.Size(27, 19);
+            this.lblDay.TabIndex = 0;
+            this.lblDay.Text = "00";
             // 
             // calendarDays
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.pnlDay);
             this.Name = "calendarDays";
             this.Padding = new System.Windows.Forms.Padding(1);
-            this.Size = new System.Drawing.Size(76, 67);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.Size = new System.Drawing.Size(90, 90);
+            this.Load += new System.EventHandler(this.calendarDays_Load);
+            this.pnlDay.ResumeLayout(false);
+            this.pnlDay.PerformLayout();
+            this.flwpnlCustomerNames.ResumeLayout(false);
+            this.flwpnlCustomerNames.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel pnlDay;
+        private System.Windows.Forms.CheckBox chckbxCheckDay;
+        private System.Windows.Forms.Label lblDay;
+        private System.Windows.Forms.FlowLayoutPanel flwpnlCustomerNames;
         private System.Windows.Forms.Label label2;
     }
 }

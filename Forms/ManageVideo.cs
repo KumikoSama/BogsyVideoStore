@@ -30,7 +30,6 @@ namespace BogsyVideoStore.Forms
                 btnEditVideo.Show();
                 txtbxTitle.Text = GlobalVideo.Title;
                 txtbxPrice.Text = GlobalVideo.Price.ToString();
-                txtbxCopies.Text = GlobalVideo.Copies.ToString();
                 cmbbxCategory.Text = GlobalVideo.Category;
                 cmbbxRating.Text = GlobalVideo.Rating;
             }
@@ -46,14 +45,13 @@ namespace BogsyVideoStore.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtbxCopies.Text) || !string.IsNullOrEmpty(txtbxTitle.Text))
+            if (!string.IsNullOrEmpty(txtbxTitle.Text))
             {
                 Video video = new Video
                 {
                     Title = txtbxTitle.Text,
                     Category = cmbbxCategory.SelectedItem.ToString(),
                     Price = int.Parse(txtbxPrice.Text),
-                    Copies = int.Parse(txtbxCopies.Text)
                 };
 
                 Utility.ExecuteQuery(Queries.AddNewVideo, false, new SqlParameter("@Title", video.Title), new SqlParameter("@Category", video.Category),
@@ -75,7 +73,6 @@ namespace BogsyVideoStore.Forms
             {
                 GlobalVideo.Title = txtbxTitle.Text;
                 GlobalVideo.Price = int.Parse(txtbxPrice.Text);
-                GlobalVideo.Copies = int.Parse(txtbxCopies.Text);
                 GlobalVideo.Category = cmbbxCategory.Text;
                 GlobalVideo.Category = cmbbxRating.Text;
 
@@ -90,14 +87,6 @@ namespace BogsyVideoStore.Forms
         private void cmbbxCategory_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-        }
-
-        private void txtbxCopies_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) 
-                e.Handled = true; 
-            else if (char.IsDigit(e.KeyChar) && txtbxCopies.Text.Length >= 4) 
-                e.Handled = true;
         }
     }
 }
