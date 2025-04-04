@@ -21,6 +21,7 @@ namespace BogsyVideoStore.Models
         public string Status { get; set; }
         public int PenaltyFee { get; set; }
         public int RentFee { get; set; }
+        public string SerialNo { get; set; }
     }
 
     public class GlobalTransaction

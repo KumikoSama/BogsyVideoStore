@@ -52,10 +52,11 @@ namespace BogsyVideoStore.Forms
                     Title = txtbxTitle.Text,
                     Category = cmbbxCategory.SelectedItem.ToString(),
                     Price = int.Parse(txtbxPrice.Text),
+                    Rating = cmbbxRating.SelectedItem.ToString(),
                 };
 
                 Utility.ExecuteQuery(Queries.AddNewVideo, false, new SqlParameter("@Title", video.Title), new SqlParameter("@Category", video.Category),
-                    new SqlParameter("@Price", video.Price), new SqlParameter("@Copies", video.Copies));
+                    new SqlParameter("@Price", video.Price), new SqlParameter("@Copies", video.Copies), new SqlParameter("@Rating", video.Rating));
 
                 MessageBox.Show("Video successfully added");
                 this.Close();

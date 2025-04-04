@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
 using System.Globalization;
+using System.Net.Mail;
 
 namespace BogsyVideoStore.Forms
 {
@@ -52,7 +53,6 @@ namespace BogsyVideoStore.Forms
 
             Utility.ExecuteQuery(Queries.UpdateRentalTable, false);
             Utility.ExecuteQuery(Queries.UpdatePenaltyFee, false);
-            Utility.GetTransactions();
 
             Utility.GetVideosInfo();
             videos = new AutoCompleteStringCollection();
@@ -64,6 +64,7 @@ namespace BogsyVideoStore.Forms
 
             GlobalCustomer.CustomerList.Add(new Customer { CustomerName = "All" });
             Utility.GetCustomersInfo(txtbxSearchCustomerTransactions);
+            Utility.GetTransactions();
 
             txtbxSearchCustomerTransactions.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
 
@@ -282,8 +283,8 @@ namespace BogsyVideoStore.Forms
                     GlobalTransaction.TotalAmount += totalPenalty;
                 }
 
-                using (Receipt receipt = new Receipt(true))
-                    receipt.ShowDialog();
+                using (PaymentWindow paymentWindow = new PaymentWindow())
+                    paymentWindow.ShowDialog();
 
                 datagridTransactions.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadOverdueRent.ToString(), cmbbxCategory.SelectedItem.ToString(), txtbxSearchCustomerTransactions.Text != "All");
             }
@@ -318,7 +319,7 @@ namespace BogsyVideoStore.Forms
             if (pnlCalendar.Visible == false)
             {
                 pnlCalendar.Show();
-                pnlCalendar.Location = new Point(664, 0);
+                pnlCalendar.Location = new Point(549, 0);
 
                 ShowDays(DateTime.Now.Month, DateTime.Now.Year);
             }
@@ -407,7 +408,15 @@ namespace BogsyVideoStore.Forms
 
                 if (GlobalTransaction.TransactionList.Any(transaction => transaction.RentDate == date))
                 {
-
+                    foreach (var transaction in GlobalTransaction.TransactionList.Where(transaction => transaction.RentDate == date))
+                    {
+                        string customerName = GlobalCustomer.CustomerList.Where(customer => customer.CustomerID == transaction.CustomerID).Select(customer => customer.CustomerName).FirstOrDefault();
+                        days.TransactionsOnDateList.Add(new TransactionsOnDate
+                        {
+                            CustomerName = customerName,
+                            Status = transaction.Status
+                        });
+                    }
                 }
 
                 days.Click += Days_Click;
@@ -579,14 +588,12 @@ namespace BogsyVideoStore.Forms
                 datagridVidLibrary.DataSource = GlobalVideo.VideoList.Where(video => video.Title.ToLower().StartsWith(txtbxSearchVideo.Text.ToLower())).ToList();
         }
 
-
         private void cmbbxSortByCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedCategory = cmbbxSortByCategory.Text;
 
             datagridVidLibrary.DataSource = Utility.LoadDataByCustomerAndCategory(StoredProcedures.LoadAllVideos.ToString(), selectedCategory, false);
         }
-
 
         private void cmbbxRating_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -599,10 +606,20 @@ namespace BogsyVideoStore.Forms
 
         private void txtbxVideoID_TextChanged(object sender, EventArgs e)
         {
-            int videoid = int.Parse(txtbxVideoID.Text);
-            string name = GlobalVideo.VideoList.Where(video => video.VideoID == videoid).Select(video => video.Title).FirstOrDefault();
+            if (!string.IsNullOrEmpty(txtbxVideoID.Text))
+            {
+                int videoid = int.Parse(txtbxVideoID.Text);
+                string name = GlobalVideo.VideoList.Where(video => video.VideoID == videoid).Select(video => video.Title).FirstOrDefault();
 
-            txtbxDescription.Text = name;
+                txtbxDescription.Text = name;
+            }
+            else
+                return;
+        }
+
+        private void cmbbxEntryType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -612,6 +629,7 @@ namespace BogsyVideoStore.Forms
                 DocumentNo = txtbxDocumentNo.Text,
                 VideoID = int.Parse(txtbxVideoID.Text),
                 Description = txtbxDescription.Text,
+                Quantity = int.Parse(txtbxQuantity.Text),
                 SerialNo = txtbxSerialNo.Text,
                 EntryType = cmbbxEntryType.Text
             });
@@ -623,7 +641,7 @@ namespace BogsyVideoStore.Forms
         {
             foreach (var item in GlobalItemJournal.ItemsList)
             {
-                Utility.ExecuteQuery(Queries.AddIntoItemLedgerEntry, false, new SqlParameter("@DocumentNo", item.DocumentNo), new SqlParameter("@VideoID", item.VideoID), new SqlParameter("@Description", item.Description),
+                Utility.ExecuteQuery("AddIntoItemLedgerEntry", true, new SqlParameter("@DocumentNo", item.DocumentNo), new SqlParameter("@VideoID", item.VideoID), new SqlParameter("@Description", item.Description),
                     new SqlParameter("@Quantity", item.Quantity), new SqlParameter("@SerialNo", item.SerialNo), new SqlParameter("@Type", item.EntryType));
             }
 

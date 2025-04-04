@@ -55,7 +55,12 @@ namespace BogsyVideoStore.Forms
                     MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
+                {
                     Utility.ExecuteQuery(Queries.EditCustomerQuery, false, new SqlParameter("@CustomerName", txtbxFullName.Text.ToUpper()), new SqlParameter("@ContactInfo", txtbxContactInfo.Text), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID));
+
+                    MessageBox.Show("Customer information successfully edited");
+                    this.Close();
+                }
                 else return;
             }
         }

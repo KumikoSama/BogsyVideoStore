@@ -39,8 +39,8 @@ namespace BogsyVideoStore.Forms
             {
                 this.Close();
 
-                Receipt receipt = new Receipt(false);
-                receipt.Show();
+                PaymentWindow paymentWindow = new PaymentWindow();
+                paymentWindow.ShowDialog();
             }
             else
                 MessageBox.Show("Add transaction to the list first");
@@ -79,7 +79,8 @@ namespace BogsyVideoStore.Forms
                     DueDate = dueDate,
                     RentDate = DateTime.Now,
                     PenaltyFee = 0,
-                    RentFee = GlobalVideo.Price
+                    RentFee = GlobalVideo.Price, 
+                    SerialNo = txtbxSerialNo.Text,
                 });
 
                 datagridList.DataSource = null;
@@ -87,7 +88,7 @@ namespace BogsyVideoStore.Forms
 
                 GlobalTransaction.TotalAmount = calculateTotal(int.Parse(txtbxPrice.Text), previousAmount);
                 previousAmount = GlobalTransaction.TotalAmount;
-                lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount.ToString()}.00";
+                lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount}.00";
             }
             else MessageBox.Show("Limit of 10 videos reached.");
         }

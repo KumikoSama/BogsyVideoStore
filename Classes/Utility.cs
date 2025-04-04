@@ -37,8 +37,10 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static void ExecuteQuery(string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
+        public static object ExecuteQuery(string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
         {
+            object result = null;
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -53,12 +55,16 @@ namespace BogsyVideoStore.Classes
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
+
+                    result = cmd.ExecuteScalar();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            return result ?? null;
         }
 
         public static void GetTransactions()
@@ -80,6 +86,7 @@ namespace BogsyVideoStore.Classes
                             RentalID = int.Parse(reader["RentalID"].ToString()),
                             VideoID = int.Parse(reader["VideoID"].ToString()),
                             CustomerID = int.Parse(reader["CustomerID"].ToString()),
+                            CustomerName = GlobalCustomer.CustomerList.FirstOrDefault(c => c.CustomerID == int.Parse(reader["CustomerID"].ToString())).CustomerName,
                             RentDate = Convert.ToDateTime(reader["RentDate"].ToString()),
                             DueDate = Convert.ToDateTime(reader["DueDate"].ToString()),
                             ReturnDate = reader["ReturnDate"].ToString() ?? null,

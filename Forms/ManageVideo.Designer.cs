@@ -50,7 +50,7 @@
             this.btnAdd.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnAdd.Location = new System.Drawing.Point(172, 343);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(75, 31);
             this.btnAdd.TabIndex = 26;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
@@ -139,7 +139,7 @@
             this.btnEditVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.btnEditVideo.Location = new System.Drawing.Point(172, 343);
             this.btnEditVideo.Name = "btnEditVideo";
-            this.btnEditVideo.Size = new System.Drawing.Size(75, 23);
+            this.btnEditVideo.Size = new System.Drawing.Size(75, 31);
             this.btnEditVideo.TabIndex = 28;
             this.btnEditVideo.Text = "Edit";
             this.btnEditVideo.UseVisualStyleBackColor = false;
@@ -190,8 +190,8 @@
             this.Controls.Add(this.cmbbxRating);
             this.Controls.Add(this.cmbbxCategory);
             this.Controls.Add(this.txtbxTitle);
-            this.Controls.Add(this.btnEditVideo);
             this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnEditVideo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ManageVideo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

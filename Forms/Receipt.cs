@@ -11,6 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.Windows.Forms;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.ReportingServices.Interfaces;
+using MimeKit;
+using System.IO;
 
 namespace BogsyVideoStore.Forms
 {
@@ -27,57 +32,7 @@ namespace BogsyVideoStore.Forms
         private void Receipt_Load(object sender, EventArgs e)
         {
             this.reportViewerReceipt.RefreshReport();
-            this.BringToFront();
-
-            lblTotal.Text = $"Total: ₱{GlobalTransaction.TotalAmount}.00";
-        }
-
-        private void txtbxPayment_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
-            if (char.IsDigit(e.KeyChar) && txtbxPayment.TextLength > 6)
-                e.Handled = true;
-        }
-
-        private void btnGenerateReceipt_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtbxPayment.Text))
-                MessageBox.Show("Enter payment");
-            else
-            {
-                if (!isPenaltyFee)
-                {
-                    foreach (var transaction in GlobalTransaction.TransactionList)
-                    {
-                        Utility.ExecuteQuery("InsertToRental", true, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
-                            new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
-                    }
-
-                    MessageBox.Show("Video successfully rented");
-                }
-                else
-                {
-                    Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
-
-                    MessageBox.Show("Payments settled");
-                }
-
-                Utility.GenerateReceipt(reportViewerReceipt, isPenaltyFee);
-                pnlPayment.Hide();
-            }
-        }
-
-        private void txtbxPayment_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtbxPayment.Text))
-                lblChange.Text = $"Change: ₱0.00";
-            else
-            {
-                GlobalTransaction.Payment = Convert.ToInt32(txtbxPayment.Text);
-                GlobalTransaction.Change = GlobalTransaction.Payment - GlobalTransaction.TotalAmount;
-                lblChange.Text = $"Change: ₱{GlobalTransaction.Change}.00";
-            }
+            Utility.GenerateReceipt(reportViewerReceipt, isPenaltyFee);
         }
 
         private void Receipt_FormClosed(object sender, FormClosedEventArgs e)
@@ -86,6 +41,35 @@ namespace BogsyVideoStore.Forms
             GlobalTransaction.Payment = 0;
             GlobalTransaction.Change = 0;
             GlobalTransaction.TransactionList.Clear();
+        }
+
+        private void btnSendToEmail_Click(object sender, EventArgs e)
+        {
+            LocalReport report = new LocalReport();
+            report.ReportPath = "TransactionReceipt.rdlc"; 
+
+            byte[] pdfBytes = report.Render("PDF"); 
+
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("Elisha Laud", "elilaud23@gmail.com"));
+            email.To.Add(new MailboxAddress("Zero Four", "zerof740@gmail.com"));
+            email.Subject = "Report PDF Attached";
+
+            var attachment = new MimePart("application", "pdf")
+            {
+                Content = new MimeContent(new MemoryStream(pdfBytes)),
+                ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                FileName = "Report.pdf"
+            };
+
+            var client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            client.Authenticate("elilaud23@gmail.com", "lrcf tmun brqh ninm");
+            email.Body = new Multipart("mixed") { new TextPart("plain") { Text = "See attached report." }, attachment };
+            client.Send(email);
+            client.Disconnect(true);
+
+            MessageBox.Show("✅ Email Sent!");
         }
     }
 }

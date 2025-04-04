@@ -11,10 +11,11 @@ using BogsyVideoStore.Forms;
 
 namespace BogsyVideoStore
 {
+
     public partial class calendarDays: UserControl
     {
         string _day;
-        public static List<string> Names = new List<string> { };
+        public List<TransactionsOnDate> TransactionsOnDateList = new List<TransactionsOnDate>();
         public string SelectedDay { get { return lblDay.Text; } set { lblDay.Text = value; } }
 
         private void pnlDay_Click(object sender, EventArgs e)
@@ -45,23 +46,30 @@ namespace BogsyVideoStore
             _day = day;
             lblDay.Text = day;
 
-            AttachClickEvent(this); // Attach click event to all child controls
+            AttachClickEvent(this); 
         }
 
         private void calendarDays_Load(object sender, EventArgs e)
         {
             flwpnlCustomerNames.Controls.Clear();
 
-            if (Names.Count > 0)
+            if (TransactionsOnDateList.Count > 0)
             {
-                foreach (string name in Names)
+                foreach (var transaction in TransactionsOnDateList)
                 {
                     Label label = new Label();
-                    label.Text = name;
+                    label.Text = transaction.CustomerName;
+                    label.BackColor = transaction.Status == "Closed" ? Color.RosyBrown : Color.Goldenrod;
 
                     flwpnlCustomerNames.Controls.Add(label);
                 } 
             }
         }
+    }   
+    
+    public class TransactionsOnDate
+    {
+        public string CustomerName { get; set; }
+        public string Status { get; set; }
     }
 }

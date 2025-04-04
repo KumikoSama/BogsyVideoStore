@@ -11,7 +11,7 @@ namespace BogsyVideoStore.Models
         public string DocumentNo { get; set; }
         public int VideoID { get; set; }
         public string Description { get; set; }
-        public int Quantity { get; } = 1;
+        public int Quantity { get; set; }
         public string SerialNo { get; set; }
         public string EntryType { get; set; }
     }

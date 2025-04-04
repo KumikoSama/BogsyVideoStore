@@ -33,6 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chckbxCheckDay = new System.Windows.Forms.CheckBox();
             this.lblDay = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlDay.SuspendLayout();
             this.flwpnlCustomerNames.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +56,9 @@
             this.flwpnlCustomerNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flwpnlCustomerNames.Controls.Add(this.label2);
+            this.flwpnlCustomerNames.Controls.Add(this.label1);
+            this.flwpnlCustomerNames.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.flwpnlCustomerNames.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.flwpnlCustomerNames.Location = new System.Drawing.Point(0, 36);
             this.flwpnlCustomerNames.Name = "flwpnlCustomerNames";
             this.flwpnlCustomerNames.Size = new System.Drawing.Size(88, 52);
@@ -64,6 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.RosyBrown;
             this.label2.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label2.Location = new System.Drawing.Point(3, 0);
@@ -96,6 +101,18 @@
             this.lblDay.TabIndex = 0;
             this.lblDay.Text = "00";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Goldenrod;
+            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(3, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Customer name";
+            // 
             // calendarDays
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,5 +138,6 @@
         private System.Windows.Forms.Label lblDay;
         private System.Windows.Forms.FlowLayoutPanel flwpnlCustomerNames;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

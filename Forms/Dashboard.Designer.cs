@@ -43,9 +43,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.RentReturn = new System.Windows.Forms.TabPage();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.pnlCalendar = new System.Windows.Forms.Panel();
             this.lblTuesday = new System.Windows.Forms.Label();
+            this.btnNext = new System.Windows.Forms.PictureBox();
             this.flwpnlCalendar = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -54,6 +55,7 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.btnPrev = new System.Windows.Forms.PictureBox();
             this.lblMonday = new System.Windows.Forms.Label();
             this.lblMonth = new System.Windows.Forms.Label();
             this.lblSunday = new System.Windows.Forms.Label();
@@ -62,7 +64,9 @@
             this.lblFriday = new System.Windows.Forms.Label();
             this.lblThursday = new System.Windows.Forms.Label();
             this.datagridTransactions = new System.Windows.Forms.DataGridView();
+            this.btnCalendar = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmbbxCategory = new System.Windows.Forms.ComboBox();
             this.txtbxSearchCustomerTransactions = new System.Windows.Forms.ComboBox();
             this.btnSettlePenalty = new System.Windows.Forms.Button();
@@ -76,6 +80,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnEditCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.VideoLibrary = new System.Windows.Forms.TabPage();
             this.reportViewerVideo = new Microsoft.Reporting.WinForms.ReportViewer();
             this.cmbbxRating = new System.Windows.Forms.ComboBox();
@@ -89,7 +94,26 @@
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.btnShowUnavailableVideos = new System.Windows.Forms.Button();
             this.btnHideUnavailableVideos = new System.Windows.Forms.Button();
-            this.btnAddItem = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.ItemJournal = new System.Windows.Forms.TabPage();
+            this.btnRemoveItem = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnPost = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbbxEntryType = new System.Windows.Forms.ComboBox();
+            this.txtbxSerialNo = new System.Windows.Forms.TextBox();
+            this.txtbxQuantity = new System.Windows.Forms.TextBox();
+            this.txtbxVideoID = new System.Windows.Forms.TextBox();
+            this.txtbxDescription = new System.Windows.Forms.TextBox();
+            this.txtbxDocumentNo = new System.Windows.Forms.TextBox();
+            this.datagridItemJournal = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.btnAllVideos = new System.Windows.Forms.Button();
             this.btnAllTransactions = new System.Windows.Forms.Button();
@@ -97,49 +121,25 @@
             this.btnItemLedgerEntry = new System.Windows.Forms.Button();
             this.btnOverdue = new System.Windows.Forms.Button();
             this.btnPastTransactions = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.PictureBox();
-            this.btnPrev = new System.Windows.Forms.PictureBox();
-            this.btnCalendar = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.ItemJournal = new System.Windows.Forms.TabPage();
-            this.datagridItemJournal = new System.Windows.Forms.DataGridView();
-            this.cmbbxEntryType = new System.Windows.Forms.ComboBox();
-            this.txtbxDocumentNo = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtbxVideoID = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtbxDescription = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtbxQuantity = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtbxSerialNo = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnPost = new System.Windows.Forms.Button();
-            this.btnRemoveItem = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.RentReturn.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.pnlCalendar.SuspendLayout();
-            this.flwpnlCalendar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
-            this.CustomerLibrary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).BeginInit();
-            this.VideoLibrary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNext)).BeginInit();
+            this.flwpnlCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCalendar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.CustomerLibrary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.VideoLibrary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.ItemJournal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridItemJournal)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -149,9 +149,8 @@
             this.tabControl1.Controls.Add(this.CustomerLibrary);
             this.tabControl1.Controls.Add(this.VideoLibrary);
             this.tabControl1.Controls.Add(this.ItemJournal);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(119, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1350, 701);
@@ -160,7 +159,7 @@
             // RentReturn
             // 
             this.RentReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.RentReturn.Controls.Add(this.panel3);
+            this.RentReturn.Controls.Add(this.label9);
             this.RentReturn.Controls.Add(this.pnlCalendar);
             this.RentReturn.Controls.Add(this.datagridTransactions);
             this.RentReturn.Controls.Add(this.btnCalendar);
@@ -171,7 +170,6 @@
             this.RentReturn.Controls.Add(this.btnSettlePenalty);
             this.RentReturn.Controls.Add(this.btnRent);
             this.RentReturn.Controls.Add(this.btnReturn);
-            this.RentReturn.Controls.Add(this.btnAddItem);
             this.RentReturn.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RentReturn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
             this.RentReturn.Location = new System.Drawing.Point(4, 26);
@@ -182,20 +180,15 @@
             this.RentReturn.Text = "Rent and Return";
             this.RentReturn.Click += new System.EventHandler(this.Dashboard_Click);
             // 
-            // panel3
+            // label9
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.panel3.Controls.Add(this.pictureBox4);
-            this.panel3.Controls.Add(this.btnAllVideos);
-            this.panel3.Controls.Add(this.btnAllTransactions);
-            this.panel3.Controls.Add(this.btnOngoingRent);
-            this.panel3.Controls.Add(this.btnItemLedgerEntry);
-            this.panel3.Controls.Add(this.btnOverdue);
-            this.panel3.Controls.Add(this.btnPastTransactions);
-            this.panel3.Location = new System.Drawing.Point(-4, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(118, 719);
-            this.panel3.TabIndex = 31;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(11, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(184, 25);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Rental and Return";
             // 
             // pnlCalendar
             // 
@@ -211,7 +204,7 @@
             this.pnlCalendar.Controls.Add(this.lblWednesday);
             this.pnlCalendar.Controls.Add(this.lblFriday);
             this.pnlCalendar.Controls.Add(this.lblThursday);
-            this.pnlCalendar.Location = new System.Drawing.Point(1318, 138);
+            this.pnlCalendar.Location = new System.Drawing.Point(1202, 22);
             this.pnlCalendar.Name = "pnlCalendar";
             this.pnlCalendar.Padding = new System.Windows.Forms.Padding(1);
             this.pnlCalendar.Size = new System.Drawing.Size(678, 671);
@@ -228,6 +221,17 @@
             this.lblTuesday.Size = new System.Drawing.Size(53, 16);
             this.lblTuesday.TabIndex = 33;
             this.lblTuesday.Text = "Tuesday";
+            // 
+            // btnNext
+            // 
+            this.btnNext.Image = global::BogsyVideoStore.Properties.Resources.right_arrow_circle_regular_24;
+            this.btnNext.Location = new System.Drawing.Point(274, 23);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(26, 28);
+            this.btnNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNext.TabIndex = 35;
+            this.btnNext.TabStop = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // flwpnlCalendar
             // 
@@ -295,6 +299,17 @@
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(90, 90);
             this.panel9.TabIndex = 0;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Image = global::BogsyVideoStore.Properties.Resources.left_arrow_circle_regular_24;
+            this.btnPrev.Location = new System.Drawing.Point(242, 23);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(26, 28);
+            this.btnPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnPrev.TabIndex = 35;
+            this.btnPrev.TabStop = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // lblMonday
             // 
@@ -393,7 +408,7 @@
             this.datagridTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
             dataGridViewCellStyle2.Format = "D";
             dataGridViewCellStyle2.NullValue = null;
@@ -402,7 +417,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.datagridTransactions.DefaultCellStyle = dataGridViewCellStyle2;
             this.datagridTransactions.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.datagridTransactions.Location = new System.Drawing.Point(137, 54);
+            this.datagridTransactions.Location = new System.Drawing.Point(16, 79);
             this.datagridTransactions.MultiSelect = false;
             this.datagridTransactions.Name = "datagridTransactions";
             this.datagridTransactions.ReadOnly = true;
@@ -416,17 +431,39 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridTransactions.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.datagridTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridTransactions.Size = new System.Drawing.Size(1180, 563);
+            this.datagridTransactions.Size = new System.Drawing.Size(1180, 538);
             this.datagridTransactions.TabIndex = 38;
             this.datagridTransactions.DataSourceChanged += new System.EventHandler(this.datagridTransactions_DataSourceChanged);
             this.datagridTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridTransactions_CellClick);
             // 
+            // btnCalendar
+            // 
+            this.btnCalendar.Image = global::BogsyVideoStore.Properties.Resources.calendar_solid_24;
+            this.btnCalendar.Location = new System.Drawing.Point(1164, 46);
+            this.btnCalendar.Name = "btnCalendar";
+            this.btnCalendar.Size = new System.Drawing.Size(32, 26);
+            this.btnCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnCalendar.TabIndex = 32;
+            this.btnCalendar.TabStop = false;
+            this.btnCalendar.Click += new System.EventHandler(this.btnCalendar_Click);
+            // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(1097, 22);
+            this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Location = new System.Drawing.Point(972, 48);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(24, 25);
+            this.panel1.Size = new System.Drawing.Size(24, 22);
             this.panel1.TabIndex = 30;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
+            this.pictureBox1.Location = new System.Drawing.Point(16, 47);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 29;
+            this.pictureBox1.TabStop = false;
             // 
             // cmbbxCategory
             // 
@@ -438,7 +475,7 @@
             "All",
             "VCD",
             "DVD"});
-            this.cmbbxCategory.Location = new System.Drawing.Point(1159, 23);
+            this.cmbbxCategory.Location = new System.Drawing.Point(1038, 47);
             this.cmbbxCategory.Name = "cmbbxCategory";
             this.cmbbxCategory.Size = new System.Drawing.Size(120, 24);
             this.cmbbxCategory.TabIndex = 25;
@@ -450,13 +487,12 @@
             // 
             this.txtbxSearchCustomerTransactions.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.txtbxSearchCustomerTransactions.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.txtbxSearchCustomerTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtbxSearchCustomerTransactions.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbxSearchCustomerTransactions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
             this.txtbxSearchCustomerTransactions.FormattingEnabled = true;
             this.txtbxSearchCustomerTransactions.Items.AddRange(new object[] {
             "All"});
-            this.txtbxSearchCustomerTransactions.Location = new System.Drawing.Point(171, 23);
+            this.txtbxSearchCustomerTransactions.Location = new System.Drawing.Point(50, 47);
             this.txtbxSearchCustomerTransactions.Name = "txtbxSearchCustomerTransactions";
             this.txtbxSearchCustomerTransactions.Size = new System.Drawing.Size(947, 24);
             this.txtbxSearchCustomerTransactions.TabIndex = 13;
@@ -469,9 +505,9 @@
             this.btnSettlePenalty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettlePenalty.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettlePenalty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnSettlePenalty.Location = new System.Drawing.Point(138, 623);
+            this.btnSettlePenalty.Location = new System.Drawing.Point(16, 623);
             this.btnSettlePenalty.Name = "btnSettlePenalty";
-            this.btnSettlePenalty.Size = new System.Drawing.Size(128, 33);
+            this.btnSettlePenalty.Size = new System.Drawing.Size(128, 32);
             this.btnSettlePenalty.TabIndex = 28;
             this.btnSettlePenalty.Text = "Settle Penalty Fees";
             this.btnSettlePenalty.UseVisualStyleBackColor = false;
@@ -485,7 +521,7 @@
             this.btnRent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRent.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnRent.Location = new System.Drawing.Point(138, 624);
+            this.btnRent.Location = new System.Drawing.Point(16, 623);
             this.btnRent.Name = "btnRent";
             this.btnRent.Size = new System.Drawing.Size(74, 32);
             this.btnRent.TabIndex = 21;
@@ -500,7 +536,7 @@
             this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReturn.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReturn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnReturn.Location = new System.Drawing.Point(138, 623);
+            this.btnReturn.Location = new System.Drawing.Point(16, 623);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(74, 32);
             this.btnReturn.TabIndex = 22;
@@ -530,10 +566,10 @@
             // 
             // reportViewerCustomer
             // 
-            this.reportViewerCustomer.Location = new System.Drawing.Point(733, 86);
+            this.reportViewerCustomer.Location = new System.Drawing.Point(669, 82);
             this.reportViewerCustomer.Name = "reportViewerCustomer";
             this.reportViewerCustomer.ServerReport.BearerToken = null;
-            this.reportViewerCustomer.Size = new System.Drawing.Size(581, 525);
+            this.reportViewerCustomer.Size = new System.Drawing.Size(546, 531);
             this.reportViewerCustomer.TabIndex = 33;
             // 
             // txtbxSearchCustomer
@@ -541,9 +577,9 @@
             this.txtbxSearchCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.txtbxSearchCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtbxSearchCustomer.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxSearchCustomer.Location = new System.Drawing.Point(66, 57);
+            this.txtbxSearchCustomer.Location = new System.Drawing.Point(48, 53);
             this.txtbxSearchCustomer.Name = "txtbxSearchCustomer";
-            this.txtbxSearchCustomer.Size = new System.Drawing.Size(661, 23);
+            this.txtbxSearchCustomer.Size = new System.Drawing.Size(615, 23);
             this.txtbxSearchCustomer.TabIndex = 31;
             this.txtbxSearchCustomer.TextChanged += new System.EventHandler(this.txtbxSearchCustomer_TextChanged);
             // 
@@ -555,7 +591,7 @@
             this.btnGenerateCustomerReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateCustomerReport.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerateCustomerReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnGenerateCustomerReport.Location = new System.Drawing.Point(1109, 617);
+            this.btnGenerateCustomerReport.Location = new System.Drawing.Point(1017, 619);
             this.btnGenerateCustomerReport.Name = "btnGenerateCustomerReport";
             this.btnGenerateCustomerReport.Size = new System.Drawing.Size(198, 35);
             this.btnGenerateCustomerReport.TabIndex = 27;
@@ -592,7 +628,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.datagridCustomer.DefaultCellStyle = dataGridViewCellStyle5;
             this.datagridCustomer.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.datagridCustomer.Location = new System.Drawing.Point(27, 86);
+            this.datagridCustomer.Location = new System.Drawing.Point(14, 82);
             this.datagridCustomer.MultiSelect = false;
             this.datagridCustomer.Name = "datagridCustomer";
             this.datagridCustomer.ReadOnly = true;
@@ -606,7 +642,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.datagridCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridCustomer.Size = new System.Drawing.Size(700, 525);
+            this.datagridCustomer.Size = new System.Drawing.Size(649, 531);
             this.datagridCustomer.TabIndex = 25;
             this.datagridCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridCustomer_CellClick);
             // 
@@ -614,7 +650,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(22, 18);
+            this.label3.Location = new System.Drawing.Point(9, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(177, 25);
             this.label3.TabIndex = 19;
@@ -628,7 +664,7 @@
             this.btnEditCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditCustomer.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnEditCustomer.Location = new System.Drawing.Point(667, 617);
+            this.btnEditCustomer.Location = new System.Drawing.Point(603, 619);
             this.btnEditCustomer.Name = "btnEditCustomer";
             this.btnEditCustomer.Size = new System.Drawing.Size(60, 35);
             this.btnEditCustomer.TabIndex = 13;
@@ -644,13 +680,23 @@
             this.btnAddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddCustomer.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAddCustomer.Location = new System.Drawing.Point(602, 617);
+            this.btnAddCustomer.Location = new System.Drawing.Point(540, 619);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(57, 35);
             this.btnAddCustomer.TabIndex = 12;
             this.btnAddCustomer.Text = "Add";
             this.btnAddCustomer.UseVisualStyleBackColor = false;
             this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
+            this.pictureBox3.Location = new System.Drawing.Point(14, 53);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(28, 23);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 32;
+            this.pictureBox3.TabStop = false;
             // 
             // VideoLibrary
             // 
@@ -678,10 +724,10 @@
             // 
             // reportViewerVideo
             // 
-            this.reportViewerVideo.Location = new System.Drawing.Point(711, 86);
+            this.reportViewerVideo.Location = new System.Drawing.Point(626, 83);
             this.reportViewerVideo.Name = "reportViewerVideo";
             this.reportViewerVideo.ServerReport.BearerToken = null;
-            this.reportViewerVideo.Size = new System.Drawing.Size(606, 526);
+            this.reportViewerVideo.Size = new System.Drawing.Size(589, 526);
             this.reportViewerVideo.TabIndex = 32;
             // 
             // cmbbxRating
@@ -694,7 +740,7 @@
             "All",
             "VCD",
             "DVD"});
-            this.cmbbxRating.Location = new System.Drawing.Point(627, 55);
+            this.cmbbxRating.Location = new System.Drawing.Point(542, 52);
             this.cmbbxRating.Name = "cmbbxRating";
             this.cmbbxRating.Size = new System.Drawing.Size(78, 24);
             this.cmbbxRating.TabIndex = 31;
@@ -711,7 +757,7 @@
             "All",
             "VCD",
             "DVD"});
-            this.cmbbxSortByCategory.Location = new System.Drawing.Point(543, 55);
+            this.cmbbxSortByCategory.Location = new System.Drawing.Point(458, 52);
             this.cmbbxSortByCategory.Name = "cmbbxSortByCategory";
             this.cmbbxSortByCategory.Size = new System.Drawing.Size(78, 24);
             this.cmbbxSortByCategory.TabIndex = 31;
@@ -723,9 +769,9 @@
             this.txtbxSearchVideo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.txtbxSearchVideo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtbxSearchVideo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxSearchVideo.Location = new System.Drawing.Point(61, 56);
+            this.txtbxSearchVideo.Location = new System.Drawing.Point(53, 53);
             this.txtbxSearchVideo.Name = "txtbxSearchVideo";
-            this.txtbxSearchVideo.Size = new System.Drawing.Size(476, 23);
+            this.txtbxSearchVideo.Size = new System.Drawing.Size(399, 23);
             this.txtbxSearchVideo.TabIndex = 25;
             this.txtbxSearchVideo.TextChanged += new System.EventHandler(this.txtbxSearch_TextChanged);
             // 
@@ -736,7 +782,7 @@
             this.btnGenerateVideoReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateVideoReport.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerateVideoReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnGenerateVideoReport.Location = new System.Drawing.Point(1168, 618);
+            this.btnGenerateVideoReport.Location = new System.Drawing.Point(1066, 615);
             this.btnGenerateVideoReport.Name = "btnGenerateVideoReport";
             this.btnGenerateVideoReport.Size = new System.Drawing.Size(149, 33);
             this.btnGenerateVideoReport.TabIndex = 23;
@@ -773,7 +819,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.datagridVidLibrary.DefaultCellStyle = dataGridViewCellStyle8;
             this.datagridVidLibrary.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.datagridVidLibrary.Location = new System.Drawing.Point(27, 86);
+            this.datagridVidLibrary.Location = new System.Drawing.Point(19, 83);
             this.datagridVidLibrary.MultiSelect = false;
             this.datagridVidLibrary.Name = "datagridVidLibrary";
             this.datagridVidLibrary.ReadOnly = true;
@@ -787,7 +833,7 @@
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridVidLibrary.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.datagridVidLibrary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridVidLibrary.Size = new System.Drawing.Size(678, 526);
+            this.datagridVidLibrary.Size = new System.Drawing.Size(601, 526);
             this.datagridVidLibrary.TabIndex = 21;
             this.datagridVidLibrary.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridVidLibrary_CellClick);
             this.datagridVidLibrary.DoubleClick += new System.EventHandler(this.datagridVidLibrary_DoubleClick);
@@ -797,7 +843,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
-            this.label2.Location = new System.Drawing.Point(22, 18);
+            this.label2.Location = new System.Drawing.Point(14, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(135, 25);
             this.label2.TabIndex = 18;
@@ -811,7 +857,7 @@
             this.btnDeleteVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteVideo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnDeleteVideo.Location = new System.Drawing.Point(643, 618);
+            this.btnDeleteVideo.Location = new System.Drawing.Point(558, 615);
             this.btnDeleteVideo.Name = "btnDeleteVideo";
             this.btnDeleteVideo.Size = new System.Drawing.Size(62, 33);
             this.btnDeleteVideo.TabIndex = 17;
@@ -827,7 +873,7 @@
             this.btnEditVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditVideo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnEditVideo.Location = new System.Drawing.Point(575, 618);
+            this.btnEditVideo.Location = new System.Drawing.Point(490, 615);
             this.btnEditVideo.Name = "btnEditVideo";
             this.btnEditVideo.Size = new System.Drawing.Size(62, 33);
             this.btnEditVideo.TabIndex = 16;
@@ -842,7 +888,7 @@
             this.btnAddVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddVideo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddVideo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAddVideo.Location = new System.Drawing.Point(507, 618);
+            this.btnAddVideo.Location = new System.Drawing.Point(422, 615);
             this.btnAddVideo.Name = "btnAddVideo";
             this.btnAddVideo.Size = new System.Drawing.Size(62, 33);
             this.btnAddVideo.TabIndex = 15;
@@ -857,7 +903,7 @@
             this.btnShowUnavailableVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowUnavailableVideos.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowUnavailableVideos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnShowUnavailableVideos.Location = new System.Drawing.Point(27, 618);
+            this.btnShowUnavailableVideos.Location = new System.Drawing.Point(19, 615);
             this.btnShowUnavailableVideos.Name = "btnShowUnavailableVideos";
             this.btnShowUnavailableVideos.Size = new System.Drawing.Size(164, 33);
             this.btnShowUnavailableVideos.TabIndex = 19;
@@ -872,7 +918,7 @@
             this.btnHideUnavailableVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHideUnavailableVideos.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHideUnavailableVideos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnHideUnavailableVideos.Location = new System.Drawing.Point(27, 618);
+            this.btnHideUnavailableVideos.Location = new System.Drawing.Point(19, 615);
             this.btnHideUnavailableVideos.Name = "btnHideUnavailableVideos";
             this.btnHideUnavailableVideos.Size = new System.Drawing.Size(164, 33);
             this.btnHideUnavailableVideos.TabIndex = 20;
@@ -880,214 +926,10 @@
             this.btnHideUnavailableVideos.UseVisualStyleBackColor = false;
             this.btnHideUnavailableVideos.Click += new System.EventHandler(this.btnHideUnavailableVideos_Click);
             // 
-            // btnAddItem
-            // 
-            this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
-            this.btnAddItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddItem.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAddItem.Location = new System.Drawing.Point(138, 623);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(82, 33);
-            this.btnAddItem.TabIndex = 28;
-            this.btnAddItem.Text = "Add Item";
-            this.btnAddItem.UseVisualStyleBackColor = false;
-            this.btnAddItem.Visible = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::BogsyVideoStore.Properties.Resources.BVSLogo_removebg_preview;
-            this.pictureBox4.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(118, 92);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 28;
-            this.pictureBox4.TabStop = false;
-            // 
-            // btnAllVideos
-            // 
-            this.btnAllVideos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAllVideos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnAllVideos.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAllVideos.FlatAppearance.BorderSize = 0;
-            this.btnAllVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAllVideos.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAllVideos.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAllVideos.Image = global::BogsyVideoStore.Properties.Resources.videos_solid_24;
-            this.btnAllVideos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAllVideos.Location = new System.Drawing.Point(4, 123);
-            this.btnAllVideos.Name = "btnAllVideos";
-            this.btnAllVideos.Size = new System.Drawing.Size(114, 53);
-            this.btnAllVideos.TabIndex = 23;
-            this.btnAllVideos.Text = "All Videos";
-            this.btnAllVideos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAllVideos.UseVisualStyleBackColor = false;
-            this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
-            // 
-            // btnAllTransactions
-            // 
-            this.btnAllTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAllTransactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnAllTransactions.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAllTransactions.FlatAppearance.BorderSize = 0;
-            this.btnAllTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAllTransactions.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAllTransactions.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAllTransactions.Image = global::BogsyVideoStore.Properties.Resources.spreadsheet_regular_24;
-            this.btnAllTransactions.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAllTransactions.Location = new System.Drawing.Point(3, 192);
-            this.btnAllTransactions.Name = "btnAllTransactions";
-            this.btnAllTransactions.Size = new System.Drawing.Size(114, 65);
-            this.btnAllTransactions.TabIndex = 20;
-            this.btnAllTransactions.Text = "All\r\nTransactions";
-            this.btnAllTransactions.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAllTransactions.UseVisualStyleBackColor = false;
-            this.btnAllTransactions.Click += new System.EventHandler(this.btnAllReports_Click);
-            // 
-            // btnOngoingRent
-            // 
-            this.btnOngoingRent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOngoingRent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnOngoingRent.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnOngoingRent.FlatAppearance.BorderSize = 0;
-            this.btnOngoingRent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOngoingRent.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOngoingRent.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnOngoingRent.Image = global::BogsyVideoStore.Properties.Resources.refresh_regular_24;
-            this.btnOngoingRent.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnOngoingRent.Location = new System.Drawing.Point(4, 354);
-            this.btnOngoingRent.Name = "btnOngoingRent";
-            this.btnOngoingRent.Size = new System.Drawing.Size(114, 49);
-            this.btnOngoingRent.TabIndex = 16;
-            this.btnOngoingRent.Text = "Ongoing Rent";
-            this.btnOngoingRent.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnOngoingRent.UseVisualStyleBackColor = false;
-            this.btnOngoingRent.Click += new System.EventHandler(this.btnOngoingRent_Click);
-            // 
-            // btnItemLedgerEntry
-            // 
-            this.btnItemLedgerEntry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnItemLedgerEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnItemLedgerEntry.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnItemLedgerEntry.FlatAppearance.BorderSize = 0;
-            this.btnItemLedgerEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnItemLedgerEntry.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnItemLedgerEntry.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnItemLedgerEntry.Image = global::BogsyVideoStore.Properties.Resources.file_regular_24;
-            this.btnItemLedgerEntry.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnItemLedgerEntry.Location = new System.Drawing.Point(4, 491);
-            this.btnItemLedgerEntry.Name = "btnItemLedgerEntry";
-            this.btnItemLedgerEntry.Size = new System.Drawing.Size(114, 69);
-            this.btnItemLedgerEntry.TabIndex = 27;
-            this.btnItemLedgerEntry.Text = "Item\r\nLedger Entry";
-            this.btnItemLedgerEntry.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnItemLedgerEntry.UseVisualStyleBackColor = false;
-            this.btnItemLedgerEntry.Click += new System.EventHandler(this.btnItemLedgerEntry_Click);
-            // 
-            // btnOverdue
-            // 
-            this.btnOverdue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOverdue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnOverdue.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnOverdue.FlatAppearance.BorderSize = 0;
-            this.btnOverdue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOverdue.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOverdue.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnOverdue.Image = global::BogsyVideoStore.Properties.Resources.calendar_exclamation_solid_24;
-            this.btnOverdue.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnOverdue.Location = new System.Drawing.Point(4, 418);
-            this.btnOverdue.Name = "btnOverdue";
-            this.btnOverdue.Size = new System.Drawing.Size(114, 54);
-            this.btnOverdue.TabIndex = 27;
-            this.btnOverdue.Text = "Overdue Rent";
-            this.btnOverdue.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnOverdue.UseVisualStyleBackColor = false;
-            this.btnOverdue.Click += new System.EventHandler(this.btnOverdue_Click);
-            // 
-            // btnPastTransactions
-            // 
-            this.btnPastTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPastTransactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnPastTransactions.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.btnPastTransactions.FlatAppearance.BorderSize = 0;
-            this.btnPastTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPastTransactions.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPastTransactions.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnPastTransactions.Image = global::BogsyVideoStore.Properties.Resources.archive_regular_24;
-            this.btnPastTransactions.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnPastTransactions.Location = new System.Drawing.Point(4, 272);
-            this.btnPastTransactions.Name = "btnPastTransactions";
-            this.btnPastTransactions.Size = new System.Drawing.Size(114, 66);
-            this.btnPastTransactions.TabIndex = 15;
-            this.btnPastTransactions.Text = "Closed\r\nTransactions";
-            this.btnPastTransactions.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnPastTransactions.UseVisualStyleBackColor = false;
-            this.btnPastTransactions.Click += new System.EventHandler(this.btnPastTransactions_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Image = global::BogsyVideoStore.Properties.Resources.right_arrow_circle_regular_24;
-            this.btnNext.Location = new System.Drawing.Point(274, 23);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(26, 28);
-            this.btnNext.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnNext.TabIndex = 35;
-            this.btnNext.TabStop = false;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPrev
-            // 
-            this.btnPrev.Image = global::BogsyVideoStore.Properties.Resources.left_arrow_circle_regular_24;
-            this.btnPrev.Location = new System.Drawing.Point(242, 23);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(26, 28);
-            this.btnPrev.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnPrev.TabIndex = 35;
-            this.btnPrev.TabStop = false;
-            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
-            // 
-            // btnCalendar
-            // 
-            this.btnCalendar.Image = global::BogsyVideoStore.Properties.Resources.calendar_solid_24;
-            this.btnCalendar.Location = new System.Drawing.Point(1285, 22);
-            this.btnCalendar.Name = "btnCalendar";
-            this.btnCalendar.Size = new System.Drawing.Size(32, 26);
-            this.btnCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnCalendar.TabIndex = 32;
-            this.btnCalendar.TabStop = false;
-            this.btnCalendar.Click += new System.EventHandler(this.btnCalendar_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
-            this.pictureBox1.Location = new System.Drawing.Point(137, 23);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 25);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 29;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
-            this.pictureBox3.Location = new System.Drawing.Point(27, 57);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(33, 23);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 32;
-            this.pictureBox3.TabStop = false;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::BogsyVideoStore.Properties.Resources.magnifying_glass_solid;
-            this.pictureBox2.Location = new System.Drawing.Point(27, 56);
+            this.pictureBox2.Location = new System.Drawing.Point(19, 53);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(28, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1122,6 +964,182 @@
             this.ItemJournal.TabIndex = 3;
             this.ItemJournal.Text = "Item Journal";
             // 
+            // btnRemoveItem
+            // 
+            this.btnRemoveItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnRemoveItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.btnRemoveItem.FlatAppearance.BorderSize = 0;
+            this.btnRemoveItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemoveItem.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.btnRemoveItem.Location = new System.Drawing.Point(1110, 620);
+            this.btnRemoveItem.Name = "btnRemoveItem";
+            this.btnRemoveItem.Size = new System.Drawing.Size(105, 33);
+            this.btnRemoveItem.TabIndex = 27;
+            this.btnRemoveItem.Text = "Remove Item";
+            this.btnRemoveItem.UseVisualStyleBackColor = false;
+            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.btnAdd.Location = new System.Drawing.Point(148, 577);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(62, 33);
+            this.btnAdd.TabIndex = 27;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnPost
+            // 
+            this.btnPost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.btnPost.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
+            this.btnPost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPost.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
+            this.btnPost.Location = new System.Drawing.Point(216, 577);
+            this.btnPost.Name = "btnPost";
+            this.btnPost.Size = new System.Drawing.Size(62, 33);
+            this.btnPost.TabIndex = 27;
+            this.btnPost.Text = "Post";
+            this.btnPost.UseVisualStyleBackColor = false;
+            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
+            this.label5.Location = new System.Drawing.Point(26, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(132, 25);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Item Journal";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(28, 457);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 16);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Entry Type";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(28, 388);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 16);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Serial No.";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(28, 319);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 16);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Quantity";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(28, 181);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 16);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Video ID";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(28, 248);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 16);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Description";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(28, 119);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(87, 16);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "Document No.";
+            // 
+            // cmbbxEntryType
+            // 
+            this.cmbbxEntryType.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxEntryType.FormattingEnabled = true;
+            this.cmbbxEntryType.Items.AddRange(new object[] {
+            "Purchase",
+            "Sale",
+            "Return"});
+            this.cmbbxEntryType.Location = new System.Drawing.Point(31, 476);
+            this.cmbbxEntryType.Name = "cmbbxEntryType";
+            this.cmbbxEntryType.Size = new System.Drawing.Size(363, 24);
+            this.cmbbxEntryType.TabIndex = 24;
+            this.cmbbxEntryType.Text = "Purchase";
+            this.cmbbxEntryType.SelectedIndexChanged += new System.EventHandler(this.cmbbxEntryType_SelectedIndexChanged);
+            // 
+            // txtbxSerialNo
+            // 
+            this.txtbxSerialNo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxSerialNo.Location = new System.Drawing.Point(31, 407);
+            this.txtbxSerialNo.Name = "txtbxSerialNo";
+            this.txtbxSerialNo.Size = new System.Drawing.Size(363, 23);
+            this.txtbxSerialNo.TabIndex = 23;
+            // 
+            // txtbxQuantity
+            // 
+            this.txtbxQuantity.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxQuantity.Location = new System.Drawing.Point(31, 338);
+            this.txtbxQuantity.Name = "txtbxQuantity";
+            this.txtbxQuantity.Size = new System.Drawing.Size(362, 23);
+            this.txtbxQuantity.TabIndex = 23;
+            // 
+            // txtbxVideoID
+            // 
+            this.txtbxVideoID.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxVideoID.Location = new System.Drawing.Point(31, 200);
+            this.txtbxVideoID.Name = "txtbxVideoID";
+            this.txtbxVideoID.Size = new System.Drawing.Size(363, 23);
+            this.txtbxVideoID.TabIndex = 23;
+            this.txtbxVideoID.TextChanged += new System.EventHandler(this.txtbxVideoID_TextChanged);
+            // 
+            // txtbxDescription
+            // 
+            this.txtbxDescription.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtbxDescription.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtbxDescription.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxDescription.Location = new System.Drawing.Point(31, 267);
+            this.txtbxDescription.Name = "txtbxDescription";
+            this.txtbxDescription.Size = new System.Drawing.Size(363, 23);
+            this.txtbxDescription.TabIndex = 23;
+            // 
+            // txtbxDocumentNo
+            // 
+            this.txtbxDocumentNo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxDocumentNo.Location = new System.Drawing.Point(31, 138);
+            this.txtbxDocumentNo.Name = "txtbxDocumentNo";
+            this.txtbxDocumentNo.Size = new System.Drawing.Size(363, 23);
+            this.txtbxDocumentNo.TabIndex = 23;
+            // 
             // datagridItemJournal
             // 
             this.datagridItemJournal.AllowUserToAddRows = false;
@@ -1151,7 +1169,7 @@
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.datagridItemJournal.DefaultCellStyle = dataGridViewCellStyle11;
             this.datagridItemJournal.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.datagridItemJournal.Location = new System.Drawing.Point(498, 53);
+            this.datagridItemJournal.Location = new System.Drawing.Point(422, 53);
             this.datagridItemJournal.MultiSelect = false;
             this.datagridItemJournal.Name = "datagridItemJournal";
             this.datagridItemJournal.ReadOnly = true;
@@ -1165,183 +1183,160 @@
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.datagridItemJournal.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.datagridItemJournal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datagridItemJournal.Size = new System.Drawing.Size(823, 557);
+            this.datagridItemJournal.Size = new System.Drawing.Size(793, 561);
             this.datagridItemJournal.TabIndex = 22;
             // 
-            // cmbbxEntryType
+            // panel3
             // 
-            this.cmbbxEntryType.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbbxEntryType.FormattingEnabled = true;
-            this.cmbbxEntryType.Items.AddRange(new object[] {
-            "Purchase",
-            "Sale",
-            "Return"});
-            this.cmbbxEntryType.Location = new System.Drawing.Point(52, 476);
-            this.cmbbxEntryType.Name = "cmbbxEntryType";
-            this.cmbbxEntryType.Size = new System.Drawing.Size(363, 24);
-            this.cmbbxEntryType.TabIndex = 24;
-            this.cmbbxEntryType.Text = "Purchase";
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.panel3.Controls.Add(this.pictureBox4);
+            this.panel3.Controls.Add(this.btnAllVideos);
+            this.panel3.Controls.Add(this.btnAllTransactions);
+            this.panel3.Controls.Add(this.btnOngoingRent);
+            this.panel3.Controls.Add(this.btnItemLedgerEntry);
+            this.panel3.Controls.Add(this.btnOverdue);
+            this.panel3.Controls.Add(this.btnPastTransactions);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(118, 701);
+            this.panel3.TabIndex = 31;
             // 
-            // txtbxDocumentNo
+            // pictureBox4
             // 
-            this.txtbxDocumentNo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxDocumentNo.Location = new System.Drawing.Point(52, 138);
-            this.txtbxDocumentNo.Name = "txtbxDocumentNo";
-            this.txtbxDocumentNo.Size = new System.Drawing.Size(363, 23);
-            this.txtbxDocumentNo.TabIndex = 23;
+            this.pictureBox4.Image = global::BogsyVideoStore.Properties.Resources.BVSLogo_removebg_preview;
+            this.pictureBox4.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(118, 92);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 28;
+            this.pictureBox4.TabStop = false;
             // 
-            // label11
+            // btnAllVideos
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(49, 119);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 16);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "Document No.";
+            this.btnAllVideos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAllVideos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnAllVideos.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAllVideos.FlatAppearance.BorderSize = 0;
+            this.btnAllVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAllVideos.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAllVideos.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAllVideos.Image = global::BogsyVideoStore.Properties.Resources.videos_solid_24;
+            this.btnAllVideos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAllVideos.Location = new System.Drawing.Point(0, 134);
+            this.btnAllVideos.Name = "btnAllVideos";
+            this.btnAllVideos.Size = new System.Drawing.Size(118, 53);
+            this.btnAllVideos.TabIndex = 23;
+            this.btnAllVideos.Text = "All Videos";
+            this.btnAllVideos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAllVideos.UseVisualStyleBackColor = false;
+            this.btnAllVideos.Click += new System.EventHandler(this.btnAllVideos_Click);
             // 
-            // txtbxVideoID
+            // btnAllTransactions
             // 
-            this.txtbxVideoID.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxVideoID.Location = new System.Drawing.Point(52, 200);
-            this.txtbxVideoID.Name = "txtbxVideoID";
-            this.txtbxVideoID.Size = new System.Drawing.Size(363, 23);
-            this.txtbxVideoID.TabIndex = 23;
-            this.txtbxVideoID.TextChanged += new System.EventHandler(this.txtbxVideoID_TextChanged);
+            this.btnAllTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAllTransactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnAllTransactions.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAllTransactions.FlatAppearance.BorderSize = 0;
+            this.btnAllTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAllTransactions.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAllTransactions.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAllTransactions.Image = global::BogsyVideoStore.Properties.Resources.spreadsheet_regular_24;
+            this.btnAllTransactions.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAllTransactions.Location = new System.Drawing.Point(0, 193);
+            this.btnAllTransactions.Name = "btnAllTransactions";
+            this.btnAllTransactions.Size = new System.Drawing.Size(118, 65);
+            this.btnAllTransactions.TabIndex = 20;
+            this.btnAllTransactions.Text = "All\r\nTransactions";
+            this.btnAllTransactions.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAllTransactions.UseVisualStyleBackColor = false;
+            this.btnAllTransactions.Click += new System.EventHandler(this.btnAllReports_Click);
             // 
-            // label1
+            // btnOngoingRent
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(49, 181);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 16);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Video ID";
+            this.btnOngoingRent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOngoingRent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnOngoingRent.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOngoingRent.FlatAppearance.BorderSize = 0;
+            this.btnOngoingRent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOngoingRent.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOngoingRent.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOngoingRent.Image = global::BogsyVideoStore.Properties.Resources.refresh_regular_24;
+            this.btnOngoingRent.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnOngoingRent.Location = new System.Drawing.Point(0, 345);
+            this.btnOngoingRent.Name = "btnOngoingRent";
+            this.btnOngoingRent.Size = new System.Drawing.Size(119, 49);
+            this.btnOngoingRent.TabIndex = 16;
+            this.btnOngoingRent.Text = "Ongoing Rent";
+            this.btnOngoingRent.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnOngoingRent.UseVisualStyleBackColor = false;
+            this.btnOngoingRent.Click += new System.EventHandler(this.btnOngoingRent_Click);
             // 
-            // txtbxDescription
+            // btnItemLedgerEntry
             // 
-            this.txtbxDescription.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtbxDescription.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtbxDescription.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxDescription.Location = new System.Drawing.Point(52, 267);
-            this.txtbxDescription.Name = "txtbxDescription";
-            this.txtbxDescription.Size = new System.Drawing.Size(363, 23);
-            this.txtbxDescription.TabIndex = 23;
+            this.btnItemLedgerEntry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnItemLedgerEntry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnItemLedgerEntry.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnItemLedgerEntry.FlatAppearance.BorderSize = 0;
+            this.btnItemLedgerEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnItemLedgerEntry.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnItemLedgerEntry.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnItemLedgerEntry.Image = global::BogsyVideoStore.Properties.Resources.file_regular_24;
+            this.btnItemLedgerEntry.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnItemLedgerEntry.Location = new System.Drawing.Point(0, 482);
+            this.btnItemLedgerEntry.Name = "btnItemLedgerEntry";
+            this.btnItemLedgerEntry.Size = new System.Drawing.Size(119, 69);
+            this.btnItemLedgerEntry.TabIndex = 27;
+            this.btnItemLedgerEntry.Text = "Item\r\nLedger Entry";
+            this.btnItemLedgerEntry.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnItemLedgerEntry.UseVisualStyleBackColor = false;
+            this.btnItemLedgerEntry.Click += new System.EventHandler(this.btnItemLedgerEntry_Click);
             // 
-            // label4
+            // btnOverdue
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(49, 248);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 16);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Description";
+            this.btnOverdue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOverdue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnOverdue.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOverdue.FlatAppearance.BorderSize = 0;
+            this.btnOverdue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOverdue.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOverdue.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOverdue.Image = global::BogsyVideoStore.Properties.Resources.calendar_exclamation_solid_24;
+            this.btnOverdue.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnOverdue.Location = new System.Drawing.Point(0, 409);
+            this.btnOverdue.Name = "btnOverdue";
+            this.btnOverdue.Size = new System.Drawing.Size(119, 54);
+            this.btnOverdue.TabIndex = 27;
+            this.btnOverdue.Text = "Overdue Rent";
+            this.btnOverdue.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnOverdue.UseVisualStyleBackColor = false;
+            this.btnOverdue.Click += new System.EventHandler(this.btnOverdue_Click);
             // 
-            // label5
+            // btnPastTransactions
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Bahnschrift SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(28)))), ((int)(((byte)(20)))));
-            this.label5.Location = new System.Drawing.Point(47, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 25);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Item Journal";
-            // 
-            // txtbxQuantity
-            // 
-            this.txtbxQuantity.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxQuantity.Location = new System.Drawing.Point(52, 338);
-            this.txtbxQuantity.Name = "txtbxQuantity";
-            this.txtbxQuantity.Size = new System.Drawing.Size(362, 23);
-            this.txtbxQuantity.TabIndex = 23;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(49, 319);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 16);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Quantity";
-            // 
-            // txtbxSerialNo
-            // 
-            this.txtbxSerialNo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxSerialNo.Location = new System.Drawing.Point(52, 407);
-            this.txtbxSerialNo.Name = "txtbxSerialNo";
-            this.txtbxSerialNo.Size = new System.Drawing.Size(363, 23);
-            this.txtbxSerialNo.TabIndex = 23;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(49, 388);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 16);
-            this.label7.TabIndex = 25;
-            this.label7.Text = "Serial No.";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(49, 457);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 16);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Entry Type";
-            // 
-            // btnPost
-            // 
-            this.btnPost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
-            this.btnPost.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
-            this.btnPost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPost.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnPost.Location = new System.Drawing.Point(237, 577);
-            this.btnPost.Name = "btnPost";
-            this.btnPost.Size = new System.Drawing.Size(62, 33);
-            this.btnPost.TabIndex = 27;
-            this.btnPost.Text = "Post";
-            this.btnPost.UseVisualStyleBackColor = false;
-            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
-            // 
-            // btnRemoveItem
-            // 
-            this.btnRemoveItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnRemoveItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
-            this.btnRemoveItem.FlatAppearance.BorderSize = 0;
-            this.btnRemoveItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveItem.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnRemoveItem.Location = new System.Drawing.Point(1216, 616);
-            this.btnRemoveItem.Name = "btnRemoveItem";
-            this.btnRemoveItem.Size = new System.Drawing.Size(105, 33);
-            this.btnRemoveItem.TabIndex = 27;
-            this.btnRemoveItem.Text = "Remove Item";
-            this.btnRemoveItem.UseVisualStyleBackColor = false;
-            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
-            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
-            this.btnAdd.Location = new System.Drawing.Point(169, 577);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(62, 33);
-            this.btnAdd.TabIndex = 27;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnPastTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPastTransactions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
+            this.btnPastTransactions.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPastTransactions.FlatAppearance.BorderSize = 0;
+            this.btnPastTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPastTransactions.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPastTransactions.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnPastTransactions.Image = global::BogsyVideoStore.Properties.Resources.archive_regular_24;
+            this.btnPastTransactions.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPastTransactions.Location = new System.Drawing.Point(0, 273);
+            this.btnPastTransactions.Name = "btnPastTransactions";
+            this.btnPastTransactions.Size = new System.Drawing.Size(119, 66);
+            this.btnPastTransactions.TabIndex = 15;
+            this.btnPastTransactions.Text = "Closed\r\nTransactions";
+            this.btnPastTransactions.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPastTransactions.UseVisualStyleBackColor = false;
+            this.btnPastTransactions.Click += new System.EventHandler(this.btnPastTransactions_Click);
             // 
             // Dashboard
             // 
@@ -1349,12 +1344,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(117)))), ((int)(((byte)(101)))));
             this.ClientSize = new System.Drawing.Size(1350, 701);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(61)))), ((int)(((byte)(55)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bogsy\'s Video Store";
@@ -1362,27 +1357,28 @@
             this.Click += new System.EventHandler(this.Dashboard_Click);
             this.tabControl1.ResumeLayout(false);
             this.RentReturn.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
+            this.RentReturn.PerformLayout();
             this.pnlCalendar.ResumeLayout(false);
             this.pnlCalendar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNext)).EndInit();
             this.flwpnlCalendar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnPrev)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridTransactions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCalendar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.CustomerLibrary.ResumeLayout(false);
             this.CustomerLibrary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.VideoLibrary.ResumeLayout(false);
             this.VideoLibrary.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridVidLibrary)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNext)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPrev)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCalendar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ItemJournal.ResumeLayout(false);
             this.ItemJournal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridItemJournal)).EndInit();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1450,7 +1446,6 @@
         private Microsoft.Reporting.WinForms.ReportViewer reportViewerCustomer;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewerVideo;
         private System.Windows.Forms.Button btnItemLedgerEntry;
-        private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.TabPage ItemJournal;
         private System.Windows.Forms.DataGridView datagridItemJournal;
         private System.Windows.Forms.ComboBox cmbbxEntryType;
@@ -1469,5 +1464,6 @@
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Button btnRemoveItem;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Label label9;
     }
 }
