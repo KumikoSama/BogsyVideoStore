@@ -18,18 +18,18 @@ namespace BogsyVideoStore
         public List<TransactionsOnDate> TransactionsOnDateList = new List<TransactionsOnDate>();
         public string SelectedDay { get { return lblDay.Text; } set { lblDay.Text = value; } }
 
-        private void pnlDay_Click(object sender, EventArgs e)
-        {
-            if (chckbxCheckDay.Checked == false && lblDay.Text != "")
-            {
-                chckbxCheckDay.Checked = true;
-                pnlDay.BackColor = Color.WhiteSmoke;
-                lblDay.ForeColor = Color.FromArgb(60, 61, 55);
-                
-                foreach (Label label in flwpnlCustomerNames.Controls)
-                    label.ForeColor = Color.FromArgb(60, 61, 55);
-            }
-        }
+        //private void pnlDay_Click(object sender, EventArgs e)
+        //{
+        //    if (chckbxCheckDay.Checked == false && lblDay.Text != "")
+        //    {
+        //        chckbxCheckDay.Checked = true;
+        //        pnlDay.BackColor = Color.WhiteSmoke;
+        //        lblDay.ForeColor = Color.FromArgb(60, 61, 55);
+
+        //        foreach (Label label in flwpnlCustomerNames.Controls)
+        //            label.ForeColor = Color.FromArgb(60, 61, 55);
+        //    }
+        //}
 
         private void AttachClickEvent(Control parent)
         {
@@ -62,7 +62,7 @@ namespace BogsyVideoStore
                     label.BackColor = transaction.Status == "Closed" ? Color.RosyBrown : Color.Goldenrod;
 
                     flwpnlCustomerNames.Controls.Add(label);
-                } 
+                }
             }
         }
     }   

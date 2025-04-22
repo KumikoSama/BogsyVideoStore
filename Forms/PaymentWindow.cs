@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using BogsyVideoStore.Properties;
 
 namespace BogsyVideoStore.Forms
 {
@@ -17,9 +18,10 @@ namespace BogsyVideoStore.Forms
     {
         bool isPenaltyFee;
 
-        public PaymentWindow()
+        public PaymentWindow(bool isPenaltyFee)
         {
             InitializeComponent();
+            this.isPenaltyFee = isPenaltyFee;
         }
 
         private void btnConfirmTransaction_Click(object sender, EventArgs e)
@@ -28,17 +30,26 @@ namespace BogsyVideoStore.Forms
                 MessageBox.Show("Enter payment");
             else
             {
+                GlobalItemJournal.DocumentNo = Settings.Default.LastReceiptNo + 1;
+                Settings.Default.LastReceiptNo = GlobalItemJournal.DocumentNo;
+                Settings.Default.Save();
+
                 if (!isPenaltyFee)
                 {
-                    var lastDocumentNo = Utility.ExecuteQuery("GetLastDocumentNo", true);
-                    int documentNo = int.Parse(lastDocumentNo.ToString()) + 1;
-
                     foreach (var transaction in GlobalTransaction.TransactionList)
                     {
-                        Utility.ExecuteQuery("InsertToRental", true, new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), new SqlParameter("@RentDate", transaction.RentDate),
-                            new SqlParameter("@DueDate", transaction.DueDate), new SqlParameter("@RentFee", transaction.RentFee), new SqlParameter("@PenaltyFee", transaction.PenaltyFee), new SqlParameter("@Status", transaction.Status));
+                        Utility.ExecuteQuery("InsertToRental", true,
+                            new SqlParameter("@VideoID", transaction.VideoID), 
+                            new SqlParameter("@CustomerID", GlobalCustomer.CustomerID), 
+                            new SqlParameter("@RentDate", transaction.RentDate),
+                            new SqlParameter("@DueDate", transaction.DueDate), 
+                            new SqlParameter("@RentFee", transaction.RentFee), 
+                            new SqlParameter("@PenaltyFee", transaction.PenaltyFee), 
+                            new SqlParameter("@Status", transaction.Status),
+                            new SqlParameter("@SerialNo", transaction.SerialNo), 
+                            new SqlParameter("@DocumentNo", "BVS" + GlobalItemJournal.DocumentNo));
 
-                        Utility.ExecuteQuery("AddIntoItemLedgerEntry", true, new SqlParameter("@DocumentNo", documentNo), new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@Description", "Rented"),
+                        Utility.ExecuteQuery("AddIntoItemLedgerEntry", true, new SqlParameter("@DocumentNo", "BVS" + GlobalItemJournal.DocumentNo), new SqlParameter("@VideoID", transaction.VideoID), new SqlParameter("@Title", transaction.VideoTitle),
                             new SqlParameter("@Quantity", "-1"), new SqlParameter("@SerialNo", transaction.SerialNo), new SqlParameter("@Type", "Sale"));
                     }
 
@@ -49,12 +60,15 @@ namespace BogsyVideoStore.Forms
                 {
                     Utility.ExecuteQuery("ReturnVideo", true, new SqlParameter("@RentalID", GlobalTransaction.RentalID), new SqlParameter("@VideoID", GlobalVideo.VideoID));
 
+                    Utility.ExecuteQuery("AddIntoItemLedgerEntry", true, new SqlParameter("@DocumentNo", GlobalItemJournal.DocumentNo), new SqlParameter("@VideoID", GlobalVideo.VideoID), new SqlParameter("@Title", GlobalVideo.Title),
+                        new SqlParameter("@Quantity", "+1"), new SqlParameter("@SerialNo", GlobalItemJournal.SerialNo), new SqlParameter("@Type", "Return"));
+
                     MessageBox.Show("Payments settled");
                     isPenaltyFee = true;
                 }
 
-                using (Receipt receipt = new Receipt(isPenaltyFee))
-                    receipt.ShowDialog();
+                Receipt receipt = new Receipt(isPenaltyFee);
+                receipt.Show();
 
                 this.Close();
             }

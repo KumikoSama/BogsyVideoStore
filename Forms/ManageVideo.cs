@@ -31,7 +31,6 @@ namespace BogsyVideoStore.Forms
                 txtbxTitle.Text = GlobalVideo.Title;
                 txtbxPrice.Text = GlobalVideo.Price.ToString();
                 cmbbxCategory.Text = GlobalVideo.Category;
-                cmbbxRating.Text = GlobalVideo.Rating;
             }
         }
 
@@ -52,11 +51,10 @@ namespace BogsyVideoStore.Forms
                     Title = txtbxTitle.Text,
                     Category = cmbbxCategory.SelectedItem.ToString(),
                     Price = int.Parse(txtbxPrice.Text),
-                    Rating = cmbbxRating.SelectedItem.ToString(),
                 };
 
                 Utility.ExecuteQuery(Queries.AddNewVideo, false, new SqlParameter("@Title", video.Title), new SqlParameter("@Category", video.Category),
-                    new SqlParameter("@Price", video.Price), new SqlParameter("@Copies", video.Copies), new SqlParameter("@Rating", video.Rating));
+                    new SqlParameter("@Price", video.Price), new SqlParameter("@Copies", video.Copies));
 
                 MessageBox.Show("Video successfully added");
                 this.Close();
@@ -75,10 +73,9 @@ namespace BogsyVideoStore.Forms
                 GlobalVideo.Title = txtbxTitle.Text;
                 GlobalVideo.Price = int.Parse(txtbxPrice.Text);
                 GlobalVideo.Category = cmbbxCategory.Text;
-                GlobalVideo.Category = cmbbxRating.Text;
 
                 Utility.ExecuteQuery(Queries.EditVideo, false, new SqlParameter("@Title", GlobalVideo.Title), new SqlParameter("@Category", GlobalVideo.Category),
-                    new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.Copies), new SqlParameter("@Rating", GlobalVideo.Rating), new SqlParameter("@VideoID", GlobalVideo.VideoID));
+                    new SqlParameter("@Price", GlobalVideo.Price), new SqlParameter("@Copies", GlobalVideo.Copies), new SqlParameter("@VideoID", GlobalVideo.VideoID));
 
                 this.Close();
             }

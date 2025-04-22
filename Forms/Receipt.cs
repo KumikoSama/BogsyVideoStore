@@ -43,33 +43,33 @@ namespace BogsyVideoStore.Forms
             GlobalTransaction.TransactionList.Clear();
         }
 
-        private void btnSendToEmail_Click(object sender, EventArgs e)
-        {
-            LocalReport report = new LocalReport();
-            report.ReportPath = "TransactionReceipt.rdlc"; 
+        //private void btnSendToEmail_Click(object sender, EventArgs e)
+        //{
+        //    //LocalReport report = new LocalReport();
+        //    //report.ReportPath = "TransactionReceipt.rdlc"; 
 
-            byte[] pdfBytes = report.Render("PDF"); 
+        //    //byte[] pdfBytes = report.Render("PDF"); 
 
-            var email = new MimeMessage();
-            email.From.Add(new MailboxAddress("Elisha Laud", "elilaud23@gmail.com"));
-            email.To.Add(new MailboxAddress("Zero Four", "zerof740@gmail.com"));
-            email.Subject = "Report PDF Attached";
+        //    //var email = new MimeMessage();
+        //    //email.From.Add(new MailboxAddress("Elisha Laud", "elilaud23@gmail.com"));
+        //    //email.To.Add(new MailboxAddress("Zero Four", "zerof740@gmail.com"));
+        //    //email.Subject = "Report PDF Attached";
 
-            var attachment = new MimePart("application", "pdf")
-            {
-                Content = new MimeContent(new MemoryStream(pdfBytes)),
-                ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                FileName = "Report.pdf"
-            };
+        //    //var attachment = new MimePart("application", "pdf")
+        //    //{
+        //    //    Content = new MimeContent(new MemoryStream(pdfBytes)),
+        //    //    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+        //    //    FileName = "Report.pdf"
+        //    //};
 
-            var client = new SmtpClient();
-            client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            client.Authenticate("elilaud23@gmail.com", "lrcf tmun brqh ninm");
-            email.Body = new Multipart("mixed") { new TextPart("plain") { Text = "See attached report." }, attachment };
-            client.Send(email);
-            client.Disconnect(true);
+        //    //var client = new SmtpClient();
+        //    //client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+        //    //client.Authenticate("elilaud23@gmail.com", "lrcf tmun brqh ninm");
+        //    //email.Body = new Multipart("mixed") { new TextPart("plain") { Text = "See attached report." }, attachment };
+        //    //client.Send(email);
+        //    //client.Disconnect(true);
 
-            MessageBox.Show("✅ Email Sent!");
-        }
+        //    //MessageBox.Show("✅ Email Sent!");
+        //}
     }
 }

@@ -14,17 +14,22 @@ namespace BogsyVideoStore.Forms
         public RentForm()
         {
             InitializeComponent();
-            GlobalTransaction.TransactionList.Clear();
-            GlobalCustomer.CustomerList.Clear();
         }
 
         private void RentForm_Load(object sender, EventArgs e)
         {
+            GlobalTransaction.TransactionList.Clear();
+            GlobalCustomer.CustomerList.Clear();
+
             cmbbxVideos.SelectedIndexChanged -= cmbbxVideos_SelectedIndexChanged;
             cmbbxCustomer.SelectedIndexChanged -= cmbbxCustomer_SelectedIndexChanged;
+
             Utility.GetVideosInfo(cmbbxVideos);
             Utility.GetCustomersInfo(cmbbxCustomer);
+            Utility.GetSerialNo(cmbbxSerialNo);
             cmbbxCustomer.Text = "";
+            cmbbxSerialNo.DataSource = SerialNoList.SerialNos.Where(no => no.Status == "Available").Select(no => no.SerialNumber).ToList();
+
             cmbbxCustomer.SelectedIndexChanged += cmbbxCustomer_SelectedIndexChanged;
             cmbbxVideos.SelectedIndexChanged += cmbbxVideos_SelectedIndexChanged;
 
@@ -39,7 +44,7 @@ namespace BogsyVideoStore.Forms
             {
                 this.Close();
 
-                PaymentWindow paymentWindow = new PaymentWindow();
+                PaymentWindow paymentWindow = new PaymentWindow(false);
                 paymentWindow.ShowDialog();
             }
             else
@@ -48,7 +53,18 @@ namespace BogsyVideoStore.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbbxCustomer.Text))
+            if (!Utility.CheckExistingRent(cmbbxSerialNo.Text))
+            {
+                MessageBox.Show("This video is already rented.");
+                return;
+            }
+            else if (datagridList.Rows.Cast<DataGridViewRow>().Any(r => !r.IsNewRow && r.Cells["SerialNo"].Value?.ToString() == cmbbxSerialNo.Text &&
+              r.Cells["VideoID"].Value?.ToString() == cmbbxVideos.SelectedValue.ToString()))
+            {
+                MessageBox.Show("This video is already in the list.");
+                return;
+            }
+            else if (string.IsNullOrEmpty(cmbbxCustomer.Text))
             {
                 MessageBox.Show("Select a customer.");
                 return;
@@ -79,8 +95,8 @@ namespace BogsyVideoStore.Forms
                     DueDate = dueDate,
                     RentDate = DateTime.Now,
                     PenaltyFee = 0,
-                    RentFee = GlobalVideo.Price, 
-                    SerialNo = txtbxSerialNo.Text,
+                    RentFee = GlobalVideo.Price,
+                    SerialNo = cmbbxSerialNo.Text,
                 });
 
                 datagridList.DataSource = null;
@@ -101,9 +117,13 @@ namespace BogsyVideoStore.Forms
         private void cmbbxVideos_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalVideo.VideoID = int.Parse(cmbbxVideos.SelectedValue.ToString());
+            Utility.GetSerialNo(cmbbxSerialNo);
 
             GlobalVideo.Category = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Category).FirstOrDefault();
             GlobalVideo.Price = GlobalVideo.VideoList.Where(video => video.VideoID == GlobalVideo.VideoID).Select(video => video.Price).FirstOrDefault();
+
+            cmbbxSerialNo.DataSource = null;
+            cmbbxSerialNo.DataSource = SerialNoList.SerialNos.Where(no => no.Status == "Available").Select(no => no.SerialNumber).ToList();
 
             txtbxCategory.Text = GlobalVideo.Category;
             txtbxPrice.Text = GlobalVideo.Price.ToString();
@@ -118,7 +138,7 @@ namespace BogsyVideoStore.Forms
             if (result == DialogResult.Yes)
             {
                 GlobalTransaction.TotalAmount -= int.Parse(datagridList.CurrentRow.Cells["RentFee"].Value.ToString());
-                lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount.ToString()}.00";
+                lblTotalAmount.Text = $"₱{GlobalTransaction.TotalAmount}.00";
                  
                 GlobalTransaction.TransactionList.RemoveAt(rowIndex);
                 datagridList.DataSource = null;
@@ -132,7 +152,7 @@ namespace BogsyVideoStore.Forms
 
         private void datagridList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            Utility.HideColumns(datagridList, "CustomerName", "VideoID", "CustomerID", "DatePaid", "PenaltyFee");
+            Utility.HideColumns(datagridList, "CustomerName", "VideoID", "CustomerID", "DatePaid", "PenaltyFee", "RentalID", "ReturnDate");
             Utility.SplitColumnHeaderTexts(datagridList);
 
             cmbbxCustomer.Enabled = false;

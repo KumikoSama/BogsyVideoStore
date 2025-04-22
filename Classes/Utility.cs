@@ -26,9 +26,6 @@ namespace BogsyVideoStore.Classes
                 if (isStoredProcedure)
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                if (query == "LoadAllVideos")
-                    cmd.Parameters.AddWithValue("@ShowUnavailable", ShowUnavailable);
-
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -37,10 +34,8 @@ namespace BogsyVideoStore.Classes
             }
         }
 
-        public static object ExecuteQuery(string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
+        public static void ExecuteQuery(string query, bool isStoredProcedure, params SqlParameter[] parameterSets)
         {
-            object result = null;
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -55,16 +50,12 @@ namespace BogsyVideoStore.Classes
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
-
-                    result = cmd.ExecuteScalar();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            return result ?? null;
         }
 
         public static void GetTransactions()
@@ -85,12 +76,14 @@ namespace BogsyVideoStore.Classes
                         {
                             RentalID = int.Parse(reader["RentalID"].ToString()),
                             VideoID = int.Parse(reader["VideoID"].ToString()),
+                            VideoTitle = GlobalVideo.VideoList.FirstOrDefault(v => v.VideoID == int.Parse(reader["VideoID"].ToString())).Title,
                             CustomerID = int.Parse(reader["CustomerID"].ToString()),
                             CustomerName = GlobalCustomer.CustomerList.FirstOrDefault(c => c.CustomerID == int.Parse(reader["CustomerID"].ToString())).CustomerName,
                             RentDate = Convert.ToDateTime(reader["RentDate"].ToString()),
                             DueDate = Convert.ToDateTime(reader["DueDate"].ToString()),
                             ReturnDate = reader["ReturnDate"].ToString() ?? null,
                             RentFee = int.Parse(reader["RentFee"].ToString()),
+                            PenaltyFee = int.Parse(reader["PenaltyFee"].ToString()),
                             Status = reader["Status"].ToString()
                         });
                     }
@@ -100,7 +93,7 @@ namespace BogsyVideoStore.Classes
 
         public static void GetVideosInfo(ComboBox comboBox = null)
         {
-            string query = "SELECT * FROM VideoTable WHERE Copies > 0";
+            string query = "SELECT * FROM VideoTable";
             GlobalVideo.VideoList.Clear();
 
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
@@ -119,8 +112,7 @@ namespace BogsyVideoStore.Classes
                             Category = reader["Category"].ToString(),
                             Price = int.Parse(reader["Price"].ToString()),
                             Copies = int.Parse(reader["Copies"].ToString()),
-                            CopiesOnRent = int.Parse(reader["CopiesOnRent"].ToString()),
-                            Rating = reader["Rating"].ToString()
+                            CopiesOnRent = int.Parse(reader["CopiesOnRent"].ToString())
                         });
                     }
                 }
@@ -132,6 +124,32 @@ namespace BogsyVideoStore.Classes
                 comboBox.DataSource = GlobalVideo.VideoList;
                 comboBox.DisplayMember = "Title";
                 comboBox.ValueMember = "VideoID"; 
+            }
+        }
+
+        public static void GetItemLedgerEntries()
+        {
+            GlobalItemJournal.ItemsList.Clear();
+
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(Queries.LoadItemLedgerEntry, conn);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        GlobalItemJournal.ItemsList.Add(new ItemJournal
+                        {
+                            DocumentNo = reader["DocumentNo."].ToString(),
+                            VideoID = int.Parse(reader["VideoID"].ToString()),
+                            Title = reader["Title"].ToString(),
+                            Quantity = int.Parse(reader["Quantity"].ToString()),
+                            SerialNo = reader["SerialNo."].ToString(),
+                            EntryType = reader["Type"].ToString()
+                        });
+                    }
+                }
             }
         }
 
@@ -184,57 +202,48 @@ namespace BogsyVideoStore.Classes
 
         public static void GenerateCustomerReport(ReportViewer reportViewer)
         {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand("LoadOnGoingRent", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                if (GlobalCustomer.CustomerID != 0)
-                    cmd.Parameters.AddWithValue("@CustomerID", GlobalCustomer.CustomerID);
-
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                reportViewer.LocalReport.DataSources.Clear();
-
-                ReportDataSource reportDataSource = new ReportDataSource("CustomerRentalTransaction", dt);
-                reportViewer.LocalReport.ReportPath = "CustomerReport.rdlc";
-                reportViewer.LocalReport.DataSources.Add(reportDataSource);
-
-                ReportParameter[] reportParams = new ReportParameter[]
+            reportViewer.LocalReport.DataSources.Clear();
+            var customerData = GlobalTransaction.TransactionList
+                .Where(t => (GlobalCustomer.CustomerID == 0 || t.CustomerID == GlobalCustomer.CustomerID) && t.Status == "On Rent")
+                .Select(t => new
                 {
-                    new ReportParameter("CustomerID", GlobalCustomer.CustomerID.ToString() ?? null),
-                    new ReportParameter("CustomerName", GlobalCustomer.CustomerName != "All" ? "Customer Name: " + GlobalCustomer.CustomerName : "(All Customers)") 
-                };
+                    t.CustomerName,
+                    t.VideoID,
+                    t.VideoTitle,
+                    t.RentDate,
+                    t.DueDate,
+                    t.ReturnDate,
+                    t.RentFee,
+                    t.PenaltyFee,
+                    t.Status
+                }).ToList();
 
-                reportViewer.LocalReport.SetParameters(reportParams);
+            ReportDataSource reportDataSource = new ReportDataSource("CustomerData", customerData);
+            reportViewer.LocalReport.ReportPath = "CustomerReport.rdlc";
+            reportViewer.LocalReport.DataSources.Add(reportDataSource);
 
-                reportViewer.RefreshReport();
-                reportViewer.Refresh();
-            }
+            ReportParameter[] reportParams = new ReportParameter[]
+            {
+                new ReportParameter("CustomerID", GlobalCustomer.CustomerID.ToString() ?? null),
+                new ReportParameter("CustomerName", GlobalCustomer.CustomerName != null ? "Customer Name: " + GlobalCustomer.CustomerName : "(All Customers)")
+            };
+
+            reportViewer.LocalReport.SetParameters(reportParams);
+
+            reportViewer.RefreshReport();
+            reportViewer.Refresh();
         }
-        
+
         public static void GenerateVideoReport(ReportViewer reportViewer)
         {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand("LoadAllVideos", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+            reportViewer.LocalReport.DataSources.Clear();
 
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+            ReportDataSource reportDataSource = new ReportDataSource("VideoDataSet", GlobalVideo.VideoList);
+            reportViewer.LocalReport.ReportPath = "VideosReport.rdlc";
+            reportViewer.LocalReport.DataSources.Add(reportDataSource);
 
-                reportViewer.LocalReport.DataSources.Clear();
-
-                ReportDataSource reportDataSource = new ReportDataSource("VideosDataSet", dt);
-                reportViewer.LocalReport.ReportPath = "VideosReport.rdlc";
-                reportViewer.LocalReport.DataSources.Add(reportDataSource);
-
-                reportViewer.RefreshReport();
-                reportViewer.Refresh();
-            }
+            reportViewer.RefreshReport();
+            reportViewer.Refresh();
         }
 
         public static void GenerateReceipt(ReportViewer reportViewerReceipt, bool isPenaltyFee)
@@ -249,13 +258,64 @@ namespace BogsyVideoStore.Classes
             {
                 new ReportParameter("TotalAmount", GlobalTransaction.TotalAmount.ToString()),
                 new ReportParameter("Payment", GlobalTransaction.Payment.ToString()),
-                new ReportParameter("Change", GlobalTransaction.Change.ToString())
+                new ReportParameter("Change", GlobalTransaction.Change.ToString()),
+                new ReportParameter("DocumentNo", GlobalItemJournal.DocumentNo.ToString()),
             };
 
             reportViewerReceipt.LocalReport.SetParameters(reportParameters);
-            reportViewerReceipt.RefreshReport();
+            reportViewerReceipt.RefreshReport(); 
             reportViewerReceipt.Refresh();
+            GlobalTransaction.TransactionList.Clear();
         }
+
+        public static bool CheckExistingRent(string serialNo)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(Queries.GetExistingRent, conn);
+
+                cmd.Parameters.AddWithValue("@VideoID", GlobalVideo.VideoID);
+                cmd.Parameters.AddWithValue("@SerialNo", serialNo);
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public static void GetSerialNo(ComboBox cmbbxSerialNo)
+        {
+            SerialNoList.SerialNos.Clear();
+
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("GetSerialNo", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@VideoID", GlobalVideo.VideoID);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SerialNoList.SerialNos.Add(new SerialNo
+                        {
+                            SerialNoId = reader["SerialNoID"].ToString(),
+                            VideoId = int.Parse(reader["VideoID"].ToString()),
+                            SerialNumber = reader["SerialNo."].ToString(),
+                            Status = reader["Status"].ToString()
+                        });
+                    }
+                }
+            }
+        }
+
 
         public static void SplitColumnHeaderTexts(DataGridView dt)
         {

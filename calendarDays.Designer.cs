@@ -31,9 +31,9 @@
             this.pnlDay = new System.Windows.Forms.Panel();
             this.flwpnlCustomerNames = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.chckbxCheckDay = new System.Windows.Forms.CheckBox();
             this.lblDay = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlDay.SuspendLayout();
             this.flwpnlCustomerNames.SuspendLayout();
             this.SuspendLayout();
@@ -47,9 +47,8 @@
             this.pnlDay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDay.Location = new System.Drawing.Point(1, 1);
             this.pnlDay.Name = "pnlDay";
-            this.pnlDay.Size = new System.Drawing.Size(88, 88);
+            this.pnlDay.Size = new System.Drawing.Size(90, 72);
             this.pnlDay.TabIndex = 0;
-            this.pnlDay.Click += new System.EventHandler(this.pnlDay_Click);
             // 
             // flwpnlCustomerNames
             // 
@@ -59,11 +58,10 @@
             this.flwpnlCustomerNames.Controls.Add(this.label1);
             this.flwpnlCustomerNames.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.flwpnlCustomerNames.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.flwpnlCustomerNames.Location = new System.Drawing.Point(0, 36);
+            this.flwpnlCustomerNames.Location = new System.Drawing.Point(3, 25);
             this.flwpnlCustomerNames.Name = "flwpnlCustomerNames";
-            this.flwpnlCustomerNames.Size = new System.Drawing.Size(88, 52);
+            this.flwpnlCustomerNames.Size = new System.Drawing.Size(84, 44);
             this.flwpnlCustomerNames.TabIndex = 2;
-            this.flwpnlCustomerNames.Click += new System.EventHandler(this.pnlDay_Click);
             // 
             // label2
             // 
@@ -76,6 +74,18 @@
             this.label2.Size = new System.Drawing.Size(73, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Customer name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Goldenrod;
+            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(3, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Customer name";
             // 
             // chckbxCheckDay
             // 
@@ -95,23 +105,11 @@
             this.lblDay.BackColor = System.Drawing.Color.Transparent;
             this.lblDay.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDay.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDay.Location = new System.Drawing.Point(61, 3);
+            this.lblDay.Location = new System.Drawing.Point(63, 3);
             this.lblDay.Name = "lblDay";
             this.lblDay.Size = new System.Drawing.Size(27, 19);
             this.lblDay.TabIndex = 0;
             this.lblDay.Text = "00";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Goldenrod;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(3, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Customer name";
             // 
             // calendarDays
             // 
@@ -121,7 +119,7 @@
             this.Controls.Add(this.pnlDay);
             this.Name = "calendarDays";
             this.Padding = new System.Windows.Forms.Padding(1);
-            this.Size = new System.Drawing.Size(90, 90);
+            this.Size = new System.Drawing.Size(92, 74);
             this.Load += new System.EventHandler(this.calendarDays_Load);
             this.pnlDay.ResumeLayout(false);
             this.pnlDay.PerformLayout();

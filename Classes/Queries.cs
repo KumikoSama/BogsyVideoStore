@@ -14,9 +14,9 @@ namespace BogsyVideoStore.Classes
         public static string GetMemberID { get; } = "SELECT CustomerID FROM CustomerTable WHERE CustomerName = @CustomerName";
         public static string DeleteVideo { get; } = "DELETE FROM VideoTable WHERE VideoID = @VideoID";
         public static string InsertToCustomerTable { get; } = "INSERT INTO CustomerTable (CustomerName, ContactInfo) VALUES (@CustomerName, @ContactInfo)";
-        public static string EditVideo { get; } = "UPDATE VideoTable SET Title = @Title, Category = @Category, Price = @Price, Copies = @Copies, Rating = @Rating WHERE VideoID = @VideoID";
-        public static string AddNewVideo { get; } = "INSERT INTO VideoTable (Title, Category, Price, Copies, Rating) VALUES (@Title, @Category, @Price, @Copies, @Rating)";
-        public static string LoadItemLedgerEntry { get; } = "SELECT * FROM ItemLedgerEntry";
-        public static string AddIntoItemLedgerEntry { get; } = "INSERT INTO ItemLedgerEntry ([DocumentNo.], VideoID, Description, Quantity, [SerialNo.], Type) VALUES (@DocumentNo, @VideoID, @Description, @Quantity, @SerialNo, @Type)";
+        public static string EditVideo { get; } = "UPDATE VideoTable SET Title = @Title, Category = @Category, Price = @Price, Copies = @Copies WHERE VideoID = @VideoID";
+        public static string AddNewVideo { get; } = "INSERT INTO VideoTable (Title, Category, Price, Copies) VALUES (@Title, @Category, @Price, @Copies)";
+        public static string LoadItemLedgerEntry { get; } = "SELECT * FROM ItemLedgerEntry ORDER BY [EntryNo.] DESC";
+        public static string GetExistingRent { get; } = "SELECT TOP 1 * FROM RentalTable WHERE VideoID = @VideoID AND [SerialNo.] = @SerialNo AND Status = 'On Rent'";
     }
 }

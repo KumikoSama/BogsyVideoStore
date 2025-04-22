@@ -32,5 +32,6 @@ namespace BogsyVideoStore.Models
         public static int TotalAmount { get; set; }
         public static int Change { get; set; }
         public static int Payment { get; set; }
+        public static string DocumentNo { get; set; }
     }
 }

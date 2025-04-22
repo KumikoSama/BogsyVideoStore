@@ -210,6 +210,12 @@
     <Compile Include="Classes\Queries.cs" />
     <Compile Include="Classes\Utility.cs" />
     <Compile Include="Classes\Validator.cs" />
+    <Compile Include="Forms\DataDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DataDisplay.Designer.cs">
+      <DependentUpon>DataDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ManageCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +255,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\GlobalConfig.cs" />
     <Compile Include="Models\ItemJournal.cs" />
+    <Compile Include="Models\SerialNo.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Program.cs" />
@@ -266,6 +273,9 @@
     <EmbeddedResource Include="bin\Debug\VideosReport.rdlc" />
     <EmbeddedResource Include="calendarDays.resx">
       <DependentUpon>calendarDays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataDisplay.resx">
+      <DependentUpon>DataDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManageCustomer.resx">
       <DependentUpon>ManageCustomer.cs</DependentUpon>
@@ -297,8 +307,10 @@
     </Compile>
     <EmbeddedResource Include="bin\Debug\CustomerReport.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BogsyVideoStore.Models.Customer.datasource" />
     <None Include="Properties\DataSources\BogsyVideoStore.Models.Receipt.datasource" />
     <None Include="Properties\DataSources\BogsyVideoStore.Models.Transaction.datasource" />
+    <None Include="Properties\DataSources\BogsyVideoStore.Models.Video.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -346,6 +358,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
+    <None Include="Resources\money-regular-96%282%29.png" />
+    <None Include="Resources\money-regular-96%281%29.png" />
+    <None Include="Resources\money-regular-96.png" />
+    <None Include="Resources\transfer-regular-96.png" />
+    <None Include="Resources\wallet-regular-96.png" />
+    <None Include="Resources\error-regular-96.png" />
+    <None Include="Resources\error-regular-24.png" />
+    <None Include="Resources\x-circle-regular-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />

@@ -123,6 +123,26 @@ namespace BogsyVideoStore.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap error_regular_24 {
+            get {
+                object obj = ResourceManager.GetObject("error-regular-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap error_regular_96 {
+            get {
+                object obj = ResourceManager.GetObject("error-regular-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file_regular_24 {
             get {
                 object obj = ResourceManager.GetObject("file-regular-24", resourceCulture);
@@ -166,6 +186,36 @@ namespace BogsyVideoStore.Properties {
         internal static System.Drawing.Bitmap magnifying_glass_solid {
             get {
                 object obj = ResourceManager.GetObject("magnifying-glass-solid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_regular_96 {
+            get {
+                object obj = ResourceManager.GetObject("money-regular-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_regular_96_1_ {
+            get {
+                object obj = ResourceManager.GetObject("money-regular-96(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_regular_96_2_ {
+            get {
+                object obj = ResourceManager.GetObject("money-regular-96(2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +293,39 @@ namespace BogsyVideoStore.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap transfer_regular_96 {
+            get {
+                object obj = ResourceManager.GetObject("transfer-regular-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap videos_solid_24 {
             get {
                 object obj = ResourceManager.GetObject("videos-solid-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wallet_regular_96 {
+            get {
+                object obj = ResourceManager.GetObject("wallet-regular-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap x_circle_regular_24 {
+            get {
+                object obj = ResourceManager.GetObject("x-circle-regular-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

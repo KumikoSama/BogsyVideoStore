@@ -114,7 +114,7 @@
             this.btnEditCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.btnEditCustomer.Location = new System.Drawing.Point(188, 223);
             this.btnEditCustomer.Name = "btnEditCustomer";
-            this.btnEditCustomer.Size = new System.Drawing.Size(53, 23);
+            this.btnEditCustomer.Size = new System.Drawing.Size(53, 27);
             this.btnEditCustomer.TabIndex = 26;
             this.btnEditCustomer.Text = "Edit";
             this.btnEditCustomer.UseVisualStyleBackColor = false;
@@ -132,7 +132,7 @@
             this.btnAddCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(223)))), ((int)(((byte)(204)))));
             this.btnAddCustomer.Location = new System.Drawing.Point(188, 223);
             this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.Size = new System.Drawing.Size(53, 23);
+            this.btnAddCustomer.Size = new System.Drawing.Size(53, 27);
             this.btnAddCustomer.TabIndex = 25;
             this.btnAddCustomer.Text = "Add";
             this.btnAddCustomer.UseVisualStyleBackColor = false;
